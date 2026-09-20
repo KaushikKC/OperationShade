@@ -11,6 +11,12 @@ import { readFileSync } from 'node:fs'
 
 const dms: DM[] = JSON.parse(readFileSync(path.join(process.cwd(), 'data', 'dms.json'), 'utf8'))
 const sorted = [...dms].sort((a, b) => Date.parse(b.ts) - Date.parse(a.ts))
-const out = path.join(process.cwd(), 'data', 'exports', 'maya-dms-last-30-days.csv')
-writeFileSync(out, toCsv(sorted), 'utf8')
-process.stdout.write(`${sorted.length} messages -> ${path.relative(process.cwd(), out)}\n`)
+const csv = toCsv(sorted)
+// One copy to keep, one served so the console can hand out a file to try.
+for (const out of [
+  path.join(process.cwd(), 'data', 'exports', 'maya-dms-last-30-days.csv'),
+  path.join(process.cwd(), 'public', 'maya-dms-last-30-days.csv'),
+]) {
+  writeFileSync(out, csv, 'utf8')
+  process.stdout.write(`${sorted.length} messages -> ${path.relative(process.cwd(), out)}\n`)
+}

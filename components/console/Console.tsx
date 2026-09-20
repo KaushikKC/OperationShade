@@ -487,6 +487,15 @@ export default function Console() {
             >
               ⬆ Upload your DMs
             </button>
+            <a
+              href="/maya-dms-last-30-days.csv"
+              download
+              className="text-[11.5px] underline"
+              style={{ color: 'var(--nb-muted)' }}
+              title="A file in the right shape, to try it with"
+            >
+              sample export
+            </a>
             <div className="flex-1" />
             {[
               [`${stats?.count ?? results.length}`, 'DMs read'],
