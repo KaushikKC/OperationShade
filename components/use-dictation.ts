@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
 /**
  * Speaking instead of typing, using the recognition the browser already ships.
@@ -49,19 +49,25 @@ const MESSAGES: Record<string, string> = {
   network: 'Could not reach the speech service. Type it instead.',
 }
 
+/** Whether this browser has it is a fact about the browser, not state of ours. */
+const noSubscribe = () => () => {}
+const hasRecognition = () => ctor() !== null
+const notOnTheServer = () => false
+
 export function useDictation({ onFinal }: { onFinal: (text: string) => void }) {
-  const [supported, setSupported] = useState(false)
+  // Read rather than stored: the server says no, the client says what it has,
+  // and nothing sets state on mount to get there.
+  const supported = useSyncExternalStore(noSubscribe, hasRecognition, notOnTheServer)
   const [listening, setListening] = useState(false)
   const [interim, setInterim] = useState('')
   const [error, setError] = useState<string | null>(null)
   const ref = useRef<Recognition | null>(null)
   // Kept in a ref so a re-render of the page does not tear down a live session.
+  // Written in an effect, not during render — a render can be thrown away.
   const onFinalRef = useRef(onFinal)
-  onFinalRef.current = onFinal
-
-  // Checked after mount, never during render: the server has no window, and a
-  // microphone that appears on hydration is better than a markup mismatch.
-  useEffect(() => setSupported(ctor() !== null), [])
+  useEffect(() => {
+    onFinalRef.current = onFinal
+  }, [onFinal])
 
   const stop = useCallback(() => ref.current?.stop(), [])
 
