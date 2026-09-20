@@ -123,7 +123,7 @@ const WHY: Record<string, string> = {
   'a reaction': 'Her skin has reacted. Nothing goes out on that without you.',
   'a life event': "There's something going on in her life behind this, not a product question.",
   'meant for her': 'She wrote to you, not about a product. This is the part you said you wanted to keep.',
-  retinoid: 'Retinol, with something else going on in the message. E-02.4: not by default, not from a draft.',
+  retinoid: "Retinol, and something else going on in the message. Your rule: never by default, and never from a draft.",
   'yours to answer': 'Reads like a judgement call rather than a routine question.',
   'nothing to answer it from': 'Not enough in it to answer — no skin type, no product, no real question.',
   'not sure enough to draft': 'The read came back weak on this one. Worth your eyes.',
