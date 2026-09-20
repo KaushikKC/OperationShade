@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# An uploaded DM export is the user's own mail.
+/data/inbox.json
