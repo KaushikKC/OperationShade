@@ -314,7 +314,7 @@ function Drawer({ dm, onClose }: { dm: Classified; onClose: () => void }) {
 }
 
 export default function Console() {
-  const { data, source, isMock, loading, running, progress, error, inboxName, run } = useResults()
+  const { data, source, isMock, loading, running, progress, error, inboxName, run, resetInbox } = useResults()
   const fileInput = useRef<HTMLInputElement | null>(null)
   const [uploadNote, setUploadNote] = useState<string | null>(null)
 
@@ -534,8 +534,20 @@ export default function Console() {
 
           {(uploadNote || inboxName) && (
             <p className="mt-2 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
-              {uploadNote ??
-                `Reading ${inboxName} — your own export, not the sample. Drop in a new file any time; a CSV with the message text in it is enough.`}
+              {uploadNote ?? (
+                <>
+                  Reading <b>{inboxName}</b> — your own export, not the sample. Drop in a new file any time; a CSV
+                  with the message text in it is enough.{' '}
+                  <button
+                    className="underline"
+                    style={{ color: 'var(--nb-muted)' }}
+                    onClick={() => void resetInbox()}
+                    disabled={running}
+                  >
+                    back to the sample inbox
+                  </button>
+                </>
+              )}
             </p>
           )}
 

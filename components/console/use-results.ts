@@ -86,7 +86,7 @@ export function useResults() {
     }
   }, [])
 
-  const run = useCallback(async (mode: RunMode, upload?: Upload) => {
+  const run = useCallback(async (mode: RunMode, upload?: Upload, resetting = false) => {
     if (running) return
     setRunning(true)
     setProgress(0)
@@ -122,7 +122,7 @@ export function useResults() {
         const res = await fetch('/api/classify', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(upload ? { mode: 'all', csv: upload.csv } : { mode }),
+          body: JSON.stringify(upload ? { mode: 'all', csv: upload.csv } : { mode, reset: resetting }),
         })
         const json = await res.json().catch(() => null)
         if (!res.ok) throw new Error(json?.error ?? `The reader stopped (${res.status}).`)
@@ -130,6 +130,7 @@ export function useResults() {
         setSource('live')
         setProgress(1)
         if (upload) setInboxName(upload.name)
+        if (resetting) setInboxName(null)
       } catch (e) {
         setError(e instanceof Error ? e.message : 'run failed')
       }
@@ -139,5 +140,8 @@ export function useResults() {
     setTimeout(() => setProgress(null), 600)
   }, [running])
 
-  return { data, source, isMock: IS_MOCK, loading, running, progress, error, inboxName, refresh, run }
+  /** Put the committed inbox back after someone has uploaded their own. */
+  const resetInbox = useCallback(() => run('all', undefined, true), [run])
+
+  return { data, source, isMock: IS_MOCK, loading, running, progress, error, inboxName, refresh, run, resetInbox }
 }
