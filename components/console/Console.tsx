@@ -128,50 +128,59 @@ function LaneTag({ lane, urgent }: { lane: Lane | undefined; urgent?: boolean })
   )
 }
 
+/**
+ * One of the reader's questions. It opens to show what it can answer and where
+ * the line is drawn — it is not a switch. These are asked of every message in
+ * one pass, so turning one off would mean reading the whole inbox again, and a
+ * control that cannot do what it looks like it does is worse than no control.
+ */
 function QuestionCardView({ q }: { q: (typeof QUESTIONS)[number] }) {
+  const [open, setOpen] = useState(false)
   const kindLabel = { options: 'pick one', scale: 'how much', yesno: 'yes / no' }[q.kind]
   return (
-    <div
-      className="nb-card-flat p-3"
-      style={{ opacity: q.on ? 1 : 0.55, boxShadow: 'none' }}
-    >
-      <div className="flex items-center gap-2">
+    <div className="nb-card-flat" style={{ boxShadow: 'none' }}>
+      <button
+        className="flex w-full items-center gap-2 p-3 text-left"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
         <span className="font-display text-[14px] font-bold flex-1">{q.label}</span>
+        {q.hidden && (
+          <span className="nb-tape" style={{ background: 'var(--nb-cream-deep)' }}>
+            not shown
+          </span>
+        )}
         <span className="nb-tape" style={{ background: 'var(--nb-blue)' }}>
           {kindLabel}
         </span>
-        <span
-          aria-label={q.on ? 'on' : 'off'}
-          className="inline-block h-[18px] w-[34px] rounded-full border-[2.5px] border-[color:var(--nb-ink)] relative"
-          style={{ background: q.on ? 'var(--nb-mint)' : 'var(--nb-cream-deep)' }}
-        >
-          <i
-            className="absolute top-[1.5px] h-[10px] w-[10px] rounded-full bg-[color:var(--nb-ink)]"
-            style={{ right: q.on ? 2 : 'auto', left: q.on ? 'auto' : 2 }}
-          />
+        <span aria-hidden className="text-[13px] font-bold" style={{ color: 'var(--nb-muted)' }}>
+          {open ? '−' : '+'}
         </span>
-      </div>
-      <p className="text-[12.5px] mt-1" style={{ color: 'var(--nb-muted)' }}>
-        {q.prompt}
-      </p>
-      {q.options && (
-        <div className="mt-2 flex flex-wrap gap-1">
-          {q.options.map((o) => (
-            <span
-              key={o}
-              className="rounded-md border border-[color:var(--nb-ink)] px-1.5 py-0.5 text-[11px] font-semibold"
-              style={{ background: 'var(--nb-bg)' }}
-            >
-              {optionLabel(q.key, o)}
-            </span>
-          ))}
+      </button>
+      {open && (
+        <div className="px-3 pb-3">
+          <p className="text-[12.5px]" style={{ color: 'var(--nb-muted)' }}>
+            {q.prompt}
+          </p>
+          {q.options && (
+            <div className="mt-2 flex flex-wrap gap-1">
+              {q.options.map((o) => (
+                <span
+                  key={o}
+                  className="rounded-md border border-[color:var(--nb-ink)] px-1.5 py-0.5 text-[11px] font-semibold"
+                  style={{ background: 'var(--nb-bg)' }}
+                >
+                  {optionLabel(q.key, o)}
+                </span>
+              ))}
+            </div>
+          )}
+          {q.threshold && (
+            <p className="mt-2 text-[11px] font-semibold" style={{ color: 'var(--nb-muted)' }}>
+              {q.threshold}
+            </p>
+          )}
         </div>
-      )}
-      {q.threshold && (
-        <p className="mt-2 text-[11px] font-semibold" style={{ color: 'var(--nb-muted)' }}>
-          {q.threshold}
-          {!q.on && <span style={{ color: 'var(--nb-coral)' }}> · off</span>}
-        </p>
       )}
     </div>
   )
@@ -469,9 +478,7 @@ function PlaybookPanel({
   const { approved, reuseOn } = playbook
 
   return (
-    <div className="nb-card mt-5 p-4" style={{ background: 'var(--nb-yellow)' }}>
-      <div className="nb-eyebrow mb-2">Your Playbook</div>
-
+    <div className="nb-card p-4" style={{ background: 'var(--nb-yellow)' }}>
       <div className="flex items-center justify-between text-[13px]">
         <span style={{ color: 'var(--nb-muted)' }}>Review bar</span>
         <b>
@@ -702,17 +709,15 @@ export default function Console() {
           className="border-r-[3px] border-[color:var(--nb-ink)] p-4"
           style={{ background: 'var(--nb-cream-deep)' }}
         >
-          <div className="nb-eyebrow mb-1">What each DM is asked</div>
+          {/* Hers first: the things she decides and can change right now. */}
+          <div className="nb-eyebrow mb-1">Your Playbook</div>
           <p className="mb-3 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
-            {QUESTIONS.filter((q) => q.on).length} questions · one pass per message
+            Yours. Change any of it and the inbox follows.
           </p>
-          <div className="space-y-2.5">
-            {QUESTIONS.map((q) => (
-              <QuestionCardView key={q.key} q={q} />
-            ))}
-          </div>
 
-          <div className="nb-card mt-5 p-4" style={{ background: 'var(--nb-blue)' }}>
+          <PlaybookPanel playbook={playbook} threshold={threshold} />
+
+          <div className="nb-card mt-3 p-4" style={{ background: 'var(--nb-blue)' }}>
             <div className="nb-eyebrow mb-2">Your routing (the notebook)</div>
             <ul className="space-y-1 text-[13px] leading-snug">
               {MAYA_ROUTING.map((r) => (
@@ -721,9 +726,21 @@ export default function Console() {
                 </li>
               ))}
             </ul>
+            <p className="mt-2 text-[11px]" style={{ color: 'var(--nb-muted)' }}>
+              Straight from your notes. Editing these means reading the inbox again.
+            </p>
           </div>
 
-          <PlaybookPanel playbook={playbook} threshold={threshold} />
+          {/* The instrument, second: what it asks, not what she decides. */}
+          <div className="nb-eyebrow mb-1 mt-6">What the reader asks</div>
+          <p className="mb-3 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
+            {QUESTIONS.length} questions, all asked in one pass. Open one to see what it can answer.
+          </p>
+          <div className="space-y-2.5">
+            {QUESTIONS.map((q) => (
+              <QuestionCardView key={q.key} q={q} />
+            ))}
+          </div>
         </aside>
 
         {/* main */}

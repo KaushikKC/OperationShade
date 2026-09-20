@@ -1,17 +1,24 @@
-// Static mirror of the classifier's question set, for the rules sidebar.
-// Display copy only — the real schema lives in lib/jev.ts, and the thresholds
-// quoted here are the ones in lib/lanes.ts. Keep the two in step.
+// Her wording for the reader's question set, for the rules sidebar.
+//
+// Only the wording lives here. The option lists and the thresholds are imported
+// from lib/jev.ts and lib/lanes.ts — the same values the run used — so the
+// sidebar cannot claim something the classifier is not doing. The rung labels on
+// the two scales are the exception: Jev's criteria are full sentences, and a
+// chip needs two words.
+import { BUDGET_BANDS, INTENTS, SKIN_TYPES } from '@/lib/jev'
+import { DEFAULT_THRESHOLD, NEEDS_MAYA_CEILING } from '@/lib/lanes'
+
+const pc = (n: number) => `${Math.round(n * 100)}%`
 
 export type QuestionCard = {
   key: string
   label: string
   kind: 'options' | 'scale' | 'yesno'
   prompt: string
-  options?: string[]
+  options?: readonly string[]
   threshold?: string
   /** Asked of every message, but never shown in the table. */
   hidden?: boolean
-  on: boolean
 }
 
 export const QUESTIONS: QuestionCard[] = [
@@ -21,28 +28,21 @@ export const QUESTIONS: QuestionCard[] = [
     kind: 'options',
     prompt: 'What is this person actually asking for?',
     // E-01: the twelve the case file labels, plus the two that are not her audience.
-    options: [
-      'info', 'recommendation', 'judgement', 'value', 'context', 'diagnosis',
-      'trust', 'relationship', 'constraint', 'delayed_intent',
-      'transfer_of_trust', 'personalisation', 'brand_pitch', 'spam',
-    ],
-    on: true,
+    options: INTENTS,
   },
   {
     key: 'skin_type',
     label: 'Skin type',
     kind: 'options',
     prompt: 'Skin type stated or clearly implied',
-    options: ['dry', 'oily_combo', 'sensitive', 'redness', 'unknown'],
-    on: true,
+    options: SKIN_TYPES,
   },
   {
     key: 'budget_band',
     label: 'Budget',
     kind: 'options',
     prompt: 'Budget mentioned or implied',
-    options: ['none', 'under_30', '30_to_60', 'over_60'],
-    on: true,
+    options: BUDGET_BANDS,
   },
   {
     key: 'purchase_intent',
@@ -50,23 +50,22 @@ export const QUESTIONS: QuestionCard[] = [
     kind: 'scale',
     prompt: 'How close to buying is this person?',
     options: ['browsing', 'curious', 'ready', 'buying now'],
-    on: true,
   },
   {
     key: 'needs_maya_personally',
     label: 'Needs you',
     kind: 'yesno',
     prompt: 'Needs you, not your notes — a right answer about a product would still be the wrong reply',
-    threshold: 'Kept back at 40% and over',
-    on: true,
+    threshold: `Kept back at ${pc(NEEDS_MAYA_CEILING)} and over`,
   },
   {
     key: 'answerable_by_routing',
     label: 'Answerable from your notes',
     kind: 'yesno',
     prompt: 'You answer this one the same way every time',
-    threshold: 'Drafted at 50% and over — 25% when the reply is a question back',
-    on: true,
+    // Phrased against the slider, not against a number: she can move the bar,
+    // and lib/lanes.ts drops it by 25 points when the reply is a question back.
+    threshold: `Drafted at your review bar — starts at ${pc(DEFAULT_THRESHOLD)}, and 25 points lower when the reply is a question back`,
   },
   {
     key: 'urgency',
@@ -74,7 +73,6 @@ export const QUESTIONS: QuestionCard[] = [
     kind: 'scale',
     prompt: 'How soon do they need an answer?',
     options: ['none', 'sometime', 'a date is coming', 'wrong right now'],
-    on: true,
   },
   {
     key: 'names_shelf_product',
@@ -82,7 +80,6 @@ export const QUESTIONS: QuestionCard[] = [
     kind: 'yesno',
     prompt: 'Points at one of your ten, by name or by "the good one"',
     threshold: 'Counts at 50% and over',
-    on: true,
   },
   {
     key: 'is_reaction',
@@ -91,7 +88,6 @@ export const QUESTIONS: QuestionCard[] = [
     prompt: 'Burning, stinging, rawness, swelling — something is wrong now',
     threshold: 'Straight to you at 50% and over',
     hidden: true,
-    on: true,
   },
 ]
 
