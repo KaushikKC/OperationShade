@@ -1,0 +1,635 @@
+'use client'
+
+import Link from 'next/link'
+import { useMemo, useState, type ReactNode } from 'react'
+import type { Classified, Lane } from '@/lib/types'
+import { MAYA_ROUTING, QUESTIONS } from './questions'
+import {
+  LANE_META,
+  LANE_ORDER,
+  budgetLabel,
+  intentLabel,
+  optionLabel,
+  pct,
+  skinLabel,
+  timeAgo,
+} from './format'
+import { useResults, type RunMode } from './use-results'
+
+type Tab = 'all' | 'low' | 'urgent' | 'sample'
+
+function num(v: unknown): number {
+  const n = typeof v === 'number' ? v : Number(v)
+  return Number.isFinite(n) ? n : 0
+}
+
+function conf(c: { confidence?: number } | undefined): number {
+  return num(c?.confidence)
+}
+
+function isLowConfidence(dm: Classified): boolean {
+  const a = dm.answers
+  if (!a) return true
+  const confs = [conf(a.intent), conf(a.skin_type), conf(a.budget_band)]
+  return confs.some((c) => c > 0 && c < 0.55)
+}
+
+function isUrgent(dm: Classified): boolean {
+  return num(dm.answers?.urgency?.score) >= 0.7
+}
+
+function ConfBar({ value }: { value: number | null }) {
+  if (value === null) return null
+  return (
+    <span className="conf-bar" aria-hidden>
+      <i style={{ width: `${value}%` }} />
+    </span>
+  )
+}
+
+function Chip({
+  label,
+  value,
+  tone,
+}: {
+  label: string
+  value?: number | null
+  tone?: 'default' | 'hot' | 'calm'
+}) {
+  const bg =
+    tone === 'hot' ? 'var(--nb-pink)' : tone === 'calm' ? 'var(--nb-mint)' : 'var(--nb-paper)'
+  return (
+    <span className="nb-pill" style={{ background: bg, fontWeight: 600, fontSize: 11 }}>
+      {label}
+      {value != null && (
+        <>
+          <ConfBar value={value} />
+          <span style={{ fontWeight: 800 }}>{value}%</span>
+        </>
+      )}
+    </span>
+  )
+}
+
+function AnswerChips({ dm }: { dm: Classified }) {
+  const a = dm.answers
+  if (!a) return <span className="nb-pill">not read yet</span>
+  const needsYou = pct(a.needs_maya_personally)
+  const routable = pct(a.answerable_by_routing)
+  const buying = pct(a.purchase_intent?.score)
+  return (
+    <span className="inline-flex flex-wrap gap-1">
+      <Chip label={intentLabel(a.intent?.choice)} value={pct(a.intent?.confidence)} />
+      {a.skin_type?.choice && a.skin_type.choice !== 'unknown' && (
+        <Chip label={skinLabel(a.skin_type.choice)} value={pct(a.skin_type.confidence)} />
+      )}
+      {a.budget_band?.choice && a.budget_band.choice !== 'unknown' && (
+        <Chip label={budgetLabel(a.budget_band.choice)} value={pct(a.budget_band.confidence)} />
+      )}
+      {buying != null && buying >= 50 && <Chip label={`buying ${buying}%`} />}
+      {routable != null && routable >= 60 && (
+        <Chip label={`from notes ${routable}%`} tone="calm" />
+      )}
+      {needsYou != null && needsYou >= 60 && (
+        <Chip label={`needs you ${needsYou}%`} tone="hot" />
+      )}
+    </span>
+  )
+}
+
+function LaneTag({ lane, urgent }: { lane: Lane | undefined; urgent?: boolean }) {
+  const meta = lane ? LANE_META[lane] : null
+  return (
+    <span className="inline-flex flex-col gap-1">
+      <span
+        className="nb-pill"
+        style={{ background: meta?.color ?? 'var(--nb-cream-deep)', fontWeight: 800 }}
+      >
+        {meta?.short ?? 'unsorted'}
+      </span>
+      {urgent && (
+        <span className="nb-tape" style={{ background: 'var(--nb-coral)' }}>
+          urgent
+        </span>
+      )}
+    </span>
+  )
+}
+
+function QuestionCardView({ q }: { q: (typeof QUESTIONS)[number] }) {
+  const kindLabel = { options: 'pick one', scale: 'how much', yesno: 'yes / no' }[q.kind]
+  return (
+    <div
+      className="nb-card-flat p-3"
+      style={{ opacity: q.on ? 1 : 0.55, boxShadow: 'none' }}
+    >
+      <div className="flex items-center gap-2">
+        <span className="font-display text-[14px] font-bold flex-1">{q.label}</span>
+        <span className="nb-tape" style={{ background: 'var(--nb-blue)' }}>
+          {kindLabel}
+        </span>
+        <span
+          aria-label={q.on ? 'on' : 'off'}
+          className="inline-block h-[18px] w-[34px] rounded-full border-[2.5px] border-[color:var(--nb-ink)] relative"
+          style={{ background: q.on ? 'var(--nb-mint)' : 'var(--nb-cream-deep)' }}
+        >
+          <i
+            className="absolute top-[1.5px] h-[10px] w-[10px] rounded-full bg-[color:var(--nb-ink)]"
+            style={{ right: q.on ? 2 : 'auto', left: q.on ? 'auto' : 2 }}
+          />
+        </span>
+      </div>
+      <p className="text-[12.5px] mt-1" style={{ color: 'var(--nb-muted)' }}>
+        {q.prompt}
+      </p>
+      {q.options && (
+        <div className="mt-2 flex flex-wrap gap-1">
+          {q.options.map((o) => (
+            <span
+              key={o}
+              className="rounded-md border border-[color:var(--nb-ink)] px-1.5 py-0.5 text-[11px] font-semibold"
+              style={{ background: 'var(--nb-bg)' }}
+            >
+              {optionLabel(q.key, o)}
+            </span>
+          ))}
+        </div>
+      )}
+      {q.threshold && (
+        <p className="mt-2 text-[11px] font-semibold" style={{ color: 'var(--nb-muted)' }}>
+          {q.threshold}
+          {!q.on && <span style={{ color: 'var(--nb-coral)' }}> · off</span>}
+        </p>
+      )}
+    </div>
+  )
+}
+
+function Drawer({ dm, onClose }: { dm: Classified; onClose: () => void }) {
+  const [copied, setCopied] = useState(false)
+  const a = dm.answers
+  const fields: { key: string; label: string; node: ReactNode }[] = []
+  if (a) {
+    const choice = (key: string, label: string, ans?: { choice?: string; confidence?: number; probabilities?: Record<string, number> }) => {
+      if (!ans?.choice) return
+      fields.push({
+        key,
+        label,
+        node: (
+          <span className="inline-flex items-center gap-2">
+            <b>{optionLabel(key, ans.choice)}</b>
+            <ConfBar value={pct(ans.confidence)} />
+            <span className="text-[12px] font-bold">{pct(ans.confidence)}%</span>
+          </span>
+        ),
+      })
+    }
+    choice('intent', 'What they want', a.intent)
+    choice('skin_type', 'Skin type', a.skin_type)
+    choice('budget_band', 'Budget', a.budget_band)
+    const scale = (key: string, label: string, v?: { score?: number; confidence?: number }) => {
+      const s = pct(v?.score)
+      if (s === null) return
+      fields.push({
+        key,
+        label,
+        node: (
+          <span className="inline-flex items-center gap-2">
+            <ConfBar value={s} />
+            <span className="text-[12px] font-bold">{s}%</span>
+          </span>
+        ),
+      })
+    }
+    scale('buying', 'Buying signal', a.purchase_intent)
+    scale('urgent', 'Time pressure', a.urgency)
+    const yesno = (key: string, label: string, v?: number) => {
+      const s = pct(v)
+      if (s === null) return
+      fields.push({
+        key,
+        label,
+        node: (
+          <span className="inline-flex items-center gap-2">
+            <ConfBar value={s} />
+            <span className="text-[12px] font-bold">{s}%</span>
+          </span>
+        ),
+      })
+    }
+    yesno('needs', 'Needs you', a.needs_maya_personally)
+    yesno('routable', 'Answerable from notes', a.answerable_by_routing)
+    yesno('shelf', 'Names a shelf product', a.names_shelf_product)
+  }
+  return (
+    <div
+      className="fixed inset-0 z-40"
+      role="dialog"
+      aria-modal="true"
+      onClick={onClose}
+      style={{ background: 'rgba(10,10,10,.25)' }}
+    >
+      <aside
+        className="absolute right-0 top-0 h-full w-[min(480px,94vw)] overflow-y-auto border-l-[3px] border-[color:var(--nb-ink)] p-5"
+        style={{ background: 'var(--nb-bg)' }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="nb-hand text-[26px] leading-none">@{dm.handle || 'unknown'}</div>
+            <div className="mt-1 text-[12px] font-semibold" style={{ color: 'var(--nb-muted)' }}>
+              {dm.platform === 'tt' ? 'TikTok' : 'Instagram'} · {timeAgo(dm.ts)} ago
+              {dm.persona ? ` · case file: ${dm.persona}` : ''}
+            </div>
+          </div>
+          <button className="nb-btn" style={{ padding: '6px 12px' }} onClick={onClose}>
+            Close
+          </button>
+        </div>
+
+        <div className="nb-card-flat mt-4 p-4">
+          <div className="nb-eyebrow mb-2">Message</div>
+          <p className="text-[15px] leading-relaxed">{dm.text || '—'}</p>
+        </div>
+
+        {dm.lane && (
+          <div className="mt-4 flex items-center gap-3">
+            <LaneTag lane={dm.lane} urgent={isUrgent(dm)} />
+            <span className="text-[13px]" style={{ color: 'var(--nb-muted)' }}>
+              {LANE_META[dm.lane].desc}
+            </span>
+          </div>
+        )}
+
+        <div className="nb-card-flat mt-4 p-4">
+          <div className="nb-eyebrow mb-2">What it read</div>
+          <dl className="space-y-2">
+            {fields.map((f) => (
+              <div key={f.key} className="flex items-center justify-between gap-3 text-[13px]">
+                <dt style={{ color: 'var(--nb-muted)' }}>{f.label}</dt>
+                <dd>{f.node}</dd>
+              </div>
+            ))}
+            {fields.length === 0 && (
+              <p className="text-[13px]" style={{ color: 'var(--nb-muted)' }}>
+                No readings on this one yet.
+              </p>
+            )}
+          </dl>
+        </div>
+
+        {dm.draft && (
+          <div
+            className="nb-card-flat mt-4 border-l-[6px] p-4"
+            style={{ background: 'var(--nb-cream-deep)', borderLeftColor: 'var(--nb-coral)' }}
+          >
+            <div className="nb-eyebrow mb-1">Draft in your words</div>
+            <p className="nb-hand text-[21px] leading-snug">{dm.draft}</p>
+            <button
+              className="nb-btn nb-btn-mint mt-3"
+              style={{ padding: '6px 14px', fontSize: 13 }}
+              onClick={() => {
+                void navigator.clipboard?.writeText(dm.draft ?? '').then(() => {
+                  setCopied(true)
+                  setTimeout(() => setCopied(false), 1500)
+                })
+              }}
+            >
+              {copied ? 'Copied ✓' : 'Copy to reply'}
+            </button>
+            <p className="mt-2 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
+              Nothing sends itself — this is pasted into Instagram or TikTok by you.
+            </p>
+          </div>
+        )}
+        {dm.why && (
+          <div className="nb-card-flat mt-4 p-4" style={{ background: 'var(--nb-pink)' }}>
+            <div className="nb-eyebrow mb-1">Why it’s yours</div>
+            <p className="nb-hand text-[21px] leading-snug">{dm.why}</p>
+          </div>
+        )}
+      </aside>
+    </div>
+  )
+}
+
+export default function Console() {
+  const { data, source, isMock, loading, running, progress, error, run } = useResults()
+  const [mode, setMode] = useState<RunMode>('all')
+  const [tab, setTab] = useState<Tab>('all')
+  const [laneFilter, setLaneFilter] = useState<Lane | null>(null)
+  const [query, setQuery] = useState('')
+  const [selected, setSelected] = useState<Classified | null>(null)
+
+  const results = useMemo(() => data?.results ?? [], [data])
+  const laneCounts = useMemo(() => {
+    const c: Record<Lane, number> = { voice: 0, maya: 0, intent: 0, noise: 0 }
+    for (const r of results) if (r?.lane && r.lane in c) c[r.lane]++
+    return c
+  }, [results])
+
+  const filtered = useMemo(() => {
+    let rows = results.slice()
+    if (tab === 'low') rows = rows.filter(isLowConfidence)
+    if (tab === 'urgent') rows = rows.filter(isUrgent)
+    if (tab === 'sample') rows = rows.filter((r) => !!r?.persona)
+    if (laneFilter) rows = rows.filter((r) => r?.lane === laneFilter)
+    const q = query.trim().toLowerCase()
+    if (q) rows = rows.filter((r) => `${r?.handle} ${r?.text}`.toLowerCase().includes(q))
+    const lanePos = (r: Classified) => LANE_ORDER.indexOf(r?.lane ?? 'noise')
+    rows.sort((a, b) => {
+      const la = a?.lane ?? 'noise'
+      const lb = b?.lane ?? 'noise'
+      if (la !== lb) return lanePos(a) - lanePos(b)
+      if (la === 'maya') return num(b.answers?.urgency?.score) - num(a.answers?.urgency?.score)
+      if (la === 'voice' || la === 'intent')
+        return num(b.answers?.purchase_intent?.score) - num(a.answers?.purchase_intent?.score)
+      return 0
+    })
+    return rows
+  }, [results, tab, laneFilter, query])
+
+  const stats = data?.stats
+  const voiceShare = results.length ? laneCounts.voice / results.length : 0
+  const hoursSaved = Math.round(voiceShare * 70)
+  const urgentCount = results.filter(isUrgent).length
+  const lowCount = results.filter(isLowConfidence).length
+  const sampleCount = results.filter((r) => !!r?.persona).length
+
+  const tabs: { key: Tab; label: string }[] = [
+    { key: 'all', label: `All ${results.length}` },
+    { key: 'low', label: `Unsure (${lowCount})` },
+    { key: 'urgent', label: `Urgent (${urgentCount})` },
+    { key: 'sample', label: `Case-file 12 (${sampleCount})` },
+  ]
+
+  return (
+    <div className="min-h-screen" style={{ background: 'var(--nb-bg)' }}>
+      {/* top bar */}
+      <header
+        className="flex items-center gap-4 border-b-[3px] border-[color:var(--nb-ink)] px-5 py-3"
+        style={{ background: 'var(--nb-paper)' }}
+      >
+        <div className="flex items-center gap-3">
+          <span
+            className="grid h-9 w-9 place-items-center rounded-full border-[3px] border-[color:var(--nb-ink)] font-display text-[18px] font-black"
+            style={{ background: 'var(--nb-coral)' }}
+          >
+            M
+          </span>
+          <div>
+            <div className="font-display text-[17px] font-extrabold leading-tight">
+              Maya · Inbox Triage
+            </div>
+            <div className="text-[11.5px] font-semibold" style={{ color: 'var(--nb-muted)' }}>
+              Instagram 50K · skincare · replies in your words
+            </div>
+          </div>
+        </div>
+        <span className="nb-pill" style={{ background: 'var(--nb-cream-deep)' }}>
+          inbox <b>dms_sept.json</b>
+        </span>
+        <span className="nb-pill" style={{ background: 'var(--nb-cream-deep)' }}>
+          reader <b>jev-latest</b>
+        </span>
+        <div className="flex-1" />
+        <Link href="/ask" className="nb-btn nb-btn-yellow" style={{ padding: '7px 14px' }}>
+          “What would Maya do?” card
+        </Link>
+        <span
+          className="nb-tape"
+          style={{ background: source === 'live' ? 'var(--nb-mint)' : 'var(--nb-yellow)' }}
+          title={isMock ? 'NEXT_PUBLIC_MOCK — flip to 0 to go live' : 'live /api/results'}
+        >
+          {source === 'live' ? 'live results' : 'sample data'}
+        </span>
+      </header>
+
+      <div className="grid" style={{ gridTemplateColumns: '300px 1fr', minHeight: 'calc(100vh - 64px)' }}>
+        {/* rules sidebar */}
+        <aside
+          className="border-r-[3px] border-[color:var(--nb-ink)] p-4"
+          style={{ background: 'var(--nb-cream-deep)' }}
+        >
+          <div className="nb-eyebrow mb-1">What each DM is asked</div>
+          <p className="mb-3 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
+            {QUESTIONS.filter((q) => q.on).length} questions · one pass per message
+          </p>
+          <div className="space-y-2.5">
+            {QUESTIONS.map((q) => (
+              <QuestionCardView key={q.key} q={q} />
+            ))}
+          </div>
+
+          <div className="nb-card mt-5 p-4" style={{ background: 'var(--nb-blue)' }}>
+            <div className="nb-eyebrow mb-2">Your routing (the notebook)</div>
+            <ul className="space-y-1 text-[13px] leading-snug">
+              {MAYA_ROUTING.map((r) => (
+                <li key={r.when}>
+                  <b>{r.when}</b> → {r.then}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+
+        {/* main */}
+        <main className="paper-grid p-5">
+          {/* run bar */}
+          <div className="nb-card flex flex-wrap items-center gap-3 p-4">
+            <select
+              className="nb-select"
+              value={mode}
+              onChange={(e) => setMode(e.target.value as RunMode)}
+              disabled={running}
+            >
+              <option value="all">Redo everything</option>
+              <option value="unclassified">Only unread ones</option>
+            </select>
+            <button className="nb-btn nb-btn-coral" onClick={() => void run(mode)} disabled={running || loading}>
+              {running ? 'Reading…' : '▶ Run the inbox'}
+            </button>
+            <div className="flex-1" />
+            {[
+              [`${stats?.count ?? results.length}`, 'DMs read'],
+              [stats ? `${(stats.ms / 1000).toFixed(1)}s` : '—', 'wall time'],
+              [stats ? `$${stats.costUsd.toFixed(3)}` : '—', 'reader cost'],
+              [`${stats?.decisions ?? '—'}`, 'decisions made'],
+              [`~${hoursSaved}h`, 'back to you / month'],
+            ].map(([v, l]) => (
+              <div
+                key={l}
+                className="border-l-[2.5px] border-[color:var(--nb-line-soft)] pl-3"
+              >
+                <div className="font-display text-[19px] font-extrabold leading-none">{v}</div>
+                <div className="mt-1 text-[10.5px] font-bold uppercase tracking-wide" style={{ color: 'var(--nb-muted)' }}>
+                  {l}
+                </div>
+              </div>
+            ))}
+          </div>
+          {progress !== null && (
+            <div
+              className="mt-[-8px] mb-3 h-[10px] overflow-hidden rounded-full border-[2.5px] border-[color:var(--nb-ink)]"
+              style={{ background: 'var(--nb-paper)' }}
+            >
+              <div
+                className="h-full transition-[width] duration-150"
+                style={{ width: `${Math.round(progress * 100)}%`, background: 'var(--nb-coral)' }}
+              />
+            </div>
+          )}
+          {error && (
+            <p className="mt-2 text-[12.5px] font-semibold" style={{ color: 'var(--nb-coral)' }}>
+              Last run hit a snag ({error}) — showing {source === 'sample' ? 'the sample inbox' : 'the last good results'}.
+            </p>
+          )}
+
+          {/* lanes */}
+          <div className="mt-4 grid grid-cols-2 gap-3 xl:grid-cols-4">
+            {LANE_ORDER.map((lane) => {
+              const meta = LANE_META[lane]
+              const count = laneCounts[lane]
+              const share = results.length ? Math.round((count / results.length) * 100) : 0
+              const active = laneFilter === lane
+              return (
+                <button
+                  key={lane}
+                  onClick={() => setLaneFilter(active ? null : lane)}
+                  className="nb-card p-4 text-left transition-transform"
+                  style={{
+                    borderTop: `10px solid ${meta.color}`,
+                    transform: active ? 'translate(3px,3px)' : undefined,
+                    boxShadow: active ? '2px 2px 0 0 var(--nb-ink)' : undefined,
+                  }}
+                >
+                  <div className="font-display text-[30px] font-black leading-none">
+                    {count}
+                    <span className="ml-2 text-[13px] font-bold" style={{ color: 'var(--nb-muted)' }}>
+                      {share}%
+                    </span>
+                  </div>
+                  <div className="mt-1 font-display text-[15px] font-extrabold">{meta.label}</div>
+                  <div className="mt-1 text-[12px] leading-snug" style={{ color: 'var(--nb-muted)' }}>
+                    {meta.desc}
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* tabs + search */}
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            {tabs.map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setTab(t.key)}
+                className="nb-btn"
+                style={{
+                  padding: '6px 13px',
+                  fontSize: 13,
+                  background: tab === t.key ? 'var(--nb-ink)' : 'var(--nb-paper)',
+                  color: tab === t.key ? 'var(--nb-paper)' : 'var(--nb-ink)',
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+            {laneFilter && (
+              <button
+                className="nb-btn nb-btn-blue"
+                style={{ padding: '6px 13px', fontSize: 13 }}
+                onClick={() => setLaneFilter(null)}
+              >
+                {LANE_META[laneFilter].short} ✕
+              </button>
+            )}
+            <input
+              className="nb-input ml-auto"
+              style={{ width: 240 }}
+              placeholder="Search DMs…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+
+          {/* table */}
+          <div className="nb-card mt-3 overflow-hidden">
+            <table className="w-full border-collapse text-[13.5px]">
+              <thead>
+                <tr style={{ background: 'var(--nb-cream-deep)' }}>
+                  {['From', 'Message', 'What it read', 'Lane', 'Draft / why'].map((h) => (
+                    <th
+                      key={h}
+                      className="border-b-[3px] border-[color:var(--nb-ink)] px-3 py-2.5 text-left text-[11px] font-extrabold uppercase tracking-wider"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map((dm) => (
+                  <tr
+                    key={dm.id ?? `${dm.handle}-${dm.ts}`}
+                    className="cursor-pointer border-b border-[color:var(--nb-line-soft)] transition-colors hover:bg-[color:var(--nb-cream-deep)]"
+                    onClick={() => setSelected(dm)}
+                  >
+                    <td className="px-3 py-3 align-top whitespace-nowrap">
+                      <div className="font-bold">{dm.handle ? `@${dm.handle}` : '—'}</div>
+                      <div className="text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
+                        {dm.platform === 'tt' ? 'TT' : 'IG'} · {timeAgo(dm.ts)}
+                      </div>
+                    </td>
+                    <td className="max-w-[330px] px-3 py-3 align-top leading-snug">{dm.text || '—'}</td>
+                    <td className="px-3 py-3 align-top">
+                      <AnswerChips dm={dm} />
+                    </td>
+                    <td className="px-3 py-3 align-top">
+                      <LaneTag lane={dm.lane} urgent={isUrgent(dm)} />
+                    </td>
+                    <td className="max-w-[300px] px-3 py-3 align-top">
+                      {dm.draft ? (
+                        <div
+                          className="rounded-r-lg border-l-[4px] px-2.5 py-1.5"
+                          style={{ borderColor: 'var(--nb-mint)', background: 'var(--nb-bg)' }}
+                        >
+                          <span className="nb-hand text-[18px] leading-snug">{dm.draft}</span>
+                        </div>
+                      ) : dm.why ? (
+                        <div className="text-[12.5px] italic leading-snug" style={{ color: 'var(--nb-muted)' }}>
+                          {dm.why}
+                        </div>
+                      ) : (
+                        <span className="text-[12px]" style={{ color: 'var(--nb-muted)' }}>
+                          —
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+                {filtered.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="px-4 py-10 text-center">
+                      <div className="nb-hand text-[24px]">nothing here</div>
+                      <p className="text-[13px]" style={{ color: 'var(--nb-muted)' }}>
+                        {loading ? 'Reading the inbox…' : 'No messages match this view.'}
+                      </p>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mt-4 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
+            Sorted for you: “Needs you” by urgency, “Ready to send” by buying signal. Drafts come
+            from your notebook routing — nothing sends itself.
+          </p>
+        </main>
+      </div>
+
+      {selected && <Drawer dm={selected} onClose={() => setSelected(null)} />}
+    </div>
+  )
+}
