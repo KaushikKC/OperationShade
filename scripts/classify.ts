@@ -6,7 +6,7 @@
 import { loadEnv } from './_env'
 loadEnv()
 import { apiKey, QUESTION_COUNT, runInbox } from '../lib/run'
-import { readDms, writeResults } from '../lib/store'
+import { readCorpus, writeResults } from '../lib/store'
 import { LANE_LABELS } from '../lib/lanes'
 import type { Lane, RunResult } from '../lib/types'
 
@@ -17,7 +17,7 @@ const arg = (flag: string) => {
 
 async function main() {
   const key = apiKey()
-  const all = await readDms()
+  const all = await readCorpus()
   const limit = Number(arg('--limit') ?? all.length)
   const dms = all.slice(0, Number.isFinite(limit) ? limit : all.length)
   process.stdout.write(`Reading ${dms.length} messages\n`)

@@ -9,7 +9,7 @@ import path from 'node:path'
 import { askJevAll } from '../lib/jev'
 import { route } from '../lib/routing'
 import { apiKey } from '../lib/run'
-import { readDms } from '../lib/store'
+import { readCorpus } from '../lib/store'
 import type { DM, Lane } from '../lib/types'
 
 type Gold = { id: string; text: string; lane: Lane; intent?: string; skin_type?: string; note: string }
@@ -17,8 +17,15 @@ type Gold = { id: string; text: string; lane: Lane; intent?: string; skin_type?:
 async function main() {
   const key = apiKey()
   const gold: Gold[] = JSON.parse(readFileSync(path.join(process.cwd(), 'data', 'gold.json'), 'utf8'))
-  const dms = new Map((await readDms()).map((d: DM) => [d.id, d]))
+  const dms = new Map((await readCorpus()).map((d: DM) => [d.id, d]))
   const subjects = gold.map((g) => dms.get(g.id)).filter((d): d is DM => Boolean(d))
+  if (subjects.length < gold.length) {
+    const missing = gold.filter((g) => !dms.has(g.id)).map((g) => g.id)
+    throw new Error(
+      `${missing.length} of ${gold.length} labelled messages are not in data/dms.json (${missing.slice(0, 3).join(', ')}…). ` +
+        'Regenerate the corpus with npm run dms, or re-label with scripts/gen-gold.mjs.',
+    )
+  }
 
   const { results, failures } = await askJevAll(subjects, key, { concurrency: 10 })
   let laneHits = 0

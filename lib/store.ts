@@ -4,21 +4,29 @@ import type { Classified, DM, RunResult } from './types'
 
 const file = (...p: string[]) => path.join(process.cwd(), 'data', ...p)
 
+async function load(name: string): Promise<DM[]> {
+  try {
+    const rows = JSON.parse(await readFile(file(name), 'utf8'))
+    return Array.isArray(rows) ? (rows as DM[]) : []
+  } catch {
+    return []
+  }
+}
+
 /**
- * The working inbox. An uploaded export wins over the committed corpus, so
- * once Maya drops her own file in, every later run reads hers. Her file is
+ * The corpus in the repo. The gold set is labelled against these ids, so
+ * anything that scores itself must read this and never an upload.
+ */
+export const readCorpus = (): Promise<DM[]> => load('dms.json')
+
+/**
+ * What the console is working on. An uploaded export wins, so once Maya drops
+ * her own file in, every later run through the API reads hers. Her file is
  * gitignored — it is her mail, not ours.
  */
 export async function readDms(): Promise<DM[]> {
-  for (const p of [file('inbox.json'), file('dms.json')]) {
-    try {
-      const rows = JSON.parse(await readFile(p, 'utf8'))
-      if (Array.isArray(rows) && rows.length) return rows as DM[]
-    } catch {
-      continue
-    }
-  }
-  return []
+  const uploaded = await load('inbox.json')
+  return uploaded.length ? uploaded : readCorpus()
 }
 
 /** Where an upload lands. Returns false when the filesystem is read-only. */
