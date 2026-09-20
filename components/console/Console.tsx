@@ -16,6 +16,17 @@ import {
   timeAgo,
 } from './format'
 import { useResults, type RunMode } from './use-results'
+import { usePlaybook, type ApprovedReply } from './use-playbook'
+
+/** A row as the console shows it: her approved wording may stand in for the draft. */
+type Row = Classified & { fromPlaybook?: ApprovedReply; preparedDraft?: string }
+
+/** What the review bar is set to, in her words rather than a number. */
+function barMood(t: number): string {
+  if (t < 0.6) return 'More coverage'
+  if (t < 0.75) return 'Balanced'
+  return 'Safer'
+}
 
 type Tab = 'all' | 'low' | 'urgent' | 'sample'
 
@@ -166,7 +177,15 @@ function QuestionCardView({ q }: { q: (typeof QUESTIONS)[number] }) {
   )
 }
 
-function Drawer({ dm, onClose }: { dm: Classified; onClose: () => void }) {
+function Drawer({
+  dm,
+  playbook,
+  onClose,
+}: {
+  dm: Row
+  playbook: ReturnType<typeof usePlaybook>
+  onClose: () => void
+}) {
   const [copied, setCopied] = useState(false)
   const a = dm.answers
   const fields: { key: string; label: string; node: ReactNode }[] = []
@@ -342,7 +361,7 @@ export default function Console() {
   const [tab, setTab] = useState<Tab>('all')
   const [laneFilter, setLaneFilter] = useState<Lane | null>(null)
   const [query, setQuery] = useState('')
-  const [selected, setSelected] = useState<Classified | null>(null)
+  const [selected, setSelected] = useState<Row | null>(null)
 
   /**
    * The slider. Nothing is re-read and nothing is sent — the same answers are
@@ -350,10 +369,17 @@ export default function Console() {
    * message moving lane here means exactly what it would mean on a real run.
    */
   const [threshold, setThreshold] = useState(DEFAULT_THRESHOLD)
+  const playbook = usePlaybook()
   const stored = useMemo(() => data?.results ?? [], [data])
-  const results = useMemo(
-    () => stored.map((r) => (r?.answers ? { ...r, lane: rebucket(r, threshold) } : r)),
-    [stored, threshold],
+  const results = useMemo<Row[]>(
+    () =>
+      stored.map((r) => {
+        const row: Row = r?.answers ? { ...r, lane: rebucket(r, threshold) } : { ...r }
+        const approved = playbook.approvedFor(row)
+        if (!approved) return row
+        return { ...row, draft: approved.approvedText, preparedDraft: r.draft, fromPlaybook: approved }
+      }),
+    [stored, threshold, playbook],
   )
   const moved = useMemo(
     () => results.reduce((n, r, i) => (r?.lane !== stored[i]?.lane ? n + 1 : n), 0),
@@ -571,13 +597,16 @@ export default function Console() {
                 id="sure"
                 type="range"
                 min={DEFAULT_THRESHOLD}
-                max={0.9}
+                max={0.95}
                 step={0.01}
                 value={threshold}
                 onChange={(e) => setThreshold(Number(e.target.value))}
                 className="h-2 min-w-[240px] flex-1 cursor-pointer"
                 style={{ accentColor: 'var(--nb-coral)' }}
               />
+              <span className="nb-pill" style={{ background: 'var(--nb-cream-deep)' }}>
+                {barMood(threshold)}
+              </span>
               <span className="font-display text-[20px] font-extrabold leading-none tabular-nums">
                 {Math.round(threshold * 100)}%
               </span>
@@ -597,11 +626,11 @@ export default function Console() {
                   <b>
                     {moved} {moved === 1 ? 'message has' : 'messages have'} moved
                   </b>{' '}
-                  moved out of Ready to send and onto your desk. Nothing was re-read and nothing was sent — these
-                  are the same answers, held to a higher bar.
+                  moved out of Ready to send and onto your desk. Raise this to review more messages yourself —
+                  nothing is re-read and nothing is sent.
                 </>
               ) : (
-                'Sitting where the run was scored. Drag right to keep more of them back for yourself — nothing is re-read and nothing is sent.'
+                'Raise this to review more messages yourself. Nothing is re-read and nothing is sent.'
               )}
             </p>
           </div>
@@ -735,6 +764,11 @@ export default function Console() {
                           style={{ borderColor: 'var(--nb-mint)', background: 'var(--nb-bg)' }}
                         >
                           <span className="nb-hand text-[18px] leading-snug">{dm.draft}</span>
+                          {dm.fromPlaybook && (
+                            <div className="mt-1 text-[10.5px] font-bold uppercase tracking-wide" style={{ color: 'var(--nb-muted)' }}>
+                              From a reply you approved
+                            </div>
+                          )}
                         </div>
                       ) : dm.why ? (
                         <div className="text-[12.5px] italic leading-snug" style={{ color: 'var(--nb-muted)' }}>
@@ -769,7 +803,13 @@ export default function Console() {
         </main>
       </div>
 
-      {selected && <Drawer dm={selected} onClose={() => setSelected(null)} />}
+      {selected && (
+        <Drawer
+          dm={results.find((r) => r.id === selected.id) ?? selected}
+          playbook={playbook}
+          onClose={() => setSelected(null)}
+        />
+      )}
     </div>
   )
 }
