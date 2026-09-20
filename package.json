@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "classify": "tsx scripts/classify.ts",
+    "gold": "tsx scripts/eval-gold.ts",
+    "dms": "node scripts/gen-dms.mjs > data/dms.json"
   },
   "dependencies": {
     "next": "16.3.5",
@@ -21,6 +24,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

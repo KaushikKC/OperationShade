@@ -1,0 +1,219 @@
+[
+  {
+    "id": "dm_001",
+    "text": "my skin's been flaking under foundation since october. is the glow serum worth it or is there something cheaper that does the same job",
+    "lane": "voice",
+    "intent": "product_rec",
+    "skin_type": "dry",
+    "note": "Flaking under foundation is a barrier answer she gives constantly."
+  },
+  {
+    "id": "dm_002",
+    "text": "i'm getting married in three weeks and my skin has never looked worse. my mum died in june and i think it's all coming out on my face. i don't know what to ask you really",
+    "lane": "maya",
+    "intent": "routine_help",
+    "note": "Bereavement and a wedding. Nothing on the shelf answers this."
+  },
+  {
+    "id": "dm_003",
+    "text": "the retinol you talked about has left both my cheeks raw and hot and it stings when i put water on it. do i push through it or stop",
+    "lane": "maya",
+    "intent": "reaction_concern",
+    "skin_type": "sensitive",
+    "note": "Raw, hot, stinging. Reaction beats every other signal."
+  },
+  {
+    "id": "dm_004",
+    "text": "is there a cheaper version of the £48 cream you keep in the blue jar? i can't justify that every two months",
+    "lane": "voice",
+    "intent": "dupe_request",
+    "note": "Straight dupe, she has the £13 answer ready."
+  },
+  {
+    "id": "dm_005",
+    "text": "where do you buy the cleanser in the uk? every site i find is us only and the shipping is more than the bottle",
+    "lane": "voice",
+    "intent": "where_to_buy",
+    "note": "UK stockist. Pure lookup."
+  },
+  {
+    "id": "dm_006",
+    "text": "hiya!! do you think it's worth it? x",
+    "lane": "maya",
+    "note": "No product, no skin type, no question. Nothing to answer from — she decides."
+  },
+  {
+    "id": "dm_007",
+    "text": "i'm 15 and i've got £20 to spend. my forehead is oily by lunch but my cheeks are tight. where do i start",
+    "lane": "voice",
+    "intent": "routine_help",
+    "skin_type": "combination",
+    "note": "Fifteen, £20. Her standard two-product answer."
+  },
+  {
+    "id": "dm_008",
+    "text": "my dermatologist put me on something for rosacea and half your shelf is off limits now. is any of it still ok for me or do i just stop watching lol",
+    "lane": "maya",
+    "intent": "routine_help",
+    "skin_type": "sensitive",
+    "note": "On prescription rosacea treatment. Not a recommendation."
+  },
+  {
+    "id": "dm_009",
+    "text": "buying for my sister, she's got oily skin and i've got about £40. she watches you religiously so it has to be something you'd actually use",
+    "lane": "voice",
+    "intent": "product_rec",
+    "skin_type": "oily",
+    "note": "Gift, oily skin, £40. Answerable."
+  },
+  {
+    "id": "dm_010",
+    "text": "is it actually bad to use niacinamide and vitamin c together or is that an old myth people keep repeating",
+    "lane": "voice",
+    "intent": "routine_help",
+    "note": "Niacinamide + vitamin C myth. She has said this a hundred times."
+  },
+  {
+    "id": "dm_011",
+    "text": "everyone is posting about the £62 cream this week. i trust you more than them — is it worth it or is it this month's thing",
+    "lane": "voice",
+    "intent": "product_rec",
+    "note": "The £62 cream. Her \"this month's thing\" answer."
+  },
+  {
+    "id": "dm_012",
+    "text": "been watching you for two years and never messaged. i'm finally rebuilding my whole routine from scratch next month and i've saved every one of your shelf videos",
+    "lane": "intent",
+    "intent": "purchase_signal",
+    "note": "Rebuilding next month. Nothing to reply to today."
+  },
+  {
+    "id": "dm_153",
+    "text": "my face went red and hot after the retinal last night, do i stop i don't trust anyone else on this.",
+    "lane": "maya",
+    "intent": "reaction_concern",
+    "note": "Red and hot after retinal. Reaction."
+  },
+  {
+    "id": "dm_175",
+    "text": "hiya rosacea-ish redness on my cheeks. my eyelids are flaking and sore, i don't know which thing did it",
+    "lane": "maya",
+    "intent": "reaction_concern",
+    "skin_type": "sensitive",
+    "note": "Sore flaking eyelids, cause unknown."
+  },
+  {
+    "id": "dm_180",
+    "text": "rosacea-ish redness on my cheeks. started the retinol you mentioned and my skin is peeling around my mouth, normal?",
+    "lane": "maya",
+    "intent": "reaction_concern",
+    "skin_type": "sensitive",
+    "note": "Peeling on retinol with rosacea-ish redness. Retinol block applies."
+  },
+  {
+    "id": "dm_173",
+    "text": "i've come out in tiny bumps since i started the new cleanser, is that purging or a reaction",
+    "lane": "maya",
+    "intent": "reaction_concern",
+    "note": "Purging or reaction is exactly the call she should make herself."
+  },
+  {
+    "id": "dm_250",
+    "text": "your account has been flagged for copyright, verify here to avoid deletion",
+    "lane": "noise",
+    "intent": "spam",
+    "note": "Phishing."
+  },
+  {
+    "id": "dm_225",
+    "text": "INVEST £200 GET £2000 BACK IN 48HRS crypto trading dm for details 📈📈",
+    "lane": "noise",
+    "intent": "spam",
+    "note": "Crypto."
+  },
+  {
+    "id": "dm_227",
+    "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
+    "lane": "noise",
+    "intent": "collab_pitch",
+    "note": "Rate card pitch."
+  },
+  {
+    "id": "dm_253",
+    "text": "hey babe check my page 😘",
+    "lane": "noise",
+    "intent": "spam",
+    "note": "Bot follow-back."
+  },
+  {
+    "id": "dm_210",
+    "text": "i'm on a student budget. where do you buy the toner in the uk, everything i find is us only",
+    "lane": "voice",
+    "intent": "where_to_buy",
+    "note": "Stockist question with a student-budget aside."
+  },
+  {
+    "id": "dm_094",
+    "text": "is there a cheaper version of the toner you use happy to buy through your link if you have one.",
+    "lane": "voice",
+    "intent": "dupe_request",
+    "note": "Cheaper toner."
+  },
+  {
+    "id": "dm_089",
+    "text": "cheaper Glass Drop serum that isn't rubbish? i'm skint until the 28th 🙏",
+    "lane": "voice",
+    "intent": "dupe_request",
+    "note": "Glass Drop named — the skip line, not a dupe."
+  },
+  {
+    "id": "dm_061",
+    "text": "i'm 17 and i've got £35 to spend, where do i start",
+    "lane": "voice",
+    "intent": "routine_help",
+    "note": "Seventeen, £35."
+  },
+  {
+    "id": "dm_067",
+    "text": "my mum says i'm too young for retinol, is she right",
+    "lane": "voice",
+    "intent": "routine_help",
+    "note": "Too young for retinol. Retinol block: the answer is wait."
+  },
+  {
+    "id": "dm_027",
+    "text": "live in london, hard water, if that matters. do i need an oil on top of my moisturiser or is that a marketing thing",
+    "lane": "voice",
+    "intent": "routine_help",
+    "note": "Oil on top of moisturiser. Standard answer."
+  },
+  {
+    "id": "dm_039",
+    "text": "i've been doubling up on hyaluronic acid and my skin feels worse?? what am i doing wrong",
+    "lane": "voice",
+    "intent": "routine_help",
+    "note": "Doubling up on hyaluronic acid."
+  },
+  {
+    "id": "dm_212",
+    "text": "did you ever repurchase the cleanser or was it a one time thing",
+    "lane": "voice",
+    "intent": "product_rec",
+    "note": "Did she repurchase. Shelf question."
+  },
+  {
+    "id": "dm_130",
+    "text": "combination skin, mid twenties. screenshotted your whole routine and i'm buying it bit by bit 🙏",
+    "lane": "intent",
+    "intent": "purchase_signal",
+    "skin_type": "combination",
+    "note": "Buying the routine bit by bit. No question in it."
+  },
+  {
+    "id": "dm_138",
+    "text": "darker skin, marks stay for months. my basket is full of things you've talked about 😅 paying for it on thursday x",
+    "lane": "intent",
+    "intent": "purchase_signal",
+    "note": "Basket full, paying Thursday. Watch, do not reply."
+  }
+]
