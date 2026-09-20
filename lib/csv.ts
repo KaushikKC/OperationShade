@@ -45,17 +45,23 @@ type ParsedFields = { text: number; handle: number; platform: number; ts: number
 
 const norm = (s: string) => s.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')
 
+/**
+ * Match headers exactly first, then loosely — "DM Text" and "User Name" are
+ * what real exports look like, and neither is an exact alias. A column is
+ * claimed once so "user_name" cannot be both the handle and the persona.
+ */
 function mapHeader(header: string[]): ParsedFields | null {
   const cells = header.map(norm)
-  const find = (names: string[]) => cells.findIndex((c) => names.includes(c))
-  const fields = {
-    text: find(ALIASES.text),
-    handle: find(ALIASES.handle),
-    platform: find(ALIASES.platform),
-    ts: find(ALIASES.ts),
-    persona: find(ALIASES.persona),
-    id: find(ALIASES.id),
-  }
+  const taken = new Set<number>()
+  const claim = (i: number) => { if (i >= 0) taken.add(i); return i }
+  const exact = (names: string[]) => claim(cells.findIndex((c, i) => !taken.has(i) && names.includes(c)))
+  const loose = (names: string[]) =>
+    claim(cells.findIndex((c, i) => !taken.has(i) && names.some((n) => c.split('_').includes(n) || c === n)))
+
+  const order: (keyof ParsedFields)[] = ['text', 'handle', 'ts', 'platform', 'persona', 'id']
+  const fields = { text: -1, handle: -1, platform: -1, ts: -1, persona: -1, id: -1 } as ParsedFields
+  for (const key of order) fields[key] = exact(ALIASES[key])
+  for (const key of order) if (fields[key] === -1) fields[key] = loose(ALIASES[key])
   return fields.text === -1 ? null : fields
 }
 
@@ -95,7 +101,8 @@ export function parseDms(csv: string): ParseReport {
 
   body.forEach((cells, i) => {
     // No header we recognise: take the longest cell in the row as the message.
-    const text = (fields ? cells[fields.text] : [...cells].sort((a, b) => b.length - a.length)[0] ?? '').trim()
+    const raw = fields ? cells[fields.text] : [...cells].sort((a, b) => b.length - a.length)[0]
+    const text = (raw ?? '').trim()
     if (!text) { skipped += 1; return }
 
     const at = (idx: number) => (idx >= 0 ? (cells[idx] ?? '').trim() : '')
