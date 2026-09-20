@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useMemo, useRef, useState, type ReactNode } from 'react'
+import { DEFAULT_THRESHOLD, rebucket } from '@/lib/lanes'
 import type { Classified, Lane } from '@/lib/types'
 import { MAYA_ROUTING, QUESTIONS } from './questions'
 import {
@@ -343,7 +344,21 @@ export default function Console() {
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState<Classified | null>(null)
 
-  const results = useMemo(() => data?.results ?? [], [data])
+  /**
+   * The slider. Nothing is re-read and nothing is sent — the same answers are
+   * bucketed again in the browser, through the same rule the server used, so a
+   * message moving lane here means exactly what it would mean on a real run.
+   */
+  const [threshold, setThreshold] = useState(DEFAULT_THRESHOLD)
+  const stored = useMemo(() => data?.results ?? [], [data])
+  const results = useMemo(
+    () => stored.map((r) => (r?.answers ? { ...r, lane: rebucket(r, threshold) } : r)),
+    [stored, threshold],
+  )
+  const moved = useMemo(
+    () => results.reduce((n, r, i) => (r?.lane !== stored[i]?.lane ? n + 1 : n), 0),
+    [results, stored],
+  )
   const laneCounts = useMemo(() => {
     const c: Record<Lane, number> = { voice: 0, maya: 0, intent: 0, noise: 0 }
     for (const r of results) if (r?.lane && r.lane in c) c[r.lane]++
@@ -531,6 +546,50 @@ export default function Console() {
               Last run hit a snag ({error}) — showing {source === 'sample' ? 'the sample inbox' : 'the last good results'}.
             </p>
           )}
+
+          <div className="nb-card mt-3 p-4">
+            <div className="flex flex-wrap items-center gap-4">
+              <label htmlFor="sure" className="text-[13.5px] font-bold">
+                How sure should I be before drafting a reply?
+              </label>
+              <input
+                id="sure"
+                type="range"
+                min={0.3}
+                max={0.9}
+                step={0.01}
+                value={threshold}
+                onChange={(e) => setThreshold(Number(e.target.value))}
+                className="h-2 min-w-[240px] flex-1 cursor-pointer"
+                style={{ accentColor: 'var(--nb-coral)' }}
+              />
+              <span className="font-display text-[20px] font-extrabold leading-none tabular-nums">
+                {Math.round(threshold * 100)}%
+              </span>
+              {threshold !== DEFAULT_THRESHOLD && (
+                <button
+                  className="text-[11.5px] underline"
+                  style={{ color: 'var(--nb-muted)' }}
+                  onClick={() => setThreshold(DEFAULT_THRESHOLD)}
+                >
+                  back to {Math.round(DEFAULT_THRESHOLD * 100)}%
+                </button>
+              )}
+            </div>
+            <p className="mt-2 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
+              {moved > 0 ? (
+                <>
+                  <b>
+                    {moved} {moved === 1 ? 'message has' : 'messages have'} moved
+                  </b>{' '}
+                  since you started sliding. Drag right and more of them wait for you; drag left and more get a
+                  draft. Nothing is re-read and nothing is sent.
+                </>
+              ) : (
+                'Drag right and more messages wait for you; drag left and more get a draft. Nothing is re-read and nothing is sent.'
+              )}
+            </p>
+          </div>
 
           {(uploadNote || inboxName) && (
             <p className="mt-2 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
