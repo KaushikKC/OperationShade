@@ -70,16 +70,25 @@ untouched. Nothing is generated — if the tree has no branch, she gets it with 
 
 ### Calibration
 
-`npm run gold` scores the thirty hand labels. Current: **lane 29/30, intent 27/29,
-skin 9/9.** The threshold is swept, not chosen — accuracy is flat at 29/30 from
-0.40 to 0.65 and falls off above, so the default sits at 0.60 in the middle of
-that plateau. Jev answers the routing question in a lower band than a plain
-reading of it suggests.
+`npm run gold` scores the hand labels — thirty-three messages, the twelve E-01
+intercepts carrying the case file's own category as their intent label. The
+threshold is swept, not chosen: 32/33 at 0.40, 31/33 from 0.45 to 0.55, 25/33 at
+0.70. It sits at 0.50, mid-plateau.
 
-Two things worth knowing. Jev is not deterministic, so rows sitting within about
-0.05 of the bar change lane between runs; every one of them fails toward Maya
-rather than into a draft. And the corpus is synthetic: reactions are about 13% of
-it, which is higher than a real inbox and pushes Needs you up accordingly.
+Two questions were rewritten after reading the answers back, and both changes
+were product decisions rather than prompt tweaks:
+
+- **`answerable_by_routing`** was described as a product table, so Jev read *"is
+  the Cloud Cream worth £38"* as uncovered. Rewritten as what she actually
+  answers, it separates.
+- **`needs_maya_personally`** was asking whether the message needs Maya's
+  judgement. Everything does — *"what would YOU buy"* scored 0.5+ and went to her
+  pile. But carrying that judgement is the whole product (E-06). The question now
+  asks whether it needs Maya *herself*: a message where a correct product answer
+  would still be the wrong reply.
+
+Jev is not deterministic, so rows within about 0.05 of the bar change lane
+between runs. Every one of them fails toward Maya rather than into a draft.
 
 ## Fixture
 

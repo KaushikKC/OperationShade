@@ -7,7 +7,8 @@ const MODEL = 'jev-latest'
 /** Jev 1.13 is $42 per billion input tokens. Output tokens are free. */
 const USD_PER_INPUT_TOKEN = 42 / 1e9
 
-export const INTENTS = ['shade_info', 'recommendation', 'pick_one', 'value_check', 'routine_context', 'skin_diagnosis', 'trust_or_fan', 'life_event', 'constraint_routine', 'delayed_intent', 'brand_pitch', 'spam'] as const
+/** E-01 // the case file labels its own twelve intercepts. These are its words. */
+export const INTENTS = ['info', 'recommendation', 'judgement', 'value', 'context', 'diagnosis', 'trust', 'relationship', 'constraint', 'delayed_intent', 'transfer_of_trust', 'personalisation', 'brand_pitch', 'spam'] as const
 export const SKIN_TYPES = ['dry', 'oily_combo', 'sensitive', 'redness', 'unknown'] as const
 export const BUDGET_BANDS = ['none', 'under_30', '30_to_60', 'over_60'] as const
 
@@ -19,18 +20,20 @@ export const BUDGET_BANDS = ['none', 'under_30', '30_to_60', 'over_60'] as const
 export const QUESTIONS = {
   intent: {
     type: 'choice',
-    instructions: 'What is this person actually asking Maya for? Judge the request, not the politeness around it.',
+    instructions: 'What is this person actually asking Maya for? Judge the request underneath the message, not the politeness around it.',
     criteria: {
-      shade_info: 'Which shade, undertone or colour match — anything that depends on what they already wear.',
-      recommendation: 'Wants to be told what to buy for their skin.',
-      pick_one: 'Has narrowed it to two or three things and wants Maya to choose between them.',
-      value_check: 'Is this worth the money — including whether a cheaper version would do.',
-      routine_context: 'How to use what they already have: order, frequency, what goes with what.',
-      skin_diagnosis: 'Describes what their skin is doing — reacting, breaking out, stinging, flaking — and wants to know what is wrong. Choose this over recommendation whenever the state of their skin is the subject, even if they also ask what to buy.',
-      trust_or_fan: 'A compliment, a thank you, or someone saying they trust Maya over everyone else, with nothing asked and nothing being bought. If there is a question or a purchase in the message, it is not this.',
-      life_event: 'A wedding, a funeral, a new baby, being pregnant or post-partum, an illness, a bereavement, a first date — something happening in their life is the reason they are writing. Choose this even when a product question is attached to it.',
-      constraint_routine: 'Has a hard constraint — five minutes, no money, a baby, shift work — and needs the routine to fit inside it.',
-      delayed_intent: 'Is going to buy, but not today: saving up, waiting for payday, planning, bookmarking, working through a list. Choose this over recommendation, value_check or trust_or_fan when they are telling Maya about a purchase they will make later rather than asking her a question now.',
+      info: 'A fact about something Maya has used or worn — which shade, which one was that, where is it from.',
+      recommendation: 'Tell me what to buy. Usually comes with a skin type, a budget, or both.',
+      judgement: 'Asks Maya to choose between things: which one, if you could only keep one, this or that.',
+      value: 'Is this worth the money. Includes wondering aloud whether they are being influenced into it.',
+      context: 'They already own something and want to know what fits with it, or whether they need another thing at all.',
+      diagnosis: 'They do not know what their own skin is or what it is doing, and want help working it out.',
+      trust: 'Tells Maya they trust her, or thanks her. Nothing is being asked and nothing is being bought.',
+      relationship: 'Something in their life is the reason they are writing — a date, a wedding, a funeral, a baby, an interview.',
+      constraint: 'A hard limit on the answer: only two products, five minutes, no money, will not do eight steps.',
+      delayed_intent: 'Going to buy, but not now. Saving up, waiting for payday, bookmarking, working through a list. Telling Maya rather than asking her.',
+      transfer_of_trust: 'Asks Maya to decide as though it were her own money or her own face, sometimes on something outside beauty.',
+      personalisation: 'Asks for the one Maya would pick for them specifically — "the one you would buy if you were me".',
       brand_pitch: 'A brand, agency or PR asking for posts, gifting or a partnership.',
       spam: 'Follower growth, crypto, phishing, adult content, mass-sent nonsense.',
     },
@@ -68,10 +71,14 @@ export const QUESTIONS = {
   },
   needs_maya_personally: {
     type: 'noul',
-    instructions: 'Only Maya\'s own judgement or her own voice answers this one well.',
+    instructions: {
+      question: 'This message needs Maya herself to type the answer, because `her_routing` cannot carry it.',
+      her_routing: 'Her taste and her judgement, already written down: what she rates, what she would not pay for, what she would buy for a given skin and budget, and the questions she asks back when she needs more.',
+      the_distinction: 'Asking for Maya\'s judgement is not the same as needing Maya. Her judgement is in the routing. She is needed when a correct product answer would still be the wrong reply.',
+    },
     criteria: {
-      true: 'A judgement call, a life event, grief, a wedding, a health situation, skin that is reacting, someone in distress, someone saying they trust her over everyone else, or anything where the standard answer could be wrong or unkind.',
-      false: 'A question she answers the same way every time — what to buy for a skin type and a budget, whether something is worth the money, what order to use things in.',
+      true: 'Something happening in their life, a person upset or in distress, a message written to her rather than about a product, a health situation, or a decision outside beauty. A right answer about a product would still be the wrong reply.',
+      false: 'Asking for her pick, her opinion, her judgement or what she would buy — however personally it is phrased, including "what would you buy if you were me" and "forget the brand, what would YOU use". Her routing already carries that. Also false for anything about a product, a routine, a price, a shade or a skin type.',
     },
   },
   answerable_by_routing: {

@@ -2,13 +2,12 @@ import type { Classified, JevAnswers, Lane } from './types'
 
 /**
  * Where the console's slider starts, and the threshold the stored lanes use.
- * Calibrated, not chosen: swept against the thirty hand labels, lane accuracy
- * sits at 29/30 anywhere from 0.40 to 0.65 and falls off above it (27/30 at
- * 0.70, 23/30 at 0.80). Jev answers the routing question in a lower band than
- * a plain reading of it suggests, so this is where the boundary actually is.
- * 0.60 sits in the middle of the plateau rather than on its edge.
+ * Calibrated, not chosen: swept against the hand labels, lane accuracy is
+ * 32/33 at 0.40, 31/33 from 0.45 to 0.55, and falls away above (25/33 at 0.70,
+ * 20/33 at 0.80). Jev answers the routing question in a lower band than a plain
+ * reading of it suggests, so this sits mid-plateau rather than on an edge.
  */
-export const DEFAULT_THRESHOLD = 0.6
+export const DEFAULT_THRESHOLD = 0.5
 /** Above this, it is hers however routable the rest of the message looks. */
 export const NEEDS_MAYA_CEILING = 0.4
 /** "Ready" on the 0-3 purchase scale, normalised. */
@@ -21,23 +20,33 @@ export const LANE_LABELS: Record<Lane, string> = {
   noise: 'Filed',
 }
 
-/** Intents that are hers by definition, whatever the numbers say. */
-const ALWAYS_HERS = new Set(['skin_diagnosis', 'life_event', 'trust_or_fan'])
+/**
+ * Hers by definition, whatever the numbers say. E-06: she does not want less
+ * relationship, she wants leverage — so the human moments are the ones that
+ * reach her, not the ones that get filtered.
+ */
+const ALWAYS_HERS = new Set(['relationship', 'trust'])
 const JUNK = new Set(['brand_pitch', 'spam'])
 /** Someone asking a question gets an answer, however close to buying they are. */
-const ASKING = new Set(['shade_info', 'recommendation', 'pick_one', 'value_check', 'routine_context', 'skin_diagnosis', 'constraint_routine'])
+const ASKING = new Set(['info', 'recommendation', 'judgement', 'value', 'context', 'diagnosis', 'constraint', 'transfer_of_trust', 'personalisation'])
 
 /** Nothing in the message says what their skin is doing. */
 export const skinMissing = (a: JevAnswers) => a.skin_type.choice === 'unknown' || a.skin_type.confidence < 0.5
 
 /**
- * The bar a message has to clear before anything is drafted. It drops when the
- * only thing missing is their skin type, because asking that is her routing —
- * she answers those with one question back, every time. The slider still moves
- * it, so she keeps the last word.
+ * The bar a message has to clear before anything is drafted.
+ *
+ * It drops when the reply is going to be one of her own questions rather than
+ * an answer — when we do not know their skin, or they have not named what they
+ * mean. E-02.1 is a list of the questions she asks back, so asking one is her
+ * routing working, not her routing failing, and a drafted question carries far
+ * less risk than a drafted answer. The slider still moves both bars together,
+ * so she keeps the last word.
  */
+export const askingBack = (a: JevAnswers) => skinMissing(a) || a.names_shelf_product < 0.5
+
 export const routingBar = (a: JevAnswers, threshold: number) =>
-  skinMissing(a) && ASKING.has(a.intent.choice) ? Math.max(0.3, threshold - 0.2) : threshold
+  askingBack(a) && ASKING.has(a.intent.choice) ? Math.max(0.25, threshold - 0.25) : threshold
 
 /** One rule, used by the lanes here, by the routing, and by the slider. */
 export const readyToSend = (a: JevAnswers, threshold: number) =>
@@ -64,7 +73,7 @@ export function laneFor(answers: JevAnswers, threshold = DEFAULT_THRESHOLD, sign
   if (JUNK.has(intent.choice) && junk >= 0.5) return { lane: 'noise', because: intent.choice === 'spam' ? 'spam' : 'a pitch' }
   if ((signals?.is_reaction ?? 0) >= 0.5) return { lane: 'maya', because: 'a reaction' }
   if (ALWAYS_HERS.has(intent.choice) && intent.confidence >= 0.5) {
-    return { lane: 'maya', because: intent.choice === 'life_event' ? 'a life event' : intent.choice === 'trust_or_fan' ? 'meant for her' : 'her skin, not a product' }
+    return { lane: 'maya', because: intent.choice === 'relationship' ? 'a life event' : 'meant for her' }
   }
   // Going to buy, not today. Nothing is being asked, so nothing is drafted.
   if (intent.choice === 'delayed_intent' && intent.confidence >= 0.5) {
