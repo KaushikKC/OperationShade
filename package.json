@@ -9,7 +9,8 @@
     "lint": "eslint",
     "classify": "tsx scripts/classify.ts",
     "gold": "tsx scripts/eval-gold.ts",
-    "dms": "node scripts/gen-dms.mjs > data/dms.json"
+    "dms": "node scripts/gen-dms.mjs > data/dms.json",
+    "fixture": "tsx scripts/gen-fixture.ts > data/fixtures/results.sample.json"
   },
   "dependencies": {
     "next": "16.3.5",

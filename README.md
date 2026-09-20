@@ -52,14 +52,34 @@ state (`lib/jev.ts`). Eight of the answers are the frozen `JevAnswers`; the nint
 `is_reaction`, is a safety net the routing reads and the console never shows.
 Domain rules live in each question's `criteria`, not in a prompt.
 
-`lib/lanes.ts` turns answers into a lane at a threshold (0.70 by default) and
-exports `rebucket()` — the same rule, pure, for the console's confidence slider,
-so nothing jumps when the slider passes 0.70. `lib/routing.ts` is Maya's decision
-tree: recurring questions first, then her shelf by category. It holds the retinol
-block (a retinoid question with a reaction, a prescription, a condition or someone
-under 18 in it never gets a drafted answer), the Glass Drop skip line, and the
-intake question when the skin type is unknown. No draft is ever generated — if the
-tree has no branch, the message goes to her with a `why`.
+`lib/lanes.ts` turns answers into a lane and exports one shared rule,
+`readyToSend()`, used by the lanes, the routing and the console's slider through
+`rebucket()`. A draft goes out only when her routing covers it *and* it is not
+the kind of thing she answers herself — two sides, because a message can be both
+routable and hers, and when it is, she gets it.
+
+`lib/routing.ts` is Maya's decision tree, keyed on skin type the way her notebook
+is: dry gets Cloud Cream and the Barrier Oil, oily or combination gets the Daily
+Gel, sensitive gets nothing with fragrance, redness gets Red Reset. Two products
+per reply maximum. Anyone over £60 hears the Glass Drop line — good, not £62
+good. Shade questions are never answered blind. SPF 50 goes on every routine.
+Retinol is blocked: no draft recommends it, and a retinoid question with a
+reaction, a prescription, a condition or someone under 18 in it goes to her
+untouched. Nothing is generated — if the tree has no branch, she gets it with a
+`why`.
+
+### Calibration
+
+`npm run gold` scores the thirty hand labels. Current: **lane 29/30, intent 27/29,
+skin 9/9.** The threshold is swept, not chosen — accuracy is flat at 29/30 from
+0.40 to 0.65 and falls off above, so the default sits at 0.60 in the middle of
+that plateau. Jev answers the routing question in a lower band than a plain
+reading of it suggests.
+
+Two things worth knowing. Jev is not deterministic, so rows sitting within about
+0.05 of the bar change lane between runs; every one of them fails toward Maya
+rather than into a draft. And the corpus is synthetic: reactions are about 13% of
+it, which is higher than a real inbox and pushes Needs you up accordingly.
 
 ## Fixture
 

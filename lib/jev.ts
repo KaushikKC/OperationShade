@@ -7,9 +7,9 @@ const MODEL = 'jev-latest'
 /** Jev 1.13 is $42 per billion input tokens. Output tokens are free. */
 const USD_PER_INPUT_TOKEN = 42 / 1e9
 
-export const INTENTS = ['product_rec', 'routine_help', 'dupe_request', 'reaction_concern', 'where_to_buy', 'purchase_signal', 'collab_pitch', 'spam', 'no_question'] as const
-export const SKIN_TYPES = ['dry', 'oily', 'combination', 'sensitive', 'normal', 'unknown'] as const
-export const BUDGET_BANDS = ['under_15', '15_40', '40_plus', 'unknown'] as const
+export const INTENTS = ['shade_info', 'recommendation', 'pick_one', 'value_check', 'routine_context', 'skin_diagnosis', 'trust_or_fan', 'life_event', 'constraint_routine', 'delayed_intent', 'brand_pitch', 'spam'] as const
+export const SKIN_TYPES = ['dry', 'oily_combo', 'sensitive', 'redness', 'unknown'] as const
+export const BUDGET_BANDS = ['none', 'under_30', '30_to_60', 'over_60'] as const
 
 /**
  * The question schema. Nine questions; eight of them land in JevAnswers and the
@@ -21,90 +21,96 @@ export const QUESTIONS = {
     type: 'choice',
     instructions: 'What is this person actually asking Maya for? Judge the request, not the politeness around it.',
     criteria: {
-      product_rec: 'Wants to know whether a specific product is worth buying, or which product to buy.',
-      routine_help: 'Wants help with how to use things — order, frequency, combinations, whether they are doing it wrong.',
-      dupe_request: 'Wants a cheaper equivalent of something specific.',
-      reaction_concern: 'Their skin has reacted badly — redness, burning, stinging, peeling, bumps — and they want to know what to do.',
-      where_to_buy: 'Knows what they want and is asking where or how to get it.',
-      purchase_signal: 'Is about to buy, is saving up, or has just bought. Tells Maya rather than asking her.',
-      collab_pitch: 'A brand, agency or PR asking for posts, gifting or a partnership.',
+      shade_info: 'Which shade, undertone or colour match — anything that depends on what they already wear.',
+      recommendation: 'Wants to be told what to buy for their skin.',
+      pick_one: 'Has narrowed it to two or three things and wants Maya to choose between them.',
+      value_check: 'Is this worth the money — including whether a cheaper version would do.',
+      routine_context: 'How to use what they already have: order, frequency, what goes with what.',
+      skin_diagnosis: 'Describes what their skin is doing — reacting, breaking out, stinging, flaking — and wants to know what is wrong. Choose this over recommendation whenever the state of their skin is the subject, even if they also ask what to buy.',
+      trust_or_fan: 'A compliment, a thank you, or someone saying they trust Maya over everyone else, with nothing asked and nothing being bought. If there is a question or a purchase in the message, it is not this.',
+      life_event: 'A wedding, a funeral, a new baby, being pregnant or post-partum, an illness, a bereavement, a first date — something happening in their life is the reason they are writing. Choose this even when a product question is attached to it.',
+      constraint_routine: 'Has a hard constraint — five minutes, no money, a baby, shift work — and needs the routine to fit inside it.',
+      delayed_intent: 'Is going to buy, but not today: saving up, waiting for payday, planning, bookmarking, working through a list. Choose this over recommendation, value_check or trust_or_fan when they are telling Maya about a purchase they will make later rather than asking her a question now.',
+      brand_pitch: 'A brand, agency or PR asking for posts, gifting or a partnership.',
       spam: 'Follower growth, crypto, phishing, adult content, mass-sent nonsense.',
-      no_question: 'A compliment, a hello, or too little to work out what is being asked.',
     },
   },
   skin_type: {
     type: 'choice',
-    instructions: 'What skin type does this person have, going only on what the message says or clearly implies? Do not guess from the product they mention.',
+    instructions: 'What skin type does this person have, going only on what the message says or clearly implies? Do not infer it from the product they mention.',
     criteria: {
-      dry: 'Tightness, flaking, rough patches, never oily.',
-      oily: 'Shine, greasiness through the day, large pores.',
-      combination: 'Oily in the t-zone and dry or normal elsewhere.',
-      sensitive: 'Stings, reddens or reacts easily; eczema, rosacea or a dermatologist is mentioned.',
-      normal: 'Says their skin is fine or generally behaves.',
+      dry: 'Tightness, flaking, rough patches. Never oily.',
+      oily_combo: 'Shine, greasiness through the day, large pores, or oily in the t-zone and not elsewhere.',
+      sensitive: 'Stings, reacts or flares easily. Fragrance is a problem, or eczema, or a dermatologist is involved.',
+      redness: 'Persistent redness, flushing or rosacea as the main complaint.',
       unknown: 'The message gives nothing to go on. Choose this rather than guessing.',
     },
   },
   budget_band: {
     type: 'choice',
-    instructions: 'What can this person spend, in pounds, on the thing they are asking about? Go on stated amounts and clear signals like being a student or saving up.',
+    instructions: 'What is this person willing to spend, in pounds, on the thing they are asking about? Go on stated amounts and clear signals like being a student or saving up.',
     criteria: {
-      under_15: 'Under £15, or signals of having very little to spend.',
-      '15_40': 'Roughly £15 to £40.',
-      '40_plus': 'Over £40, or comfortable with premium prices.',
-      unknown: 'No amount and no signal. Choose this rather than guessing.',
+      none: 'No amount and no signal, or they have said they cannot spend anything.',
+      under_30: 'Under £30, or clear signals of having very little.',
+      '30_to_60': 'Roughly £30 to £60.',
+      over_60: 'Over £60, or comfortable with premium prices.',
     },
   },
   purchase_intent: {
     type: 'score',
     instructions: 'How close is this person to spending money?',
     criteria: [
-      'No sign of buying anything. Asking out of interest, or not asking at all.',
-      'Thinking about it in general terms. No product, no timeframe.',
-      'Researching a specific purchase — comparing options, asking if something is worth it.',
-      'About to buy, saving for a named thing, waiting on payday, or has just bought.',
+      'Browsing. No sign of buying anything, or not asking at all.',
+      'Curious. Thinking about it in general terms, no product and no timeframe.',
+      'Ready. Researching a specific purchase, comparing options, asking if something is worth it.',
+      'Buying now. About to pay, saving for a named thing, waiting on payday, or has just bought.',
     ],
   },
   needs_maya_personally: {
     type: 'noul',
-    instructions: 'This message needs Maya herself to answer it, rather than her usual advice.',
+    instructions: 'Only Maya\'s own judgement or her own voice answers this one well.',
     criteria: {
-      true: 'A judgement call, a life event, grief, a wedding or a health situation, a skin reaction, a message from someone in distress, or anything where the standard answer could be wrong or unkind.',
-      false: 'A question she answers the same way every time — a product, a dupe, a stockist, a routine order, a budget starter set.',
+      true: 'A judgement call, a life event, grief, a wedding, a health situation, skin that is reacting, someone in distress, someone saying they trust her over everyone else, or anything where the standard answer could be wrong or unkind.',
+      false: 'A question she answers the same way every time — what to buy for a skin type and a budget, whether something is worth the money, what order to use things in.',
     },
   },
   answerable_by_routing: {
     type: 'noul',
     instructions: {
-      question: 'Everything needed to answer this message is in the message itself and in `mayas_routing`. No extra information is needed from the person and no judgement call is involved.',
-      mayas_routing: [
-        'Which products on her shelf she rates, at which price, and which she thinks are not worth the money.',
-        'Cheaper equivalents for expensive products.',
-        'Where to buy things in the UK.',
-        'The order and frequency to use things in, and which combinations are fine.',
-        'A starter set for a stated budget and skin type.',
-      ],
+      question: 'Maya answers this kind of message the same way every time, straight from `mayas_routing`, without having to think about this person in particular.',
+      mayas_routing: {
+        what_to_buy: 'Dry skin gets Cloud Cream and the Barrier Oil. Oily or combination gets the Daily Gel. Sensitive gets nothing with fragrance in it. Redness gets Red Reset.',
+        is_it_worth_it: 'She has a settled view on everything she has talked about, including the things she thinks are not worth the money.',
+        how_to_use_it: 'The order and frequency of anything on her shelf.',
+        no_time_or_money: 'The five-minute routine she has already filmed.',
+        shade: 'Always ask what they wear now — never answer blind.',
+        always: 'SPF 50 every morning.',
+      },
     },
     criteria: {
-      true: 'One of the routing answers above fits, and the message contains whatever it needs — a product, a skin type, or an amount.',
-      false: 'Answering would need more from the person, or a judgement Maya has not already made.',
+      true: 'One of those covers it. Whether something on her shelf is worth the money is always covered, however little else the message says. It still counts when the only thing missing is the one standard question she always asks back — their skin type, or what shade they wear now.',
+      false: 'Answering would need her own judgement about this person, or something her routing does not contain: their medical situation, their life, their relationships, or a product she has never talked about. Also false when you cannot tell which product or whose skin they mean.',
     },
   },
   urgency: {
     type: 'score',
-    instructions: 'How soon does this person need an answer?',
+    instructions: 'How soon does this person need an answer? Judge the situation, not how long the message is.',
     criteria: [
       'No time pressure at all.',
       'Would like an answer sometime. Nothing turns on it.',
-      'There is a date coming — an event, a payday, a trip.',
-      'Something is wrong now. Skin is reacting, they are in pain or distress, or the date is within days.',
+      'There is a date coming — an event, a holiday, a payday.',
+      'Something is wrong now. Skin is reacting, they are distressed, or the date is within days.',
     ],
   },
   names_shelf_product: {
     type: 'noul',
-    instructions: 'The message points at a specific product Maya has talked about, by name or by unmistakable description such as "the blue jar" or "the one from the boots video".',
+    instructions: {
+      question: 'The message points at one of the products in `mayas_shelf`, by name or by a description only one of them could mean, such as "the good one" or "the £62 one".',
+      mayas_shelf: ['Cloud Cream', 'Barrier Oil', 'Daily Gel', 'Red Reset', 'Glass Drop', 'her SPF 50'],
+    },
     criteria: {
-      true: 'A named product, brand, or a description only one product could mean.',
-      false: 'Only a category — cleanser, serum, spf — or nothing at all.',
+      true: 'A named product, or a description only one product could mean.',
+      false: 'Only a category — cleanser, serum, moisturiser — or nothing at all.',
     },
   },
   is_reaction: {
@@ -134,11 +140,21 @@ export type JevResult = {
 const r3 = (n: number) => Math.round(n * 1000) / 1000
 const clamp01 = (n: number) => (Number.isFinite(n) ? Math.min(1, Math.max(0, n)) : 0)
 
-function asChoice(raw: unknown, options: readonly string[]): Choice {
+/**
+ * An option Jev did not return, or an answer that came back malformed, falls
+ * back to the strongest known option and then to `fallback`. Confidence comes
+ * through as 0 in that case, which keeps the row below every threshold and
+ * sends it to Maya rather than into a draft.
+ */
+function asChoice(raw: unknown, options: readonly string[], fallback: string): Choice {
   const a = raw as RawChoice | undefined
   const probabilities: Record<string, number> = {}
   for (const o of options) probabilities[o] = r3(clamp01(a?.probabilities?.[o] ?? 0))
-  const choice = a?.choice && options.includes(a.choice) ? a.choice : options[options.length - 1]
+  let choice = a?.choice && options.includes(a.choice) ? a.choice : ''
+  if (!choice) {
+    const best = options.reduce((x, o) => (probabilities[o] > probabilities[x] ? o : x), options[0])
+    choice = probabilities[best] > 0 ? best : fallback
+  }
   return { choice, confidence: r3(clamp01(a?.confidence ?? 0)), probabilities }
 }
 
@@ -196,9 +212,9 @@ export async function askJev(dm: Pick<DM, 'handle' | 'platform' | 'text'>, apiKe
   const a = envelope.answers ?? {}
   return {
     answers: {
-      intent: asChoice(a.intent, INTENTS),
-      skin_type: asChoice(a.skin_type, SKIN_TYPES),
-      budget_band: asChoice(a.budget_band, BUDGET_BANDS),
+      intent: asChoice(a.intent, INTENTS, 'recommendation'),
+      skin_type: asChoice(a.skin_type, SKIN_TYPES, 'unknown'),
+      budget_band: asChoice(a.budget_band, BUDGET_BANDS, 'none'),
       purchase_intent: asScore(a.purchase_intent, QUESTIONS.purchase_intent.criteria.length),
       needs_maya_personally: asNoul(a.needs_maya_personally),
       answerable_by_routing: asNoul(a.answerable_by_routing),

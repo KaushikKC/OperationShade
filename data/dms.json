@@ -3,7 +3,7 @@
     "id": "dm_001",
     "handle": "leah.textures",
     "platform": "ig",
-    "text": "my skin's been flaking under foundation since october. is the glow serum worth it or is there something cheaper that does the same job",
+    "text": "my skin's been flaking under foundation since october. is the Cloud Cream worth it or is there something cheaper that does the same job",
     "persona": "Dry-skin regular",
     "ts": "2026-09-20T14:00:00.000Z"
   },
@@ -27,7 +27,7 @@
     "id": "dm_004",
     "handle": "tashaa.k",
     "platform": "tt",
-    "text": "is there a cheaper version of the £48 cream you keep in the blue jar? i can't justify that every two months",
+    "text": "is there a cheaper version of the Glass Drop? i can't justify £62 every two months",
     "persona": "Dupe hunter",
     "ts": "2026-09-20T06:00:00.000Z"
   },
@@ -35,8 +35,8 @@
     "id": "dm_005",
     "handle": "bee.in.peckham",
     "platform": "ig",
-    "text": "where do you buy the cleanser in the uk? every site i find is us only and the shipping is more than the bottle",
-    "persona": "Where to buy",
+    "text": "what shade of the tint would i be? i'm about the same as you in most things but i go redder in summer",
+    "persona": "Shade match",
     "ts": "2026-09-19T22:00:00.000Z"
   },
   {
@@ -75,15 +75,15 @@
     "id": "dm_010",
     "handle": "ing.redients",
     "platform": "ig",
-    "text": "is it actually bad to use niacinamide and vitamin c together or is that an old myth people keep repeating",
-    "persona": "Ingredient question",
+    "text": "i've got the Cloud Cream and the Barrier Oil and i think i've been putting them on in the wrong order. my skin is dry, does it matter",
+    "persona": "Routine order",
     "ts": "2026-09-18T13:00:00.000Z"
   },
   {
     "id": "dm_011",
     "handle": "worth.it.or.not",
     "platform": "tt",
-    "text": "everyone is posting about the £62 cream this week. i trust you more than them — is it worth it or is it this month's thing",
+    "text": "everyone is posting about the Glass Drop this week. i trust you more than them — is it worth £62 or is it this month's thing",
     "persona": "Worth it?",
     "ts": "2026-09-18T04:00:00.000Z"
   },
@@ -92,1359 +92,120 @@
     "handle": "quiet.follower.02",
     "platform": "ig",
     "text": "been watching you for two years and never messaged. i'm finally rebuilding my whole routine from scratch next month and i've saved every one of your shelf videos",
-    "persona": "Long-time watcher",
+    "persona": "Silent browser",
     "ts": "2026-09-17T16:00:00.000Z"
   },
   {
-    "id": "dm_216",
-    "handle": "sadess",
-    "platform": "ig",
-    "text": "i work nights so my routine is upside down. is the spf worth it or is it this month's thing sorry this is long. xx",
-    "ts": "2026-09-20T13:48:38.455Z"
-  },
-  {
-    "id": "dm_036",
-    "handle": "hen.and.co",
-    "platform": "tt",
-    "text": "i work nights so my routine is upside down. what do you use on your face after a flight, mine is always awful for a week",
-    "ts": "2026-08-30T05:04:56.549Z"
-  },
-  {
-    "id": "dm_197",
-    "handle": "mo.does.makeup",
-    "platform": "ig",
-    "text": "darker skin, marks stay for months. is the retinal worth it or is it this month's thing",
-    "ts": "2026-08-25T17:08:30.432Z"
-  },
-  {
-    "id": "dm_210",
-    "handle": "tara92",
-    "platform": "tt",
-    "text": "i'm on a student budget. where do you buy the toner in the uk, everything i find is us only",
-    "ts": "2026-09-15T18:40:50.755Z"
-  },
-  {
-    "id": "dm_094",
-    "handle": "kem.87",
-    "platform": "ig",
-    "text": "is there a cheaper version of the toner you use happy to buy through your link if you have one.",
-    "ts": "2026-08-22T12:15:48.897Z"
-  },
-  {
-    "id": "dm_138",
-    "handle": "anya_london",
-    "platform": "ig",
-    "text": "darker skin, marks stay for months. my basket is full of things you've talked about 😅 paying for it on thursday x",
-    "ts": "2026-09-11T03:11:09.652Z"
-  },
-  {
-    "id": "dm_153",
-    "handle": "anya.87",
-    "platform": "ig",
-    "text": "my face went red and hot after the retinal last night, do i stop i don't trust anyone else on this.",
-    "ts": "2026-08-27T18:07:26.045Z"
-  },
-  {
-    "id": "dm_027",
-    "handle": "lily.and.co",
-    "platform": "tt",
-    "text": "live in london, hard water, if that matters. do i need an oil on top of my moisturiser or is that a marketing thing",
-    "ts": "2026-09-20T01:46:23.854Z"
-  },
-  {
-    "id": "dm_039",
-    "handle": "immy.beauty",
-    "platform": "tt",
-    "text": "i've been doubling up on hyaluronic acid and my skin feels worse?? what am i doing wrong",
-    "ts": "2026-09-09T10:34:49.346Z"
-  },
-  {
-    "id": "dm_211",
-    "handle": "moss",
-    "platform": "ig",
-    "text": "been on the pill for a year and my skin is different. which spf do you use in summer, the one from the video or something else no rush!",
-    "ts": "2026-09-18T23:16:53.633Z"
-  },
-  {
-    "id": "dm_199",
-    "handle": "noor.and.co",
-    "platform": "ig",
-    "text": "combination skin, mid twenties. what's actually still on your shelf from last year",
-    "ts": "2026-09-09T05:32:30.678Z"
-  },
-  {
-    "id": "dm_109",
-    "handle": "anya.and.co",
-    "platform": "tt",
-    "text": "combination skin, mid twenties. does the aldi one actually do the same job or is that tiktok talking",
-    "ts": "2026-08-27T02:01:19.432Z"
-  },
-  {
-    "id": "dm_250",
-    "handle": "sade.face",
-    "platform": "tt",
-    "text": "your account has been flagged for copyright, verify here to avoid deletion",
-    "ts": "2026-08-26T20:30:16.597Z"
-  },
-  {
-    "id": "dm_061",
-    "handle": "shan.03",
-    "platform": "tt",
-    "text": "i'm 17 and i've got £35 to spend, where do i start",
-    "ts": "2026-09-13T11:46:14.405Z"
-  },
-  {
-    "id": "dm_132",
-    "handle": "kemss",
-    "platform": "tt",
-    "text": "sorry to dm but just ordered the Glass Drop serum you use, wish me luck 🤞 happy to buy through your link if you have one.",
-    "ts": "2026-09-16T06:33:27.930Z"
-  },
-  {
-    "id": "dm_158",
-    "handle": "ola.face",
-    "platform": "ig",
-    "text": "my face went red and hot after the toner last night, do i stop xx",
-    "ts": "2026-09-15T19:30:08.035Z"
-  },
-  {
-    "id": "dm_104",
-    "handle": "sade_uk",
-    "platform": "ig",
-    "text": "cheaper serum that isn't rubbish? i'm skint until the 28th x",
-    "ts": "2026-08-23T23:23:45.806Z"
-  },
-  {
-    "id": "dm_089",
-    "handle": "nia.skin",
-    "platform": "ig",
-    "text": "cheaper Glass Drop serum that isn't rubbish? i'm skint until the 28th 🙏",
-    "ts": "2026-08-31T05:32:27.403Z"
-  },
-  {
-    "id": "dm_207",
-    "handle": "fern_official",
-    "platform": "ig",
-    "text": "i'm 34 and my skin's changed since having my son. which spf do you use in summer, the one from the video or something else",
-    "ts": "2026-09-03T23:43:06.627Z"
-  },
-  {
-    "id": "dm_175",
-    "handle": "kayleigh_uk",
-    "platform": "ig",
-    "text": "hiya rosacea-ish redness on my cheeks. my eyelids are flaking and sore, i don't know which thing did it",
-    "ts": "2026-08-30T10:06:03.145Z"
-  },
-  {
-    "id": "dm_130",
-    "handle": "ruth.03",
-    "platform": "tt",
-    "text": "combination skin, mid twenties. screenshotted your whole routine and i'm buying it bit by bit 🙏",
-    "ts": "2026-09-10T21:15:35.404Z"
-  },
-  {
-    "id": "dm_180",
-    "handle": "yaz.and.co",
-    "platform": "tt",
-    "text": "rosacea-ish redness on my cheeks. started the retinol you mentioned and my skin is peeling around my mouth, normal?",
-    "ts": "2026-08-25T17:01:58.941Z"
-  },
-  {
-    "id": "dm_110",
-    "handle": "sade_london",
-    "platform": "tt",
-    "text": "is there a cheaper version of the cleanser you use thank you!!",
-    "ts": "2026-08-27T15:17:27.506Z"
-  },
-  {
-    "id": "dm_067",
-    "handle": "shan.face",
-    "platform": "ig",
-    "text": "my mum says i'm too young for retinol, is she right",
-    "ts": "2026-08-22T19:15:12.154Z"
-  },
-  {
-    "id": "dm_107",
-    "handle": "noorldn",
-    "platform": "ig",
-    "text": "is there a cheaper version of the cleanser you use",
-    "ts": "2026-09-11T12:36:08.379Z"
-  },
-  {
-    "id": "dm_062",
-    "handle": "bella.does.makeup",
-    "platform": "ig",
-    "text": "is it bad to use my sister's stuff, she's 19 and has oily skin love your videos btw",
-    "ts": "2026-08-25T20:55:49.890Z"
-  },
-  {
-    "id": "dm_212",
-    "handle": "aisha_london",
-    "platform": "ig",
-    "text": "did you ever repurchase the cleanser or was it a one time thing",
-    "ts": "2026-09-08T05:02:03.700Z"
-  },
-  {
-    "id": "dm_162",
-    "handle": "kemldn",
-    "platform": "ig",
-    "text": "sorry to dm but my eyelids are flaking and sore, i don't know which thing did it",
-    "ts": "2026-09-04T01:59:01.272Z"
-  },
-  {
-    "id": "dm_143",
-    "handle": "hen92",
-    "platform": "ig",
-    "text": "just ordered the exfoliant you use, wish me luck 🤞 happy to buy through your link if you have one. 🙏",
-    "ts": "2026-08-23T20:33:57.705Z"
-  },
-  {
-    "id": "dm_157",
-    "handle": "immy.skin",
-    "platform": "ig",
-    "text": "started the retinol you mentioned and my skin is peeling around my mouth, normal? been following since the boots video.",
-    "ts": "2026-08-31T07:54:51.298Z"
-  },
-  {
-    "id": "dm_200",
-    "handle": "tilda_uk",
-    "platform": "ig",
-    "text": "i've got about a month before a wedding. which spf do you use in summer, the one from the video or something else i know you get a million of these. love your videos btw",
-    "ts": "2026-09-08T13:04:27.070Z"
-  },
-  {
-    "id": "dm_225",
-    "handle": "olass",
-    "platform": "ig",
-    "text": "INVEST £200 GET £2000 BACK IN 48HRS crypto trading dm for details 📈📈",
-    "ts": "2026-09-06T07:32:56.281Z"
-  },
-  {
-    "id": "dm_173",
-    "handle": "kem.skin",
-    "platform": "ig",
-    "text": "i've come out in tiny bumps since i started the new cleanser, is that purging or a reaction",
-    "ts": "2026-08-28T15:29:35.096Z"
-  },
-  {
-    "id": "dm_103",
-    "handle": "bea.beauty",
-    "platform": "tt",
-    "text": "is there a cheaper version of the toner you use",
-    "ts": "2026-08-30T10:19:59.968Z"
-  },
-  {
-    "id": "dm_024",
-    "handle": "kayleigh_london",
-    "platform": "tt",
-    "text": "hi maya live in london, hard water, if that matters. what do you use on your face after a flight, mine is always awful for a week",
-    "ts": "2026-09-14T05:55:39.796Z"
-  },
-  {
-    "id": "dm_083",
-    "handle": "shan.beauty",
-    "platform": "tt",
-    "text": "cheaper moisturiser that isn't rubbish? i'm skint until the 28th",
-    "ts": "2026-08-27T22:20:57.338Z"
-  },
-  {
-    "id": "dm_038",
-    "handle": "dani.87",
-    "platform": "ig",
-    "text": "my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad",
-    "ts": "2026-09-19T05:57:02.194Z"
-  },
-  {
-    "id": "dm_131",
-    "handle": "tilda.skin",
-    "platform": "ig",
-    "text": "about to spend £20 on skincare, talk me out of it or tell me what to get",
-    "ts": "2026-09-10T12:27:46.970Z"
-  },
-  {
-    "id": "dm_059",
-    "handle": "niaxo",
-    "platform": "ig",
-    "text": "rosacea-ish redness on my cheeks. everyone at school uses the serum you talked about but i can't afford it, is there anything cheaper i've read everything and i'm more confused than when i started.",
-    "ts": "2026-09-10T16:15:24.040Z"
-  },
-  {
-    "id": "dm_122",
-    "handle": "beaxo",
-    "platform": "tt",
-    "text": "rosacea-ish redness on my cheeks. screenshotted your whole routine and i'm buying it bit by bit",
-    "ts": "2026-09-20T02:51:23.931Z"
-  },
-  {
-    "id": "dm_086",
-    "handle": "lex.beauty",
-    "platform": "ig",
-    "text": "the £62 one everyone's posting about, is there a boots dupe no rush!",
-    "ts": "2026-09-20T09:06:55.826Z"
-  },
-  {
-    "id": "dm_172",
-    "handle": "tara.face",
-    "platform": "tt",
-    "text": "i work nights so my routine is upside down. i've come out in tiny bumps since i started the new toner, is that purging or a reaction",
-    "ts": "2026-09-01T13:34:01.947Z"
-  },
-  {
-    "id": "dm_102",
-    "handle": "anya92",
-    "platform": "tt",
-    "text": "oily t-zone, dry everywhere else. i can't spend £62 every two months, what's the next best thing sorry this is long. love your videos btw",
-    "ts": "2026-08-23T17:10:31.103Z"
-  },
-  {
-    "id": "dm_190",
-    "handle": "nia_uk",
-    "platform": "ig",
-    "text": "i'm on a student budget. which spf do you use in summer, the one from the video or something else happy to buy through your link if you have one.",
-    "ts": "2026-09-14T09:15:28.858Z"
-  },
-  {
-    "id": "dm_030",
-    "handle": "hen.and.co",
-    "platform": "ig",
-    "text": "do i need an oil on top of my moisturiser or is that a marketing thing thank you!!",
-    "ts": "2026-08-22T00:06:33.373Z"
-  },
-  {
-    "id": "dm_014",
-    "handle": "zainabss",
-    "platform": "ig",
-    "text": "i've been doubling up on hyaluronic acid and my skin feels worse?? what am i doing wrong i know you get a million of these.",
-    "ts": "2026-09-14T17:26:06.150Z"
-  },
-  {
-    "id": "dm_203",
-    "handle": "tilda92",
-    "platform": "tt",
-    "text": "did you ever repurchase the moisturiser or was it a one time thing",
-    "ts": "2026-08-25T13:06:56.616Z"
-  },
-  {
-    "id": "dm_168",
-    "handle": "priya_london",
-    "platform": "ig",
-    "text": "live in london, hard water, if that matters. i've come out in tiny bumps since i started the new retinal, is that purging or a reaction 🙏",
-    "ts": "2026-09-17T12:28:21.927Z"
-  },
-  {
-    "id": "dm_227",
-    "handle": "yaz.beauty",
-    "platform": "ig",
-    "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
-    "ts": "2026-08-29T11:05:13.536Z"
-  },
-  {
-    "id": "dm_069",
-    "handle": "hen92",
-    "platform": "tt",
-    "text": "i'm 16 and i've got £20 to spend, where do i start",
-    "ts": "2026-08-24T17:47:35.752Z"
-  },
-  {
-    "id": "dm_195",
-    "handle": "immy_x",
-    "platform": "tt",
-    "text": "combination skin, mid twenties. what's actually still on your shelf from last year",
-    "ts": "2026-08-28T19:30:39.558Z"
-  },
-  {
-    "id": "dm_253",
-    "handle": "mo.03",
-    "platform": "ig",
-    "text": "hey babe check my page 😘",
-    "ts": "2026-09-18T00:24:25.817Z"
-  },
-  {
-    "id": "dm_032",
-    "handle": "lexxo",
-    "platform": "tt",
-    "text": "i'm 41 and starting to care about this properly. i've been doubling up on hyaluronic acid and my skin feels worse?? what am i doing wrong",
-    "ts": "2026-09-02T00:42:06.046Z"
-  },
-  {
-    "id": "dm_051",
-    "handle": "kem.and.co",
-    "platform": "tt",
-    "text": "my mum says i'm too young for retinol, is she right sorry this is long.",
-    "ts": "2026-09-05T03:09:44.865Z"
-  },
-  {
-    "id": "dm_090",
-    "handle": "jen92",
-    "platform": "tt",
-    "text": "i work nights so my routine is upside down. cheaper exfoliant that isn't rubbish? i'm skint until the 28th",
-    "ts": "2026-09-13T09:43:10.151Z"
-  },
-  {
-    "id": "dm_079",
-    "handle": "tilda.skin",
-    "platform": "tt",
-    "text": "i've got eczema on my hands and i think it's spreading. i'm 16 and i've got £35 to spend, where do i start xx",
-    "ts": "2026-08-23T10:41:25.328Z"
-  },
-  {
-    "id": "dm_233",
-    "handle": "maeve.skin",
-    "platform": "tt",
-    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
-    "ts": "2026-08-25T07:21:03.579Z"
-  },
-  {
-    "id": "dm_078",
-    "handle": "sade.beauty",
-    "platform": "ig",
-    "text": "oily t-zone, dry everywhere else. i've got like £15 of birthday money, what's the one thing worth buying",
-    "ts": "2026-09-17T20:28:03.000Z"
-  },
-  {
-    "id": "dm_101",
-    "handle": "tara.03",
-    "platform": "tt",
-    "text": "i can't spend £62 every two months, what's the next best thing",
-    "ts": "2026-09-12T04:47:25.219Z"
-  },
-  {
-    "id": "dm_082",
-    "handle": "shan.87",
-    "platform": "tt",
-    "text": "i can't spend £35 every two months, what's the next best thing",
-    "ts": "2026-08-27T10:50:46.125Z"
-  },
-  {
-    "id": "dm_238",
-    "handle": "yazldn",
-    "platform": "tt",
-    "text": "hey babe check my page 😘",
-    "ts": "2026-09-12T03:46:37.587Z"
-  },
-  {
-    "id": "dm_023",
-    "handle": "gracie.skin",
-    "platform": "tt",
-    "text": "my skin goes tight about an hour after cleansing, is that a cleanser problem or am i using the wrong retinal",
-    "ts": "2026-09-19T05:05:33.525Z"
-  },
-  {
-    "id": "dm_166",
-    "handle": "yaz.skin",
-    "platform": "ig",
-    "text": "i've come out in tiny bumps since i started the new moisturiser, is that purging or a reaction 🙏",
-    "ts": "2026-09-01T07:34:26.841Z"
-  },
-  {
-    "id": "dm_185",
-    "handle": "anya_official",
-    "platform": "ig",
-    "text": "what's actually still on your shelf from last year happy to buy through your link if you have one.",
-    "ts": "2026-08-24T20:00:20.291Z"
-  },
-  {
-    "id": "dm_117",
-    "handle": "tilda.03",
-    "platform": "tt",
-    "text": "finally got a job!! treating myself. what's on your shelf that's worth it i know you get a million of these.",
-    "ts": "2026-08-31T10:50:24.475Z"
-  },
-  {
-    "id": "dm_033",
-    "handle": "evie.face",
-    "platform": "ig",
-    "text": "is a £35 moisturiser ever worth it over the £13 one for dry skin",
-    "ts": "2026-09-08T12:19:30.278Z"
-  },
-  {
-    "id": "dm_252",
-    "handle": "lex_uk",
-    "platform": "tt",
-    "text": "🔥 GROW TO 250K FOLLOWERS IN 30 DAYS ✅ real uk accounts ✅ no password ✅ dm BOOST",
-    "ts": "2026-09-04T16:51:53.732Z"
-  },
-  {
-    "id": "dm_226",
-    "handle": "noorldn",
-    "platform": "ig",
-    "text": "Hi Maya! 💕 We'd love to send you our new Glass Drop serum line for an honest review — just 2 in-feed posts and 2 stories. Shall I send the deck?",
-    "ts": "2026-08-22T01:06:28.091Z"
-  },
-  {
-    "id": "dm_179",
-    "handle": "bea.87",
-    "platform": "ig",
-    "text": "i've come out in tiny bumps since i started the new serum, is that purging or a reaction",
-    "ts": "2026-08-24T07:26:17.596Z"
-  },
-  {
-    "id": "dm_236",
-    "handle": "roisin.and.co",
-    "platform": "tt",
-    "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
-    "ts": "2026-08-22T21:41:14.506Z"
-  },
-  {
-    "id": "dm_176",
-    "handle": "daniss",
-    "platform": "tt",
-    "text": "my face went red and hot after the toner last night, do i stop",
-    "ts": "2026-09-11T07:08:11.556Z"
-  },
-  {
-    "id": "dm_192",
-    "handle": "lily_x",
-    "platform": "ig",
-    "text": "did you ever repurchase the Glass Drop serum or was it a one time thing no rush!",
-    "ts": "2026-08-31T20:23:19.897Z"
-  },
-  {
-    "id": "dm_209",
-    "handle": "zainab.03",
-    "platform": "ig",
-    "text": "hey!! what's actually still on your shelf from last year",
-    "ts": "2026-09-06T19:00:57.718Z"
-  },
-  {
-    "id": "dm_205",
-    "handle": "tilda.87",
-    "platform": "ig",
-    "text": "what's actually still on your shelf from last year",
-    "ts": "2026-09-10T05:26:46.380Z"
-  },
-  {
-    "id": "dm_121",
-    "handle": "olass",
-    "platform": "ig",
-    "text": "i work nights so my routine is upside down. about to spend £20 on skincare, talk me out of it or tell me what to get 🙏",
-    "ts": "2026-09-18T10:17:00.733Z"
-  },
-  {
-    "id": "dm_119",
-    "handle": "zainab_uk",
-    "platform": "ig",
-    "text": "just ordered the exfoliant you use, wish me luck 🤞",
-    "ts": "2026-08-25T01:29:51.896Z"
-  },
-  {
-    "id": "dm_068",
-    "handle": "noor.notes",
-    "platform": "tt",
-    "text": "i'm 14 and i've got £62 to spend, where do i start thank you!!",
-    "ts": "2026-08-28T13:20:16.036Z"
-  },
-  {
-    "id": "dm_142",
-    "handle": "dani.face",
-    "platform": "ig",
-    "text": "hi maya oily t-zone, dry everywhere else. getting paid next week and i want to sort my routine properly. where do i put the money i don't trust anyone else on this.",
-    "ts": "2026-09-15T13:57:13.645Z"
-  },
-  {
-    "id": "dm_046",
-    "handle": "bea92",
-    "platform": "ig",
-    "text": "i've been doubling up on hyaluronic acid and my skin feels worse?? what am i doing wrong",
-    "ts": "2026-09-04T07:40:55.690Z"
-  },
-  {
     "id": "dm_247",
-    "handle": "yaz.beauty",
-    "platform": "ig",
-    "text": "🔥 GROW TO 100K FOLLOWERS IN 30 DAYS ✅ real uk accounts ✅ no password ✅ dm BOOST",
-    "ts": "2026-09-12T00:16:51.024Z"
-  },
-  {
-    "id": "dm_053",
-    "handle": "evie.skin",
-    "platform": "tt",
-    "text": "my mum says i'm too young for retinol, is she right 🙏",
-    "ts": "2026-09-13T14:33:16.203Z"
-  },
-  {
-    "id": "dm_124",
-    "handle": "nia_x",
-    "platform": "ig",
-    "text": "live in london, hard water, if that matters. finally got a job!! treating myself. what's on your shelf that's worth it sorry to bother you",
-    "ts": "2026-09-07T10:22:32.192Z"
-  },
-  {
-    "id": "dm_075",
-    "handle": "dani.beauty",
-    "platform": "tt",
-    "text": "hey!! darker skin, marks stay for months. everyone at school uses the toner you talked about but i can't afford it, is there anything cheaper sorry to bother you",
-    "ts": "2026-09-14T02:57:25.018Z"
-  },
-  {
-    "id": "dm_151",
-    "handle": "sade92",
-    "platform": "tt",
-    "text": "burning when i put moisturiser on now, i think i've broken something xx",
-    "ts": "2026-08-31T05:32:05.155Z"
-  },
-  {
-    "id": "dm_127",
-    "handle": "nia.does.makeup",
-    "platform": "ig",
-    "text": "i'm 41 and starting to care about this properly. black friday is coming, what's actually worth waiting for happy to buy through your link if you have one. thank you!!",
-    "ts": "2026-09-08T01:15:08.575Z"
-  },
-  {
-    "id": "dm_044",
-    "handle": "zainabldn",
-    "platform": "ig",
-    "text": "do i need an oil on top of my moisturiser or is that a marketing thing sorry to bother you",
-    "ts": "2026-09-12T05:47:19.628Z"
-  },
-  {
-    "id": "dm_147",
-    "handle": "hen.and.co",
-    "platform": "ig",
-    "text": "i'm 34 and my skin's changed since having my son. i've saved up £62 and i want to buy properly once instead of badly five times",
-    "ts": "2026-09-15T13:59:12.375Z"
-  },
-  {
-    "id": "dm_234",
-    "handle": "ruthxo",
-    "platform": "ig",
-    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
-    "ts": "2026-09-04T01:12:00.652Z"
-  },
-  {
-    "id": "dm_091",
-    "handle": "tara.beauty",
-    "platform": "ig",
-    "text": "is there a cheaper version of the exfoliant you use",
-    "ts": "2026-08-22T13:23:05.703Z"
-  },
-  {
-    "id": "dm_125",
-    "handle": "kem_x",
-    "platform": "ig",
-    "text": "finally got a job!! treating myself. what's on your shelf that's worth it been following since the boots video.",
-    "ts": "2026-09-03T11:48:38.215Z"
-  },
-  {
-    "id": "dm_073",
-    "handle": "jen_official",
-    "platform": "ig",
-    "text": "i'm on a student budget. i'm 17 and i've got £62 to spend, where do i start i don't trust anyone else on this.",
-    "ts": "2026-09-07T12:22:21.232Z"
-  },
-  {
-    "id": "dm_170",
-    "handle": "taraldn",
-    "platform": "tt",
-    "text": "burning when i put moisturiser on now, i think i've broken something",
-    "ts": "2026-08-27T01:22:01.525Z"
-  },
-  {
-    "id": "dm_099",
-    "handle": "tara.and.co",
-    "platform": "ig",
-    "text": "i can't spend £48 every two months, what's the next best thing",
-    "ts": "2026-09-02T03:54:33.020Z"
-  },
-  {
-    "id": "dm_204",
-    "handle": "ola92",
-    "platform": "tt",
-    "text": "been on the pill for a year and my skin is different. which spf do you use in summer, the one from the video or something else",
-    "ts": "2026-09-03T06:20:36.525Z"
-  },
-  {
-    "id": "dm_063",
-    "handle": "fern_x",
-    "platform": "ig",
-    "text": "i've got eczema on my hands and i think it's spreading. i've got like £48 of birthday money, what's the one thing worth buying",
-    "ts": "2026-09-05T00:28:44.200Z"
-  },
-  {
-    "id": "dm_018",
-    "handle": "yaz.87",
-    "platform": "tt",
-    "text": "live in london, hard water, if that matters. my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad sorry this is long.",
-    "ts": "2026-09-06T14:38:23.916Z"
-  },
-  {
-    "id": "dm_085",
-    "handle": "kayleigh.face",
-    "platform": "ig",
-    "text": "the £20 one everyone's posting about, is there a boots dupe sorry to bother you",
-    "ts": "2026-08-22T23:52:31.523Z"
-  },
-  {
-    "id": "dm_050",
-    "handle": "lily.notes",
-    "platform": "ig",
-    "text": "i'm 14 and i've got £48 to spend, where do i start been following since the boots video.",
-    "ts": "2026-08-21T17:14:10.883Z"
-  },
-  {
-    "id": "dm_134",
-    "handle": "kemldn",
-    "platform": "ig",
-    "text": "my basket is full of things you've talked about 😅 paying for it on friday",
-    "ts": "2026-08-22T21:33:39.904Z"
-  },
-  {
-    "id": "dm_064",
-    "handle": "fern.beauty",
-    "platform": "ig",
-    "text": "is it bad to use my sister's stuff, she's 23 and has oily skin",
-    "ts": "2026-09-16T03:58:48.328Z"
-  },
-  {
-    "id": "dm_040",
-    "handle": "cleo.skin",
-    "platform": "ig",
-    "text": "rosacea-ish redness on my cheeks. flaking around my nose every winter no matter what i put on it. what would you actually use 🙏",
-    "ts": "2026-09-19T22:22:03.729Z"
-  },
-  {
-    "id": "dm_184",
-    "handle": "immy.does.makeup",
-    "platform": "ig",
-    "text": "i've got about a month before a wedding. is the Glass Drop serum worth it or is it this month's thing xx",
-    "ts": "2026-09-10T23:49:31.129Z"
-  },
-  {
-    "id": "dm_096",
-    "handle": "aisha.notes",
-    "platform": "ig",
-    "text": "i've got eczema on my hands and i think it's spreading. is there a cheaper version of the serum you use been following since the boots video. 🙏",
-    "ts": "2026-09-02T16:22:13.416Z"
-  },
-  {
-    "id": "dm_251",
-    "handle": "bea.03",
-    "platform": "tt",
-    "text": "Hi! I'm reaching out from a talent agency — would you be open to a quick call about representation?",
-    "ts": "2026-09-12T19:28:15.260Z"
-  },
-  {
-    "id": "dm_182",
-    "handle": "anya.03",
-    "platform": "ig",
-    "text": "burning when i put moisturiser on now, i think i've broken something",
-    "ts": "2026-08-30T03:47:47.794Z"
-  },
-  {
-    "id": "dm_149",
-    "handle": "noor.and.co",
-    "platform": "ig",
-    "text": "i've come out in tiny bumps since i started the new exfoliant, is that purging or a reaction",
-    "ts": "2026-08-29T08:39:18.360Z"
-  },
-  {
-    "id": "dm_113",
-    "handle": "bellaxo",
-    "platform": "tt",
-    "text": "does the aldi one actually do the same job or is that tiktok talking",
-    "ts": "2026-08-26T13:29:00.867Z"
-  },
-  {
-    "id": "dm_077",
-    "handle": "aisha.does.makeup",
-    "platform": "ig",
-    "text": "i'm 15 and i've got £48 to spend, where do i start",
-    "ts": "2026-09-08T04:15:45.566Z"
-  },
-  {
-    "id": "dm_081",
-    "handle": "maevess",
-    "platform": "ig",
-    "text": "the £15 one everyone's posting about, is there a boots dupe",
-    "ts": "2026-09-19T20:02:41.829Z"
-  },
-  {
-    "id": "dm_093",
-    "handle": "moxo",
-    "platform": "tt",
-    "text": "i can't spend £62 every two months, what's the next best thing i know you get a million of these.",
-    "ts": "2026-09-13T15:08:34.641Z"
-  },
-  {
-    "id": "dm_181",
-    "handle": "priya.beauty",
-    "platform": "tt",
-    "text": "i work nights so my routine is upside down. started the retinol you mentioned and my skin is peeling around my mouth, normal? thank you!!",
-    "ts": "2026-09-13T09:16:44.103Z"
-  },
-  {
-    "id": "dm_065",
-    "handle": "cleo.face",
-    "platform": "ig",
-    "text": "everyone at school uses the retinal you talked about but i can't afford it, is there anything cheaper happy to buy through your link if you have one.",
-    "ts": "2026-09-15T04:11:38.647Z"
-  },
-  {
-    "id": "dm_055",
-    "handle": "bea92",
-    "platform": "ig",
-    "text": "i'm 34 and my skin's changed since having my son. everyone at school uses the retinal you talked about but i can't afford it, is there anything cheaper i've read everything and i'm more confused than when i started.",
-    "ts": "2026-09-04T15:39:51.805Z"
-  },
-  {
-    "id": "dm_072",
-    "handle": "dani.and.co",
-    "platform": "ig",
-    "text": "is it bad to use my sister's stuff, she's 19 and has oily skin",
-    "ts": "2026-09-16T13:45:29.451Z"
-  },
-  {
-    "id": "dm_049",
-    "handle": "yaz.beauty",
-    "platform": "ig",
-    "text": "everyone at school uses the moisturiser you talked about but i can't afford it, is there anything cheaper",
-    "ts": "2026-08-28T01:25:41.298Z"
-  },
-  {
-    "id": "dm_231",
-    "handle": "yazldn",
-    "platform": "tt",
-    "text": "Hello dear, we are a Spanish beauty brand seeking UK influencers for long term cooperation. Gifting only at this stage.",
-    "ts": "2026-08-26T04:34:53.301Z"
-  },
-  {
-    "id": "dm_186",
-    "handle": "sadeldn",
-    "platform": "tt",
-    "text": "i've got eczema on my hands and i think it's spreading. which spf do you use in summer, the one from the video or something else",
-    "ts": "2026-08-26T04:32:57.121Z"
-  },
-  {
-    "id": "dm_025",
-    "handle": "bella.and.co",
-    "platform": "ig",
-    "text": "my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad",
-    "ts": "2026-09-12T09:15:37.752Z"
-  },
-  {
-    "id": "dm_116",
-    "handle": "tildaxo",
-    "platform": "tt",
-    "text": "i'm 41 and starting to care about this properly. just ordered the retinal you use, wish me luck 🤞",
-    "ts": "2026-09-13T18:43:13.982Z"
-  },
-  {
-    "id": "dm_152",
-    "handle": "ola.skin",
-    "platform": "ig",
-    "text": "live in london, hard water, if that matters. burning when i put moisturiser on now, i think i've broken something happy to buy through your link if you have one.",
-    "ts": "2026-09-06T05:43:38.499Z"
-  },
-  {
-    "id": "dm_105",
-    "handle": "jen92",
-    "platform": "ig",
-    "text": "i work nights so my routine is upside down. does the aldi one actually do the same job or is that tiktok talking",
-    "ts": "2026-09-19T03:50:00.017Z"
-  },
-  {
-    "id": "dm_219",
-    "handle": "nia_london",
-    "platform": "ig",
-    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
-    "ts": "2026-08-22T02:24:31.228Z"
-  },
-  {
-    "id": "dm_221",
-    "handle": "aisha.03",
-    "platform": "tt",
-    "text": "Hi Maya! 💕 We'd love to send you our new toner line for an honest review — just 3 in-feed posts and 1 stories. Shall I send the deck?",
-    "ts": "2026-09-13T05:57:26.789Z"
-  },
-  {
-    "id": "dm_177",
-    "handle": "kemxo",
-    "platform": "tt",
-    "text": "i work nights so my routine is upside down. i've come out in tiny bumps since i started the new exfoliant, is that purging or a reaction",
-    "ts": "2026-09-05T10:38:26.896Z"
-  },
-  {
-    "id": "dm_097",
-    "handle": "mo.87",
-    "platform": "ig",
-    "text": "i've got about a month before a wedding. is there a cheaper version of the retinal you use",
-    "ts": "2026-08-26T05:22:07.594Z"
-  },
-  {
-    "id": "dm_156",
-    "handle": "roisin.87",
-    "platform": "ig",
-    "text": "i work nights so my routine is upside down. started the retinol you mentioned and my skin is peeling around my mouth, normal?",
-    "ts": "2026-09-11T08:29:50.832Z"
-  },
-  {
-    "id": "dm_163",
-    "handle": "jen.skin",
-    "platform": "tt",
-    "text": "my face went red and hot after the exfoliant last night, do i stop no rush!",
-    "ts": "2026-08-24T18:55:54.202Z"
-  },
-  {
-    "id": "dm_135",
-    "handle": "maeve_x",
-    "platform": "ig",
-    "text": "combination skin, mid twenties. screenshotted your whole routine and i'm buying it bit by bit",
-    "ts": "2026-09-14T10:09:20.291Z"
-  },
-  {
-    "id": "dm_048",
-    "handle": "cleo92",
-    "platform": "tt",
-    "text": "is it bad to use my sister's stuff, she's 19 and has oily skin happy to buy through your link if you have one.",
-    "ts": "2026-09-13T08:37:04.567Z"
-  },
-  {
-    "id": "dm_076",
-    "handle": "evie.and.co",
-    "platform": "tt",
-    "text": "combination skin, mid twenties. i'm 16 and i've got £35 to spend, where do i start",
-    "ts": "2026-08-30T20:03:07.578Z"
-  },
-  {
-    "id": "dm_098",
-    "handle": "ruth.notes",
-    "platform": "tt",
-    "text": "the £35 one everyone's posting about, is there a boots dupe",
-    "ts": "2026-09-13T16:38:30.851Z"
-  },
-  {
-    "id": "dm_071",
-    "handle": "gracie.face",
-    "platform": "ig",
-    "text": "been on the pill for a year and my skin is different. i've got like £48 of birthday money, what's the one thing worth buying i've read everything and i'm more confused than when i started. x",
-    "ts": "2026-09-18T09:33:00.719Z"
-  },
-  {
-    "id": "dm_087",
-    "handle": "dani.03",
-    "platform": "tt",
-    "text": "i'm 41 and starting to care about this properly. the £48 one everyone's posting about, is there a boots dupe xx",
-    "ts": "2026-08-25T09:26:54.689Z"
-  },
-  {
-    "id": "dm_167",
-    "handle": "lex_x",
-    "platform": "ig",
-    "text": "i'm 34 and my skin's changed since having my son. i've come out in tiny bumps since i started the new Glass Drop serum, is that purging or a reaction",
-    "ts": "2026-08-30T17:28:17.702Z"
-  },
-  {
-    "id": "dm_052",
-    "handle": "tara.notes",
-    "platform": "tt",
-    "text": "i've got eczema on my hands and i think it's spreading. school makes my skin worse i swear. cheap things that actually work? 🥺",
-    "ts": "2026-09-15T00:31:48.230Z"
-  },
-  {
-    "id": "dm_074",
-    "handle": "bea.and.co",
-    "platform": "ig",
-    "text": "i'm 34 and my skin's changed since having my son. everyone at school uses the serum you talked about but i can't afford it, is there anything cheaper been following since the boots video.",
-    "ts": "2026-09-04T15:08:22.096Z"
-  },
-  {
-    "id": "dm_196",
-    "handle": "dani.03",
-    "platform": "tt",
-    "text": "is the serum worth it or is it this month's thing",
-    "ts": "2026-08-25T13:23:47.942Z"
-  },
-  {
-    "id": "dm_220",
-    "handle": "gracie.notes",
-    "platform": "ig",
-    "text": "your account has been flagged for copyright, verify here to avoid deletion",
-    "ts": "2026-09-18T14:24:50.823Z"
-  },
-  {
-    "id": "dm_034",
-    "handle": "kem_london",
-    "platform": "ig",
-    "text": "do i need an oil on top of my moisturiser or is that a marketing thing",
-    "ts": "2026-08-27T09:40:28.559Z"
-  },
-  {
-    "id": "dm_112",
-    "handle": "maeve.and.co",
-    "platform": "tt",
-    "text": "is there a cheaper version of the toner you use",
-    "ts": "2026-09-12T15:56:06.088Z"
-  },
-  {
-    "id": "dm_237",
-    "handle": "lily_london",
-    "platform": "ig",
-    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
-    "ts": "2026-09-18T17:58:38.370Z"
-  },
-  {
-    "id": "dm_145",
-    "handle": "gracie.face",
-    "platform": "ig",
-    "text": "getting paid on the 25th and i want to sort my routine properly. where do i put the money",
-    "ts": "2026-09-10T18:11:15.322Z"
-  },
-  {
-    "id": "dm_249",
-    "handle": "maeve_x",
-    "platform": "tt",
-    "text": "Hello dear, we are a Turkish beauty brand seeking UK influencers for long term cooperation. Gifting only at this stage.",
-    "ts": "2026-08-30T07:57:10.736Z"
-  },
-  {
-    "id": "dm_240",
-    "handle": "mo_uk",
-    "platform": "ig",
-    "text": "Hi Maya! 💕 We'd love to send you our new toner line for an honest review — just 3 in-feed posts and 3 stories. Shall I send the deck?",
-    "ts": "2026-09-01T10:35:47.168Z"
-  },
-  {
-    "id": "dm_194",
-    "handle": "maeve.notes",
-    "platform": "ig",
-    "text": "did you ever repurchase the exfoliant or was it a one time thing sorry to bother you",
-    "ts": "2026-09-14T12:19:27.234Z"
-  },
-  {
-    "id": "dm_054",
-    "handle": "maeve92",
-    "platform": "tt",
-    "text": "is it bad to use my sister's stuff, she's 19 and has oily skin",
-    "ts": "2026-09-19T23:20:54.255Z"
-  },
-  {
-    "id": "dm_070",
-    "handle": "priya_x",
-    "platform": "ig",
-    "text": "school makes my skin worse i swear. cheap things that actually work?",
-    "ts": "2026-09-05T02:43:07.307Z"
-  },
-  {
-    "id": "dm_215",
-    "handle": "yazldn",
-    "platform": "ig",
-    "text": "which spf do you use in summer, the one from the video or something else",
-    "ts": "2026-09-19T21:11:25.616Z"
-  },
-  {
-    "id": "dm_020",
-    "handle": "shanxo",
-    "platform": "ig",
-    "text": "i work nights so my routine is upside down. flaking around my nose every winter no matter what i put on it. what would you actually use no rush!",
-    "ts": "2026-08-21T19:28:40.247Z"
-  },
-  {
-    "id": "dm_245",
-    "handle": "zainab.notes",
-    "platform": "ig",
-    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
-    "ts": "2026-09-09T05:17:21.010Z"
-  },
-  {
-    "id": "dm_118",
-    "handle": "dani.87",
-    "platform": "tt",
-    "text": "getting paid friday and i want to sort my routine properly. where do i put the money sorry this is long.",
-    "ts": "2026-08-25T21:44:06.985Z"
-  },
-  {
-    "id": "dm_244",
     "handle": "ola.notes",
     "platform": "ig",
     "text": "Hello dear, we are a Korean beauty brand seeking UK influencers for long term cooperation. Gifting only at this stage.",
     "ts": "2026-09-06T09:06:16.434Z"
   },
   {
-    "id": "dm_129",
-    "handle": "roisin_x",
-    "platform": "tt",
-    "text": "black friday is coming, what's actually worth waiting for",
-    "ts": "2026-08-23T13:49:48.199Z"
-  },
-  {
-    "id": "dm_242",
-    "handle": "cleo.03",
-    "platform": "ig",
-    "text": "Hi Maya! 💕 We'd love to send you our new moisturiser line for an honest review — just 3 in-feed posts and 2 stories. Shall I send the deck?",
-    "ts": "2026-08-26T02:11:01.652Z"
-  },
-  {
-    "id": "dm_035",
-    "handle": "ola.notes",
-    "platform": "ig",
-    "text": "i've been doubling up on hyaluronic acid and my skin feels worse?? what am i doing wrong",
-    "ts": "2026-09-12T22:21:52.487Z"
-  },
-  {
-    "id": "dm_022",
-    "handle": "mo_london",
-    "platform": "tt",
-    "text": "what do you use on your face after a flight, mine is always awful for a week love your videos btw",
-    "ts": "2026-08-23T01:34:44.134Z"
-  },
-  {
-    "id": "dm_248",
-    "handle": "tara.notes",
-    "platform": "ig",
-    "text": "Hello dear, we are a Korean beauty brand seeking UK influencers for long term cooperation. Gifting only at this stage.",
-    "ts": "2026-09-18T22:28:41.096Z"
-  },
-  {
-    "id": "dm_208",
-    "handle": "sade_x",
-    "platform": "tt",
-    "text": "honest opinion on the £62 serum everyone's on about happy to buy through your link if you have one. sorry to bother you",
-    "ts": "2026-08-24T10:28:38.022Z"
-  },
-  {
-    "id": "dm_154",
-    "handle": "aishaldn",
-    "platform": "ig",
-    "text": "started the retinol you mentioned and my skin is peeling around my mouth, normal?",
-    "ts": "2026-09-19T03:07:14.082Z"
-  },
-  {
     "id": "dm_223",
-    "handle": "evie92",
-    "platform": "tt",
-    "text": "We're launching a Glass Drop serum in Q1 and Maya feels like the perfect fit for our UK push. Media kit attached — let me know the best email for your manager.",
-    "ts": "2026-08-27T08:16:00.343Z"
-  },
-  {
-    "id": "dm_217",
-    "handle": "zainabss",
+    "handle": "gracie.notes",
     "platform": "ig",
-    "text": "Hi! I'm reaching out from a talent agency — would you be open to a quick call about representation?",
-    "ts": "2026-09-05T16:28:48.677Z"
+    "text": "your account has been flagged for copyright, verify here to avoid deletion",
+    "ts": "2026-09-18T14:24:50.823Z"
   },
   {
-    "id": "dm_189",
-    "handle": "cleo.and.co",
-    "platform": "ig",
-    "text": "honest opinion on the £35 serum everyone's on about",
-    "ts": "2026-09-19T09:34:37.041Z"
-  },
-  {
-    "id": "dm_015",
-    "handle": "kayleighxo",
-    "platform": "ig",
-    "text": "i've got about a month before a wedding. is a £62 moisturiser ever worth it over the £11 one for dry skin i don't trust anyone else on this.",
-    "ts": "2026-09-13T05:07:57.700Z"
-  },
-  {
-    "id": "dm_120",
-    "handle": "evie.beauty",
-    "platform": "tt",
-    "text": "i work nights so my routine is upside down. black friday is coming, what's actually worth waiting for",
-    "ts": "2026-09-01T01:32:57.718Z"
-  },
-  {
-    "id": "dm_041",
-    "handle": "moss",
-    "platform": "tt",
-    "text": "flaking around my nose every winter no matter what i put on it. what would you actually use xx",
-    "ts": "2026-08-23T01:15:12.752Z"
-  },
-  {
-    "id": "dm_057",
-    "handle": "fern.face",
-    "platform": "ig",
-    "text": "my mum says i'm too young for retinol, is she right",
-    "ts": "2026-09-08T20:57:08.765Z"
-  },
-  {
-    "id": "dm_191",
-    "handle": "priya.beauty",
-    "platform": "tt",
-    "text": "sorry to dm but i've got eczema on my hands and i think it's spreading. did you ever repurchase the toner or was it a one time thing i know you get a million of these.",
-    "ts": "2026-09-06T04:03:28.789Z"
-  },
-  {
-    "id": "dm_042",
-    "handle": "evie92",
-    "platform": "ig",
-    "text": "is a £62 moisturiser ever worth it over the £11 one for dry skin",
-    "ts": "2026-09-12T17:31:21.098Z"
-  },
-  {
-    "id": "dm_060",
-    "handle": "tilda.does.makeup",
-    "platform": "tt",
-    "text": "live in london, hard water, if that matters. i've got like £35 of birthday money, what's the one thing worth buying",
-    "ts": "2026-08-25T20:03:46.923Z"
-  },
-  {
-    "id": "dm_193",
-    "handle": "dani.notes",
-    "platform": "ig",
-    "text": "i work nights so my routine is upside down. where do you buy the moisturiser in the uk, everything i find is us only i've read everything and i'm more confused than when i started.",
-    "ts": "2026-09-20T15:57:05.914Z"
-  },
-  {
-    "id": "dm_169",
-    "handle": "priya_london",
-    "platform": "ig",
-    "text": "burning when i put moisturiser on now, i think i've broken something",
-    "ts": "2026-08-24T15:25:01.505Z"
-  },
-  {
-    "id": "dm_246",
-    "handle": "bella.notes",
+    "id": "dm_236",
+    "handle": "maeve.skin",
     "platform": "tt",
     "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
-    "ts": "2026-09-11T18:59:33.029Z"
+    "ts": "2026-08-25T07:21:03.579Z"
   },
   {
-    "id": "dm_133",
-    "handle": "kem.and.co",
+    "id": "dm_188",
+    "handle": "aishass",
     "platform": "ig",
-    "text": "screenshotted your whole routine and i'm buying it bit by bit love your videos btw",
-    "ts": "2026-08-30T03:39:02.588Z"
+    "text": "sorry to dm but honest opinion on the £62 serum everyone's on about",
+    "ts": "2026-08-31T19:17:34.398Z"
   },
   {
-    "id": "dm_140",
-    "handle": "dani_uk",
+    "id": "dm_081",
+    "handle": "shan.87",
     "platform": "tt",
-    "text": "black friday is coming, what's actually worth waiting for x",
-    "ts": "2026-09-14T18:08:48.608Z"
+    "text": "cheaper retinal that isn't rubbish? i'm skint until the 28th",
+    "ts": "2026-08-27T10:50:46.125Z"
   },
   {
-    "id": "dm_056",
-    "handle": "tara.does.makeup",
+    "id": "dm_050",
+    "handle": "tara.and.co",
     "platform": "tt",
-    "text": "school makes my skin worse i swear. cheap things that actually work? 🙏",
-    "ts": "2026-09-08T07:22:01.443Z"
+    "text": "i'm 17 and i've got £20 to spend, where do i start i don't trust anyone else on this. 🥺",
+    "ts": "2026-08-28T21:31:45.778Z"
   },
   {
-    "id": "dm_123",
-    "handle": "bella_x",
+    "id": "dm_141",
+    "handle": "dani.face",
     "platform": "ig",
-    "text": "getting paid thursday and your shelf is the first thing i'm buying from. saving this",
-    "ts": "2026-09-08T07:40:45.164Z"
-  },
-  {
-    "id": "dm_115",
-    "handle": "anya.does.makeup",
-    "platform": "ig",
-    "text": "been on the pill for a year and my skin is different. i've saved up £20 and i want to buy properly once instead of badly five times",
-    "ts": "2026-08-31T18:22:22.406Z"
-  },
-  {
-    "id": "dm_128",
-    "handle": "tilda.beauty",
-    "platform": "ig",
-    "text": "combination skin, mid twenties. getting paid next week and your shelf is the first thing i'm buying from. saving this i know you get a million of these.",
-    "ts": "2026-09-02T16:22:35.432Z"
-  },
-  {
-    "id": "dm_229",
-    "handle": "anya_uk",
-    "platform": "ig",
-    "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
-    "ts": "2026-09-09T05:39:58.637Z"
-  },
-  {
-    "id": "dm_031",
-    "handle": "fernldn",
-    "platform": "tt",
-    "text": "live in london, hard water, if that matters. do i need an oil on top of my moisturiser or is that a marketing thing",
-    "ts": "2026-08-26T17:52:58.792Z"
-  },
-  {
-    "id": "dm_136",
-    "handle": "maeveldn",
-    "platform": "tt",
-    "text": "about to spend £20 on skincare, talk me out of it or tell me what to get no rush!",
-    "ts": "2026-08-29T17:15:23.841Z"
-  },
-  {
-    "id": "dm_148",
-    "handle": "bea.and.co",
-    "platform": "ig",
-    "text": "screenshotted your whole routine and i'm buying it bit by bit",
-    "ts": "2026-09-20T01:47:12.056Z"
+    "text": "hi maya oily t-zone, dry everywhere else. getting paid next week and i want to sort my routine properly. where do i put the money i don't trust anyone else on this.",
+    "ts": "2026-09-15T13:57:13.645Z"
   },
   {
     "id": "dm_230",
-    "handle": "priyass",
+    "handle": "yaz.beauty",
     "platform": "ig",
     "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
-    "ts": "2026-09-03T04:01:32.856Z"
+    "ts": "2026-08-29T11:05:13.536Z"
   },
   {
-    "id": "dm_218",
-    "handle": "priya.03",
-    "platform": "ig",
-    "text": "your account has been flagged for copyright, verify here to avoid deletion",
-    "ts": "2026-08-24T21:13:42.092Z"
-  },
-  {
-    "id": "dm_183",
-    "handle": "noor.87",
-    "platform": "ig",
-    "text": "which spf do you use in summer, the one from the video or something else",
-    "ts": "2026-09-17T11:39:11.927Z"
-  },
-  {
-    "id": "dm_232",
-    "handle": "roisin.notes",
-    "platform": "ig",
-    "text": "your account has been flagged for copyright, verify here to avoid deletion",
-    "ts": "2026-09-16T23:24:05.999Z"
-  },
-  {
-    "id": "dm_198",
-    "handle": "cleo.skin",
-    "platform": "ig",
-    "text": "what's actually still on your shelf from last year",
-    "ts": "2026-08-25T17:12:22.957Z"
-  },
-  {
-    "id": "dm_126",
-    "handle": "immy_x",
-    "platform": "ig",
-    "text": "i've got eczema on my hands and i think it's spreading. getting paid next week and your shelf is the first thing i'm buying from. saving this i don't trust anyone else on this. thank you!!",
-    "ts": "2026-09-08T00:11:49.846Z"
-  },
-  {
-    "id": "dm_013",
-    "handle": "noor_x",
+    "id": "dm_065",
+    "handle": "ola.skin",
     "platform": "tt",
-    "text": "my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad i know you get a million of these.",
-    "ts": "2026-08-25T02:39:56.407Z"
+    "text": "i'm 14 and i've got £48 to spend, where do i start",
+    "ts": "2026-09-16T07:17:43.704Z"
   },
   {
-    "id": "dm_111",
-    "handle": "lex.notes",
-    "platform": "ig",
-    "text": "combination skin, mid twenties. i can't spend £62 every two months, what's the next best thing",
-    "ts": "2026-08-27T00:14:40.780Z"
-  },
-  {
-    "id": "dm_202",
-    "handle": "kayleigh.notes",
-    "platform": "ig",
-    "text": "i work nights so my routine is upside down. where do you buy the moisturiser in the uk, everything i find is us only love your videos btw",
-    "ts": "2026-09-04T11:43:25.202Z"
-  },
-  {
-    "id": "dm_254",
-    "handle": "maevess",
+    "id": "dm_016",
+    "handle": "evie.03",
     "platform": "tt",
-    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
-    "ts": "2026-09-09T09:15:34.910Z"
+    "text": "is a £20 moisturiser ever worth it over the £13 one for dry skin x",
+    "ts": "2026-09-05T22:20:26.006Z"
   },
   {
-    "id": "dm_144",
-    "handle": "immy_uk",
+    "id": "dm_082",
+    "handle": "shan.beauty",
     "platform": "tt",
-    "text": "bookmarked every one of your shelf videos. rebuilding everything next month xx",
-    "ts": "2026-08-28T10:12:48.474Z"
+    "text": "darker skin, marks stay for months. is the Glass Drop worth £62 or am i being sold to",
+    "ts": "2026-08-27T22:20:57.338Z"
+  },
+  {
+    "id": "dm_061",
+    "handle": "bella.does.makeup",
+    "platform": "ig",
+    "text": "school photos are friday and i've got a massive spot, is there anything love your videos btw",
+    "ts": "2026-08-25T20:55:49.890Z"
+  },
+  {
+    "id": "dm_042",
+    "handle": "mo.87",
+    "platform": "ig",
+    "text": "rosacea-ish redness on my cheeks. Cloud Cream or the Barrier Oil first? i've got both and i've been doing it wrong i think i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-08T10:10:01.562Z"
+  },
+  {
+    "id": "dm_047",
+    "handle": "mo.03",
+    "platform": "tt",
+    "text": "school makes my skin worse i swear. cheap things that actually work? i don't trust anyone else on this.",
+    "ts": "2026-09-12T01:14:07.761Z"
+  },
+  {
+    "id": "dm_243",
+    "handle": "mo_uk",
+    "platform": "ig",
+    "text": "Hi Maya! 💕 We'd love to send you our new Cloud Cream line for an honest review — just 3 in-feed posts and 3 stories. Shall I send the deck?",
+    "ts": "2026-09-01T10:35:47.168Z"
+  },
+  {
+    "id": "dm_041",
+    "handle": "shan_x",
+    "platform": "tt",
+    "text": "i'm on a student budget. my skin goes tight about an hour after cleansing, is that a barrier problem or am i using the wrong serum",
+    "ts": "2026-09-06T17:15:38.322Z"
   },
   {
     "id": "dm_026",
@@ -1454,88 +215,284 @@
     "ts": "2026-09-16T07:49:31.411Z"
   },
   {
-    "id": "dm_241",
+    "id": "dm_069",
+    "handle": "immy.87",
+    "platform": "tt",
+    "text": "i've got about five minutes in the morning and that's being generous. what's the minimum",
+    "ts": "2026-09-15T17:46:56.861Z"
+  },
+  {
+    "id": "dm_237",
+    "handle": "ruthxo",
+    "platform": "ig",
+    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
+    "ts": "2026-09-04T01:12:00.652Z"
+  },
+  {
+    "id": "dm_137",
+    "handle": "anya_london",
+    "platform": "ig",
+    "text": "finally got a job!! treating myself. what's on your shelf that's worth it x",
+    "ts": "2026-09-11T03:11:09.652Z"
+  },
+  {
+    "id": "dm_173",
+    "handle": "zainab.skin",
+    "platform": "ig",
+    "text": "oily t-zone, dry everywhere else. i had a baby ten weeks ago and my skin is unrecognisable, i don't know where to start love your videos btw",
+    "ts": "2026-09-13T05:58:16.826Z"
+  },
+  {
+    "id": "dm_226",
+    "handle": "evie92",
+    "platform": "tt",
+    "text": "We're launching a Barrier Oil in Q1 and Maya feels like the perfect fit for our UK push. Media kit attached — let me know the best email for your manager.",
+    "ts": "2026-08-27T08:16:00.343Z"
+  },
+  {
+    "id": "dm_179",
+    "handle": "kayleigh.does.makeup",
+    "platform": "tt",
+    "text": "i trust you more than anyone on here. Cloud Cream or the Red Reset?",
+    "ts": "2026-09-16T14:50:02.337Z"
+  },
+  {
+    "id": "dm_189",
+    "handle": "immy92",
+    "platform": "ig",
+    "text": "you told me not to buy something once and it saved me £35. just wanted to say thank you xx",
+    "ts": "2026-09-18T01:26:56.034Z"
+  },
+  {
+    "id": "dm_123",
+    "handle": "yaz.face",
+    "platform": "tt",
+    "text": "hey!! i work nights so my routine is upside down. not asking anything, just saving up for the £35 one and wanted you to know sorry this is long.",
+    "ts": "2026-09-20T00:04:57.050Z"
+  },
+  {
+    "id": "dm_157",
+    "handle": "fern_x",
+    "platform": "ig",
+    "text": "burning when i put moisturiser on now, i think i've broken something i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-10T12:30:18.298Z"
+  },
+  {
+    "id": "dm_154",
+    "handle": "hen.face",
+    "platform": "ig",
+    "text": "i've got about a month before a wedding. my eyelids are flaking and sore, i don't know which thing did it happy to buy through your link if you have one. 🙏",
+    "ts": "2026-08-30T15:20:07.316Z"
+  },
+  {
+    "id": "dm_206",
+    "handle": "anya.skin",
+    "platform": "tt",
+    "text": "honest opinion on the £35 serum everyone's on about i know you get a million of these.",
+    "ts": "2026-09-14T19:28:25.600Z"
+  },
+  {
+    "id": "dm_158",
+    "handle": "lily.03",
+    "platform": "ig",
+    "text": "burning when i put moisturiser on now, i think i've broken something 🥺",
+    "ts": "2026-08-30T08:12:36.394Z"
+  },
+  {
+    "id": "dm_063",
+    "handle": "zainab92",
+    "platform": "ig",
+    "text": "is it bad to use my sister's stuff, she's 23 and has oily skin",
+    "ts": "2026-09-05T06:20:16.199Z"
+  },
+  {
+    "id": "dm_172",
+    "handle": "immy_uk",
+    "platform": "ig",
+    "text": "hiya my face went red and hot after the retinal last night, do i stop",
+    "ts": "2026-08-23T14:41:05.667Z"
+  },
+  {
+    "id": "dm_142",
+    "handle": "hen92",
+    "platform": "ig",
+    "text": "not asking anything, just saving up for the £60 one and wanted you to know happy to buy through your link if you have one. 🙏",
+    "ts": "2026-08-23T20:33:57.705Z"
+  },
+  {
+    "id": "dm_076",
+    "handle": "nia.skin",
+    "platform": "ig",
+    "text": "i'm on a student budget. my mum says i'm too young for retinol, is she right",
+    "ts": "2026-09-12T11:45:04.038Z"
+  },
+  {
+    "id": "dm_039",
+    "handle": "immy.beauty",
+    "platform": "tt",
+    "text": "do i need an oil on top of my moisturiser or is that a marketing thing",
+    "ts": "2026-09-09T10:34:49.346Z"
+  },
+  {
+    "id": "dm_246",
+    "handle": "maevexo",
+    "platform": "ig",
+    "text": "Hi! I'm reaching out from a talent agency — would you be open to a quick call about representation?",
+    "ts": "2026-09-16T14:23:01.227Z"
+  },
+  {
+    "id": "dm_192",
+    "handle": "zainab.and.co",
+    "platform": "ig",
+    "text": "hiya is the moisturiser worth it or is it this month's thing been following since the boots video.",
+    "ts": "2026-09-01T04:45:21.293Z"
+  },
+  {
+    "id": "dm_105",
+    "handle": "maeve.skin",
+    "platform": "ig",
+    "text": "is there a cheaper version of the spf you use i don't trust anyone else on this.",
+    "ts": "2026-08-30T06:32:28.924Z"
+  },
+  {
+    "id": "dm_244",
     "handle": "tilda.03",
     "platform": "ig",
     "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
     "ts": "2026-09-01T15:16:01.194Z"
   },
   {
-    "id": "dm_029",
-    "handle": "mo.beauty",
+    "id": "dm_134",
+    "handle": "lily.beauty",
     "platform": "ig",
-    "text": "combination skin, mid twenties. flaking around my nose every winter no matter what i put on it. what would you actually use no rush!",
-    "ts": "2026-09-04T12:31:58.055Z"
+    "text": "about to spend £20 on skincare, talk me out of it or tell me what to get i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-20T08:47:35.490Z"
   },
   {
-    "id": "dm_171",
-    "handle": "noorss",
+    "id": "dm_120",
+    "handle": "jenxo",
     "platform": "ig",
-    "text": "hey!! oily t-zone, dry everywhere else. burning when i put moisturiser on now, i think i've broken something",
-    "ts": "2026-09-14T21:41:47.218Z"
+    "text": "i've saved up £48 and i want to buy properly once instead of badly five times happy to buy through your link if you have one.",
+    "ts": "2026-09-07T10:42:46.592Z"
   },
   {
-    "id": "dm_066",
-    "handle": "aisha.notes",
-    "platform": "ig",
-    "text": "everyone at school uses the toner you talked about but i can't afford it, is there anything cheaper",
-    "ts": "2026-08-27T11:57:33.345Z"
+    "id": "dm_028",
+    "handle": "zainab92",
+    "platform": "tt",
+    "text": "rosacea-ish redness on my cheeks. do i need an oil on top of my moisturiser or is that a marketing thing happy to buy through your link if you have one. 🙏",
+    "ts": "2026-08-23T02:10:09.680Z"
   },
   {
-    "id": "dm_235",
+    "id": "dm_181",
+    "handle": "anya.87",
+    "platform": "tt",
+    "text": "which spf do you use in summer, the one from the video or something else love your videos btw",
+    "ts": "2026-09-13T22:10:06.748Z"
+  },
+  {
+    "id": "dm_073",
+    "handle": "bea.and.co",
+    "platform": "ig",
+    "text": "i'm 34 and my skin's changed since having my son. i've got like £20 of birthday money, what's the one thing worth buying been following since the boots video.",
+    "ts": "2026-09-04T15:08:22.096Z"
+  },
+  {
+    "id": "dm_033",
+    "handle": "gracie.and.co",
+    "platform": "tt",
+    "text": "i've got about a month before a wedding. i've been doubling up on hyaluronic acid and my skin feels worse?? what am i doing wrong",
+    "ts": "2026-09-05T17:59:10.301Z"
+  },
+  {
+    "id": "dm_233",
+    "handle": "priyass",
+    "platform": "ig",
+    "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
+    "ts": "2026-09-03T04:01:32.856Z"
+  },
+  {
+    "id": "dm_129",
+    "handle": "ruth.03",
+    "platform": "tt",
+    "text": "combination skin, mid twenties. screenshotted your whole routine and i'm buying it bit by bit 🙏",
+    "ts": "2026-09-10T21:15:35.404Z"
+  },
+  {
+    "id": "dm_136",
+    "handle": "priya.and.co",
+    "platform": "tt",
+    "text": "oily t-zone, dry everywhere else. i've got £48 saved for the Cloud Cream, holding out for payday",
+    "ts": "2026-08-24T13:00:18.409Z"
+  },
+  {
+    "id": "dm_238",
     "handle": "yaz.does.makeup",
     "platform": "tt",
     "text": "INVEST £200 GET £2000 BACK IN 48HRS crypto trading dm for details 📈📈",
     "ts": "2026-09-13T09:07:23.903Z"
   },
   {
-    "id": "dm_178",
-    "handle": "evieldn",
-    "platform": "ig",
-    "text": "i'm 34 and my skin's changed since having my son. i've come out in tiny bumps since i started the new serum, is that purging or a reaction i know you get a million of these.",
-    "ts": "2026-08-27T18:03:22.252Z"
-  },
-  {
-    "id": "dm_174",
-    "handle": "yaz.notes",
-    "platform": "ig",
-    "text": "sorry to dm but combination skin, mid twenties. burning when i put moisturiser on now, i think i've broken something happy to buy through your link if you have one.",
-    "ts": "2026-09-15T00:08:02.779Z"
-  },
-  {
-    "id": "dm_106",
-    "handle": "shan.and.co",
-    "platform": "ig",
-    "text": "cheaper spf that isn't rubbish? i'm skint until the 28th x",
-    "ts": "2026-08-27T14:17:00.507Z"
-  },
-  {
-    "id": "dm_028",
-    "handle": "fern_x",
+    "id": "dm_100",
+    "handle": "sade.87",
     "platform": "tt",
-    "text": "i'm 41 and starting to care about this properly. is a £20 moisturiser ever worth it over the £13 one for dry skin been following since the boots video.",
-    "ts": "2026-08-30T23:23:38.741Z"
+    "text": "darker skin, marks stay for months. cheaper moisturiser that isn't rubbish? i'm skint until the 28th thank you!!",
+    "ts": "2026-09-07T06:48:09.295Z"
   },
   {
-    "id": "dm_213",
-    "handle": "lily_official",
-    "platform": "ig",
-    "text": "i'm 34 and my skin's changed since having my son. where do you buy the serum in the uk, everything i find is us only 🙏",
-    "ts": "2026-09-04T00:39:52.011Z"
+    "id": "dm_208",
+    "handle": "zainab.beauty",
+    "platform": "tt",
+    "text": "is the Cloud Cream worth it or is it this month's thing thank you!!",
+    "ts": "2026-09-04T10:42:21.193Z"
   },
   {
-    "id": "dm_150",
-    "handle": "kem92",
+    "id": "dm_035",
+    "handle": "ola.notes",
     "platform": "ig",
-    "text": "my face went red and hot after the exfoliant last night, do i stop",
-    "ts": "2026-08-28T20:11:57.971Z"
+    "text": "wedding in six weeks and my skin has picked now to fall apart. what do i do",
+    "ts": "2026-09-12T22:21:52.487Z"
   },
   {
-    "id": "dm_228",
-    "handle": "lilyxo",
+    "id": "dm_191",
+    "handle": "fern.does.makeup",
     "platform": "ig",
-    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
-    "ts": "2026-09-02T19:42:41.257Z"
+    "text": "combination skin, mid twenties. where do you buy the Red Reset in the uk, everything i find is us only",
+    "ts": "2026-09-09T13:30:51.877Z"
+  },
+  {
+    "id": "dm_202",
+    "handle": "fern.face",
+    "platform": "tt",
+    "text": "i work nights and i've got no time and no money, what's the least i can get away with",
+    "ts": "2026-08-24T09:56:10.455Z"
+  },
+  {
+    "id": "dm_093",
+    "handle": "tara_x",
+    "platform": "tt",
+    "text": "is there a cheaper version of the serum you use no rush!",
+    "ts": "2026-09-12T03:43:25.085Z"
+  },
+  {
+    "id": "dm_132",
+    "handle": "bella92",
+    "platform": "tt",
+    "text": "my basket is full of things you've talked about 😅 paying for it on thursday i don't trust anyone else on this.",
+    "ts": "2026-08-26T20:28:29.995Z"
+  },
+  {
+    "id": "dm_148",
+    "handle": "lexxo",
+    "platform": "tt",
+    "text": "burning when i put moisturiser on now, i think i've broken something love your videos btw",
+    "ts": "2026-08-27T00:54:10.814Z"
+  },
+  {
+    "id": "dm_024",
+    "handle": "kayleigh_london",
+    "platform": "tt",
+    "text": "hi maya live in london, hard water, if that matters. Cloud Cream or the Barrier Oil first? i've got both and i've been doing it wrong i think",
+    "ts": "2026-09-14T05:55:39.796Z"
   },
   {
     "id": "dm_037",
@@ -1545,248 +502,1249 @@
     "ts": "2026-09-17T08:00:32.568Z"
   },
   {
-    "id": "dm_224",
+    "id": "dm_203",
+    "handle": "lex.face",
+    "platform": "ig",
+    "text": "live in london, hard water, if that matters. honest opinion on the £48 serum everyone's on about",
+    "ts": "2026-08-28T05:10:07.558Z"
+  },
+  {
+    "id": "dm_194",
+    "handle": "lex_london",
+    "platform": "ig",
+    "text": "honest opinion on the £60 serum everyone's on about",
+    "ts": "2026-09-05T03:30:50.799Z"
+  },
+  {
+    "id": "dm_106",
+    "handle": "immyldn",
+    "platform": "tt",
+    "text": "is the Glass Drop worth £62 or am i being sold to i don't trust anyone else on this. x",
+    "ts": "2026-09-14T22:18:47.006Z"
+  },
+  {
+    "id": "dm_241",
+    "handle": "yazldn",
+    "platform": "tt",
+    "text": "hey babe check my page 😘",
+    "ts": "2026-09-12T03:46:37.587Z"
+  },
+  {
+    "id": "dm_059",
+    "handle": "tilda.does.makeup",
+    "platform": "tt",
+    "text": "live in london, hard water, if that matters. is it bad to use my sister's stuff, she's 19 and has oily skin",
+    "ts": "2026-08-25T20:03:46.923Z"
+  },
+  {
+    "id": "dm_125",
+    "handle": "immy_x",
+    "platform": "ig",
+    "text": "i've got eczema on my hands and i think it's spreading. just ordered the exfoliant you use, wish me luck 🤞 i don't trust anyone else on this. thank you!!",
+    "ts": "2026-09-08T00:11:49.846Z"
+  },
+  {
+    "id": "dm_152",
+    "handle": "maeveldn",
+    "platform": "ig",
+    "text": "my face went red and hot after the Red Reset last night, do i stop",
+    "ts": "2026-08-25T20:58:41.998Z"
+  },
+  {
+    "id": "dm_101",
+    "handle": "bea92",
+    "platform": "tt",
+    "text": "is there a cheaper version of the Cloud Cream you use i know you get a million of these.",
+    "ts": "2026-09-15T04:07:22.571Z"
+  },
+  {
+    "id": "dm_088",
+    "handle": "lily92",
+    "platform": "ig",
+    "text": "rosacea-ish redness on my cheeks. does the aldi one actually do the same job or is that tiktok talking",
+    "ts": "2026-09-04T09:00:55.162Z"
+  },
+  {
+    "id": "dm_199",
+    "handle": "bella_london",
+    "platform": "tt",
+    "text": "what's actually still on your shelf from last year 🙏",
+    "ts": "2026-08-25T03:24:51.422Z"
+  },
+  {
+    "id": "dm_168",
+    "handle": "sade_x",
+    "platform": "ig",
+    "text": "my face went red and hot after the moisturiser last night, do i stop",
+    "ts": "2026-08-28T01:18:32.179Z"
+  },
+  {
+    "id": "dm_124",
+    "handle": "kem_x",
+    "platform": "ig",
+    "text": "getting paid on the 25th and your shelf is the first thing i'm buying from. saving this been following since the boots video.",
+    "ts": "2026-09-03T11:48:38.215Z"
+  },
+  {
+    "id": "dm_174",
+    "handle": "roisin.face",
+    "platform": "ig",
+    "text": "i'm 41 and starting to care about this properly. burning when i put moisturiser on now, i think i've broken something happy to buy through your link if you have one.",
+    "ts": "2026-09-05T15:14:47.943Z"
+  },
+  {
+    "id": "dm_107",
+    "handle": "kem_uk",
+    "platform": "tt",
+    "text": "is the Glass Drop worth £62 or am i being sold to",
+    "ts": "2026-09-15T13:42:35.262Z"
+  },
+  {
+    "id": "dm_067",
+    "handle": "noor.notes",
+    "platform": "tt",
+    "text": "i'm 14 and i've got £62 to spend, where do i start thank you!!",
+    "ts": "2026-08-28T13:20:16.036Z"
+  },
+  {
+    "id": "dm_103",
+    "handle": "yaz.notes",
+    "platform": "ig",
+    "text": "the £35 one everyone's posting about, is there a boots dupe",
+    "ts": "2026-09-20T14:50:16.762Z"
+  },
+  {
+    "id": "dm_058",
+    "handle": "niaxo",
+    "platform": "ig",
+    "text": "rosacea-ish redness on my cheeks. i've got like £35 of birthday money, what's the one thing worth buying i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-10T16:15:24.040Z"
+  },
+  {
+    "id": "dm_205",
+    "handle": "moxo",
+    "platform": "tt",
+    "text": "darker skin, marks stay for months. did you ever repurchase the exfoliant or was it a one time thing",
+    "ts": "2026-09-10T10:12:19.902Z"
+  },
+  {
+    "id": "dm_156",
+    "handle": "priya.skin",
+    "platform": "ig",
+    "text": "i work nights so my routine is upside down. my eyelids are flaking and sore, i don't know which thing did it sorry to bother you",
+    "ts": "2026-09-14T18:40:08.351Z"
+  },
+  {
+    "id": "dm_138",
+    "handle": "ola.beauty",
+    "platform": "tt",
+    "text": "bookmarked every one of your shelf videos. rebuilding everything next month",
+    "ts": "2026-08-25T14:36:55.297Z"
+  },
+  {
+    "id": "dm_151",
+    "handle": "sade.skin",
+    "platform": "ig",
+    "text": "hiya my face went red and hot after the Glass Drop last night, do i stop",
+    "ts": "2026-09-03T05:32:55.583Z"
+  },
+  {
+    "id": "dm_195",
+    "handle": "tara.face",
+    "platform": "ig",
+    "text": "i work nights so my routine is upside down. which shade of the tint am i if i'm a a deep neutral in everything else",
+    "ts": "2026-09-01T20:29:43.658Z"
+  },
+  {
+    "id": "dm_216",
+    "handle": "nia.87",
+    "platform": "tt",
+    "text": "your account has been flagged for copyright, verify here to avoid deletion",
+    "ts": "2026-08-27T10:06:54.144Z"
+  },
+  {
+    "id": "dm_167",
+    "handle": "dani_official",
+    "platform": "tt",
+    "text": "my cheeks have gone red and they stay red now, is that rosacea or am i panicking been following since the boots video. thank you!!",
+    "ts": "2026-09-07T03:59:45.924Z"
+  },
+  {
+    "id": "dm_098",
+    "handle": "maeve_official",
+    "platform": "tt",
+    "text": "i've got about a month before a wedding. the £48 one everyone's posting about, is there a boots dupe",
+    "ts": "2026-08-29T01:31:39.173Z"
+  },
+  {
+    "id": "dm_022",
+    "handle": "immy.notes",
+    "platform": "ig",
+    "text": "hiya Cloud Cream or the Barrier Oil first? i've got both and i've been doing it wrong i think i don't trust anyone else on this.",
+    "ts": "2026-08-23T23:39:01.577Z"
+  },
+  {
+    "id": "dm_083",
+    "handle": "tara.skin",
+    "platform": "ig",
+    "text": "i can't spend £48 every two months, what's the next best thing",
+    "ts": "2026-09-12T23:55:33.410Z"
+  },
+  {
+    "id": "dm_036",
+    "handle": "hen.and.co",
+    "platform": "tt",
+    "text": "i work nights so my routine is upside down. Cloud Cream or the Barrier Oil first? i've got both and i've been doing it wrong i think",
+    "ts": "2026-08-30T05:04:56.549Z"
+  },
+  {
+    "id": "dm_126",
+    "handle": "nia.does.makeup",
+    "platform": "ig",
+    "text": "i'm 41 and starting to care about this properly. black friday is coming, what's actually worth waiting for happy to buy through your link if you have one. thank you!!",
+    "ts": "2026-09-08T01:15:08.575Z"
+  },
+  {
+    "id": "dm_057",
+    "handle": "maeve.does.makeup",
+    "platform": "tt",
+    "text": "i've got like £15 of birthday money, what's the one thing worth buying",
+    "ts": "2026-09-08T00:21:29.898Z"
+  },
+  {
+    "id": "dm_116",
+    "handle": "sade.skin",
+    "platform": "ig",
+    "text": "i've got about a month before a wedding. getting paid next week and your shelf is the first thing i'm buying from. saving this happy to buy through your link if you have one.",
+    "ts": "2026-09-04T05:20:22.490Z"
+  },
+  {
+    "id": "dm_086",
+    "handle": "dani.03",
+    "platform": "tt",
+    "text": "i'm 41 and starting to care about this properly. i can't spend £62 every two months, what's the next best thing xx",
+    "ts": "2026-08-25T09:26:54.689Z"
+  },
+  {
+    "id": "dm_166",
+    "handle": "bella_x",
+    "platform": "ig",
+    "text": "i'm 41 and starting to care about this properly. my eyelids are flaking and sore, i don't know which thing did it",
+    "ts": "2026-09-11T08:46:41.540Z"
+  },
+  {
+    "id": "dm_099",
+    "handle": "shan.87",
+    "platform": "tt",
+    "text": "live in london, hard water, if that matters. does the aldi one actually do the same job or is that tiktok talking",
+    "ts": "2026-09-19T07:02:46.148Z"
+  },
+  {
+    "id": "dm_184",
+    "handle": "graciess",
+    "platform": "tt",
+    "text": "live in london, hard water, if that matters. i trust you more than anyone on here. Cloud Cream or the Red Reset?",
+    "ts": "2026-09-05T21:04:24.380Z"
+  },
+  {
+    "id": "dm_027",
+    "handle": "lily.and.co",
+    "platform": "tt",
+    "text": "live in london, hard water, if that matters. what do you use on your face after a flight, mine is always awful for a week",
+    "ts": "2026-09-20T01:46:23.854Z"
+  },
+  {
+    "id": "dm_013",
+    "handle": "zainab.notes",
+    "platform": "tt",
+    "text": "been on the pill for a year and my skin is different. wedding in six weeks and my skin has picked now to fall apart. what do i do",
+    "ts": "2026-09-07T18:07:19.577Z"
+  },
+  {
+    "id": "dm_197",
+    "handle": "fern.skin",
+    "platform": "ig",
+    "text": "what's actually still on your shelf from last year no rush!",
+    "ts": "2026-09-05T01:33:57.024Z"
+  },
+  {
+    "id": "dm_163",
+    "handle": "cleo.03",
+    "platform": "tt",
+    "text": "i had a baby three weeks ago and my skin is unrecognisable, i don't know where to start been following since the boots video. sorry to bother you",
+    "ts": "2026-08-30T14:52:00.846Z"
+  },
+  {
+    "id": "dm_217",
+    "handle": "lily.skin",
+    "platform": "ig",
+    "text": "hey babe check my page 😘",
+    "ts": "2026-09-11T15:15:39.514Z"
+  },
+  {
+    "id": "dm_068",
+    "handle": "kayleigh_uk",
+    "platform": "ig",
+    "text": "my mum says i'm too young for retinol, is she right sorry this is long.",
+    "ts": "2026-08-24T02:32:52.864Z"
+  },
+  {
+    "id": "dm_190",
+    "handle": "maeve.notes",
+    "platform": "ig",
+    "text": "i've got about a month before a wedding. honest opinion on the £48 serum everyone's on about love your videos btw",
+    "ts": "2026-09-12T21:13:33.806Z"
+  },
+  {
+    "id": "dm_245",
+    "handle": "cleo.03",
+    "platform": "ig",
+    "text": "Hi Maya! 💕 We'd love to send you our new spf line for an honest review — just 3 in-feed posts and 2 stories. Shall I send the deck?",
+    "ts": "2026-08-26T02:11:01.652Z"
+  },
+  {
+    "id": "dm_030",
+    "handle": "hen.and.co",
+    "platform": "ig",
+    "text": "what do you use on your face after a flight, mine is always awful for a week thank you!!",
+    "ts": "2026-08-22T00:06:33.373Z"
+  },
+  {
+    "id": "dm_051",
+    "handle": "tara.notes",
+    "platform": "tt",
+    "text": "i've got eczema on my hands and i think it's spreading. is it bad to use my sister's stuff, she's 23 and has oily skin 🥺",
+    "ts": "2026-09-15T00:31:48.230Z"
+  },
+  {
+    "id": "dm_090",
+    "handle": "sadeldn",
+    "platform": "tt",
+    "text": "is there a cheaper version of the spf you use i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-16T12:14:07.342Z"
+  },
+  {
+    "id": "dm_078",
+    "handle": "tilda.skin",
+    "platform": "tt",
+    "text": "oily t-zone, dry everywhere else. i'm 14 and i've got £62 to spend, where do i start i know you get a million of these. xx",
+    "ts": "2026-08-23T10:41:25.328Z"
+  },
+  {
+    "id": "dm_222",
+    "handle": "nia_london",
+    "platform": "ig",
+    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
+    "ts": "2026-08-22T02:24:31.228Z"
+  },
+  {
+    "id": "dm_079",
+    "handle": "evie_london",
+    "platform": "tt",
+    "text": "i work nights so my routine is upside down. Daily Gel or Red Reset, i can only afford one no rush!",
+    "ts": "2026-09-20T08:16:24.321Z"
+  },
+  {
+    "id": "dm_102",
+    "handle": "eviess",
+    "platform": "tt",
+    "text": "hey!! i've got about a month before a wedding. is the Glass Drop worth £62 or am i being sold to sorry this is long.",
+    "ts": "2026-08-31T22:15:52.343Z"
+  },
+  {
+    "id": "dm_084",
+    "handle": "kayleigh.face",
+    "platform": "ig",
+    "text": "i can't spend £20 every two months, what's the next best thing sorry to bother you",
+    "ts": "2026-08-22T23:52:31.523Z"
+  },
+  {
+    "id": "dm_227",
     "handle": "sade.does.makeup",
     "platform": "tt",
     "text": "hey babe check my page 😘",
     "ts": "2026-09-09T23:06:36.085Z"
   },
   {
-    "id": "dm_159",
-    "handle": "priyaxo",
+    "id": "dm_021",
+    "handle": "kem.and.co",
     "platform": "tt",
-    "text": "i'm 41 and starting to care about this properly. i've come out in tiny bumps since i started the new toner, is that purging or a reaction been following since the boots video.",
-    "ts": "2026-09-16T16:43:14.875Z"
-  },
-  {
-    "id": "dm_201",
-    "handle": "fern_official",
-    "platform": "tt",
-    "text": "darker skin, marks stay for months. did you ever repurchase the Glass Drop serum or was it a one time thing",
-    "ts": "2026-08-31T04:16:48.024Z"
-  },
-  {
-    "id": "dm_017",
-    "handle": "cleo.face",
-    "platform": "tt",
-    "text": "what do you use on your face after a flight, mine is always awful for a week happy to buy through your link if you have one.",
-    "ts": "2026-08-27T13:28:08.565Z"
-  },
-  {
-    "id": "dm_108",
-    "handle": "ola_london",
-    "platform": "tt",
-    "text": "live in london, hard water, if that matters. does the aldi one actually do the same job or is that tiktok talking",
-    "ts": "2026-09-10T07:02:45.036Z"
-  },
-  {
-    "id": "dm_047",
-    "handle": "zainab.face",
-    "platform": "tt",
-    "text": "i've got eczema on my hands and i think it's spreading. school makes my skin worse i swear. cheap things that actually work?",
-    "ts": "2026-09-15T16:30:21.245Z"
-  },
-  {
-    "id": "dm_164",
-    "handle": "bella.87",
-    "platform": "tt",
-    "text": "started the retinol you mentioned and my skin is peeling around my mouth, normal? i don't trust anyone else on this.",
-    "ts": "2026-09-18T19:42:41.792Z"
-  },
-  {
-    "id": "dm_165",
-    "handle": "anya.03",
-    "platform": "ig",
-    "text": "i'm 41 and starting to care about this properly. started the retinol you mentioned and my skin is peeling around my mouth, normal?",
-    "ts": "2026-08-21T21:31:35.540Z"
-  },
-  {
-    "id": "dm_114",
-    "handle": "lex.does.makeup",
-    "platform": "ig",
-    "text": "the £20 one everyone's posting about, is there a boots dupe sorry this is long. 🙏",
-    "ts": "2026-08-24T10:27:38.309Z"
-  },
-  {
-    "id": "dm_160",
-    "handle": "nia_london",
-    "platform": "tt",
-    "text": "i'm 41 and starting to care about this properly. my face went red and hot after the toner last night, do i stop sorry this is long.",
-    "ts": "2026-08-26T13:24:33.899Z"
-  },
-  {
-    "id": "dm_019",
-    "handle": "roisin_london",
-    "platform": "ig",
-    "text": "combination skin, mid twenties. my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad i don't trust anyone else on this.",
-    "ts": "2026-08-29T18:44:30.303Z"
-  },
-  {
-    "id": "dm_243",
-    "handle": "maevexo",
-    "platform": "ig",
-    "text": "Hi! I'm reaching out from a talent agency — would you be open to a quick call about representation?",
-    "ts": "2026-09-16T14:23:01.227Z"
-  },
-  {
-    "id": "dm_045",
-    "handle": "lily.does.makeup",
-    "platform": "ig",
-    "text": "i'm 41 and starting to care about this properly. my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad",
-    "ts": "2026-09-20T13:31:18.393Z"
-  },
-  {
-    "id": "dm_139",
-    "handle": "anya.and.co",
-    "platform": "ig",
-    "text": "i work nights so my routine is upside down. my basket is full of things you've talked about 😅 paying for it on next week",
-    "ts": "2026-09-17T20:21:24.788Z"
-  },
-  {
-    "id": "dm_043",
-    "handle": "bea.beauty",
-    "platform": "ig",
-    "text": "i work nights so my routine is upside down. is a £20 moisturiser ever worth it over the £11 one for dry skin i've read everything and i'm more confused than when i started.",
-    "ts": "2026-08-26T23:18:19.420Z"
-  },
-  {
-    "id": "dm_088",
-    "handle": "henxo",
-    "platform": "ig",
-    "text": "rosacea-ish redness on my cheeks. cheaper exfoliant that isn't rubbish? i'm skint until the 28th been following since the boots video.",
-    "ts": "2026-09-08T13:36:09.601Z"
-  },
-  {
-    "id": "dm_080",
-    "handle": "evie_london",
-    "platform": "tt",
-    "text": "i work nights so my routine is upside down. school makes my skin worse i swear. cheap things that actually work? no rush!",
-    "ts": "2026-09-20T08:16:24.321Z"
-  },
-  {
-    "id": "dm_206",
-    "handle": "ruth.face",
-    "platform": "ig",
-    "text": "what's actually still on your shelf from last year",
-    "ts": "2026-09-05T22:17:36.679Z"
-  },
-  {
-    "id": "dm_222",
-    "handle": "immy.beauty",
-    "platform": "tt",
-    "text": "🔥 GROW TO 50K FOLLOWERS IN 30 DAYS ✅ real uk accounts ✅ no password ✅ dm BOOST",
-    "ts": "2026-09-14T12:32:32.456Z"
-  },
-  {
-    "id": "dm_214",
-    "handle": "bellass",
-    "platform": "ig",
-    "text": "where do you buy the spf in the uk, everything i find is us only been following since the boots video.",
-    "ts": "2026-09-18T10:40:26.263Z"
-  },
-  {
-    "id": "dm_187",
-    "handle": "maeve_official",
-    "platform": "tt",
-    "text": "i've got eczema on my hands and i think it's spreading. where do you buy the moisturiser in the uk, everything i find is us only",
-    "ts": "2026-09-17T04:26:01.261Z"
-  },
-  {
-    "id": "dm_188",
-    "handle": "sade.and.co",
-    "platform": "tt",
-    "text": "combination skin, mid twenties. is the serum worth it or is it this month's thing sorry this is long.",
-    "ts": "2026-08-26T07:56:21.936Z"
-  },
-  {
-    "id": "dm_095",
-    "handle": "sade.87",
-    "platform": "ig",
-    "text": "i'm on a student budget. cheaper serum that isn't rubbish? i'm skint until the 28th",
-    "ts": "2026-09-15T03:47:44.390Z"
+    "text": "my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad",
+    "ts": "2026-08-24T08:54:04.957Z"
   },
   {
     "id": "dm_161",
-    "handle": "evie.face",
+    "handle": "maeve92",
     "platform": "ig",
-    "text": "my eyelids are flaking and sore, i don't know which thing did it i've read everything and i'm more confused than when i started. thank you!!",
-    "ts": "2026-08-27T06:08:19.156Z"
+    "text": "sorry to dm but i had a baby ten weeks ago and my skin is unrecognisable, i don't know where to start",
+    "ts": "2026-09-08T03:58:49.528Z"
   },
   {
-    "id": "dm_100",
-    "handle": "fern_x",
-    "platform": "ig",
-    "text": "is there a cheaper version of the exfoliant you use sorry to bother you",
-    "ts": "2026-09-14T03:15:45.642Z"
-  },
-  {
-    "id": "dm_084",
-    "handle": "tara.skin",
-    "platform": "ig",
-    "text": "the £48 one everyone's posting about, is there a boots dupe",
-    "ts": "2026-09-12T23:55:33.410Z"
-  },
-  {
-    "id": "dm_155",
-    "handle": "tildaxo",
+    "id": "dm_178",
+    "handle": "danildn",
     "platform": "tt",
-    "text": "my eyelids are flaking and sore, i don't know which thing did it happy to buy through your link if you have one.",
-    "ts": "2026-09-17T03:10:31.460Z"
+    "text": "where do you buy the moisturiser in the uk, everything i find is us only",
+    "ts": "2026-09-07T01:39:17.900Z"
   },
   {
-    "id": "dm_239",
+    "id": "dm_113",
+    "handle": "noor_official",
+    "platform": "ig",
+    "text": "hey!! darker skin, marks stay for months. bookmarked every one of your shelf videos. rebuilding everything next month",
+    "ts": "2026-09-08T18:11:53.801Z"
+  },
+  {
+    "id": "dm_031",
+    "handle": "fernldn",
+    "platform": "tt",
+    "text": "live in london, hard water, if that matters. what do you use on your face after a flight, mine is always awful for a week",
+    "ts": "2026-08-26T17:52:58.792Z"
+  },
+  {
+    "id": "dm_242",
     "handle": "mo_uk",
     "platform": "ig",
     "text": "Hi! I'm reaching out from a talent agency — would you be open to a quick call about representation?",
     "ts": "2026-09-11T20:08:10.250Z"
   },
   {
-    "id": "dm_092",
-    "handle": "ruth_official",
+    "id": "dm_215",
+    "handle": "lily_london",
+    "platform": "tt",
+    "text": "We're launching a exfoliant in Q1 and Maya feels like the perfect fit for our UK push. Media kit attached — let me know the best email for your manager.",
+    "ts": "2026-08-26T12:15:35.280Z"
+  },
+  {
+    "id": "dm_171",
+    "handle": "gracie.does.makeup",
+    "platform": "tt",
+    "text": "hey!! my eyelids are flaking and sore, i don't know which thing did it",
+    "ts": "2026-08-26T14:27:06.588Z"
+  },
+  {
+    "id": "dm_225",
+    "handle": "immy.beauty",
+    "platform": "tt",
+    "text": "🔥 GROW TO 50K FOLLOWERS IN 30 DAYS ✅ real uk accounts ✅ no password ✅ dm BOOST",
+    "ts": "2026-09-14T12:32:32.456Z"
+  },
+  {
+    "id": "dm_169",
+    "handle": "nia.skin",
+    "platform": "tt",
+    "text": "my cheeks have gone red and they stay red now, is that rosacea or am i panicking xx",
+    "ts": "2026-09-15T14:03:09.370Z"
+  },
+  {
+    "id": "dm_185",
+    "handle": "ruth92",
     "platform": "ig",
-    "text": "i can't spend £48 every two months, what's the next best thing sorry this is long.",
-    "ts": "2026-08-22T21:48:56.988Z"
+    "text": "i work nights and i've got no time and no money, what's the least i can get away with",
+    "ts": "2026-09-03T08:13:48.445Z"
   },
   {
-    "id": "dm_058",
-    "handle": "maeve.does.makeup",
-    "platform": "tt",
-    "text": "everyone at school uses the exfoliant you talked about but i can't afford it, is there anything cheaper",
-    "ts": "2026-09-08T00:21:29.898Z"
-  },
-  {
-    "id": "dm_021",
-    "handle": "ruth.and.co",
-    "platform": "tt",
-    "text": "flaking around my nose every winter no matter what i put on it. what would you actually use",
-    "ts": "2026-09-02T03:45:19.618Z"
-  },
-  {
-    "id": "dm_016",
-    "handle": "gracie.face",
+    "id": "dm_204",
+    "handle": "ruth_uk",
     "platform": "ig",
-    "text": "my skin goes tight about an hour after cleansing, is that a dehydration problem or am i using the wrong exfoliant no rush!",
-    "ts": "2026-08-23T23:51:38.681Z"
+    "text": "did you ever repurchase the spf or was it a one time thing",
+    "ts": "2026-09-02T17:57:13.132Z"
   },
   {
-    "id": "dm_141",
-    "handle": "kayleigh.notes",
+    "id": "dm_198",
+    "handle": "jenss",
+    "platform": "ig",
+    "text": "sorry to dm but honest opinion on the £35 serum everyone's on about been following since the boots video.",
+    "ts": "2026-08-27T10:09:22.073Z"
+  },
+  {
+    "id": "dm_115",
+    "handle": "roisin.face",
+    "platform": "ig",
+    "text": "i've got about a month before a wedding. finally got a job!! treating myself. what's on your shelf that's worth it",
+    "ts": "2026-08-31T03:39:14.170Z"
+  },
+  {
+    "id": "dm_112",
+    "handle": "evie.face",
+    "platform": "ig",
+    "text": "just ordered the exfoliant you use, wish me luck 🤞",
+    "ts": "2026-09-07T03:32:17.074Z"
+  },
+  {
+    "id": "dm_064",
+    "handle": "evie_x",
     "platform": "tt",
-    "text": "i've got eczema on my hands and i think it's spreading. i've saved up £62 and i want to buy properly once instead of badly five times",
-    "ts": "2026-08-31T15:51:54.940Z"
+    "text": "i'm on a student budget. my mum says i'm too young for retinol, is she right",
+    "ts": "2026-09-03T16:17:32.539Z"
+  },
+  {
+    "id": "dm_135",
+    "handle": "shan.face",
+    "platform": "tt",
+    "text": "combination skin, mid twenties. screenshotted your whole routine and i'm buying it bit by bit",
+    "ts": "2026-09-13T21:12:07.515Z"
+  },
+  {
+    "id": "dm_045",
+    "handle": "roisin.notes",
+    "platform": "tt",
+    "text": "hi maya combination skin, mid twenties. i've been doubling up on hyaluronic acid and my skin feels worse?? what am i doing wrong",
+    "ts": "2026-08-30T03:59:23.100Z"
+  },
+  {
+    "id": "dm_239",
+    "handle": "roisin.and.co",
+    "platform": "tt",
+    "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
+    "ts": "2026-08-22T21:41:14.506Z"
+  },
+  {
+    "id": "dm_052",
+    "handle": "evie.skin",
+    "platform": "tt",
+    "text": "my mum says i'm too young for retinol, is she right 🙏",
+    "ts": "2026-09-13T14:33:16.203Z"
+  },
+  {
+    "id": "dm_118",
+    "handle": "zainabldn",
+    "platform": "tt",
+    "text": "i work nights so my routine is upside down. i've got £62 saved for the Cloud Cream, holding out for payday",
+    "ts": "2026-09-06T17:21:25.010Z"
+  },
+  {
+    "id": "dm_074",
+    "handle": "dani.beauty",
+    "platform": "tt",
+    "text": "hey!! darker skin, marks stay for months. i've got like £62 of birthday money, what's the one thing worth buying sorry to bother you",
+    "ts": "2026-09-14T02:57:25.018Z"
   },
   {
     "id": "dm_146",
-    "handle": "ola.skin",
-    "platform": "ig",
-    "text": "getting paid thursday and your shelf is the first thing i'm buying from. saving this been following since the boots video.",
-    "ts": "2026-09-01T06:04:56.896Z"
+    "handle": "henxo",
+    "platform": "tt",
+    "text": "my cheeks have gone red and they stay red now, is that rosacea or am i panicking",
+    "ts": "2026-08-29T23:28:08.881Z"
   },
   {
-    "id": "dm_137",
-    "handle": "bella.beauty",
+    "id": "dm_121",
+    "handle": "ruthldn",
+    "platform": "tt",
+    "text": "hey!! i've got eczema on my hands and i think it's spreading. getting paid on the 25th and i want to sort my routine properly. where do i put the money",
+    "ts": "2026-08-29T14:23:23.559Z"
+  },
+  {
+    "id": "dm_044",
+    "handle": "shan.does.makeup",
+    "platform": "tt",
+    "text": "hi maya what do you use on your face after a flight, mine is always awful for a week",
+    "ts": "2026-09-03T08:40:56.207Z"
+  },
+  {
+    "id": "dm_143",
+    "handle": "dani.notes",
+    "platform": "tt",
+    "text": "i've got £15 saved for the Cloud Cream, holding out for payday i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-18T21:28:38.654Z"
+  },
+  {
+    "id": "dm_221",
+    "handle": "priya.03",
     "platform": "ig",
-    "text": "black friday is coming, what's actually worth waiting for xx",
-    "ts": "2026-08-26T14:58:22.778Z"
+    "text": "your account has been flagged for copyright, verify here to avoid deletion",
+    "ts": "2026-08-24T21:13:42.092Z"
+  },
+  {
+    "id": "dm_089",
+    "handle": "danildn",
+    "platform": "ig",
+    "text": "is there a cheaper version of the retinal you use",
+    "ts": "2026-08-29T16:50:06.002Z"
+  },
+  {
+    "id": "dm_117",
+    "handle": "aishaxo",
+    "platform": "ig",
+    "text": "black friday is coming, what's actually worth waiting for",
+    "ts": "2026-09-17T13:46:00.422Z"
+  },
+  {
+    "id": "dm_072",
+    "handle": "jen_official",
+    "platform": "ig",
+    "text": "i'm on a student budget. i'm 17 and i've got £62 to spend, where do i start i don't trust anyone else on this.",
+    "ts": "2026-09-07T12:22:21.232Z"
+  },
+  {
+    "id": "dm_164",
+    "handle": "tara_uk",
+    "platform": "ig",
+    "text": "i've come out in tiny bumps since i started the new Barrier Oil, is that purging or a reaction",
+    "ts": "2026-08-24T16:44:07.754Z"
+  },
+  {
+    "id": "dm_096",
+    "handle": "bea.face",
+    "platform": "ig",
+    "text": "sorry to dm but i'm 34 and my skin's changed since having my son. i can't spend £20 every two months, what's the next best thing",
+    "ts": "2026-09-03T12:36:46.040Z"
+  },
+  {
+    "id": "dm_200",
+    "handle": "noor.does.makeup",
+    "platform": "ig",
+    "text": "i work nights and i've got no time and no money, what's the least i can get away with sorry this is long.",
+    "ts": "2026-09-08T06:56:09.075Z"
+  },
+  {
+    "id": "dm_060",
+    "handle": "shan.03",
+    "platform": "tt",
+    "text": "i'm 17 and i've got £35 to spend, where do i start",
+    "ts": "2026-09-13T11:46:14.405Z"
+  },
+  {
+    "id": "dm_017",
+    "handle": "maeve.face",
+    "platform": "tt",
+    "text": "Cloud Cream or the Barrier Oil first? i've got both and i've been doing it wrong i think sorry to bother you",
+    "ts": "2026-08-29T12:48:06.926Z"
+  },
+  {
+    "id": "dm_085",
+    "handle": "lex.beauty",
+    "platform": "ig",
+    "text": "i can't spend £15 every two months, what's the next best thing no rush!",
+    "ts": "2026-09-20T09:06:55.826Z"
+  },
+  {
+    "id": "dm_049",
+    "handle": "fern_uk",
+    "platform": "ig",
+    "text": "rosacea-ish redness on my cheeks. my mum says i'm too young for retinol, is she right no rush!",
+    "ts": "2026-09-08T23:26:52.354Z"
+  },
+  {
+    "id": "dm_130",
+    "handle": "tilda.skin",
+    "platform": "ig",
+    "text": "about to spend £20 on skincare, talk me out of it or tell me what to get",
+    "ts": "2026-09-10T12:27:46.970Z"
+  },
+  {
+    "id": "dm_062",
+    "handle": "cleo92",
+    "platform": "tt",
+    "text": "school makes my skin worse i swear. cheap things that actually work? been following since the boots video.",
+    "ts": "2026-09-19T02:43:23.843Z"
+  },
+  {
+    "id": "dm_034",
+    "handle": "roisin.and.co",
+    "platform": "ig",
+    "text": "do i need an oil on top of my moisturiser or is that a marketing thing",
+    "ts": "2026-09-19T02:49:43.824Z"
+  },
+  {
+    "id": "dm_180",
+    "handle": "cleo.87",
+    "platform": "tt",
+    "text": "which spf do you use in summer, the one from the video or something else sorry to bother you",
+    "ts": "2026-09-03T18:03:03.754Z"
+  },
+  {
+    "id": "dm_095",
+    "handle": "noor.beauty",
+    "platform": "ig",
+    "text": "Daily Gel or Red Reset, i can only afford one",
+    "ts": "2026-09-10T13:44:48.618Z"
+  },
+  {
+    "id": "dm_248",
+    "handle": "zainab.notes",
+    "platform": "ig",
+    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
+    "ts": "2026-09-09T05:17:21.010Z"
+  },
+  {
+    "id": "dm_176",
+    "handle": "fern.87",
+    "platform": "tt",
+    "text": "my eyelids are flaking and sore, i don't know which thing did it x",
+    "ts": "2026-09-07T07:34:01.473Z"
+  },
+  {
+    "id": "dm_147",
+    "handle": "lily.03",
+    "platform": "tt",
+    "text": "my eyelids are flaking and sore, i don't know which thing did it i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-04T05:52:58.400Z"
+  },
+  {
+    "id": "dm_110",
+    "handle": "roisinxo",
+    "platform": "ig",
+    "text": "does the aldi one actually do the same job or is that tiktok talking sorry this is long.",
+    "ts": "2026-08-22T13:44:31.412Z"
+  },
+  {
+    "id": "dm_075",
+    "handle": "evie.and.co",
+    "platform": "tt",
+    "text": "combination skin, mid twenties. i'm 16 and i've got £35 to spend, where do i start",
+    "ts": "2026-08-30T20:03:07.578Z"
+  },
+  {
+    "id": "dm_080",
+    "handle": "maevess",
+    "platform": "ig",
+    "text": "the £60 one everyone's posting about, is there a boots dupe",
+    "ts": "2026-09-19T20:02:41.829Z"
+  },
+  {
+    "id": "dm_092",
+    "handle": "mo.87",
+    "platform": "tt",
+    "text": "i've got about a month before a wedding. i can't spend £60 every two months, what's the next best thing",
+    "ts": "2026-08-28T17:54:04.751Z"
+  },
+  {
+    "id": "dm_177",
+    "handle": "tara_x",
+    "platform": "tt",
+    "text": "my cheeks have gone red and they stay red now, is that rosacea or am i panicking",
+    "ts": "2026-09-04T08:25:17.103Z"
+  },
+  {
+    "id": "dm_056",
+    "handle": "fern.face",
+    "platform": "ig",
+    "text": "my mum says i'm too young for retinol, is she right",
+    "ts": "2026-09-08T20:57:08.765Z"
+  },
+  {
+    "id": "dm_053",
+    "handle": "maeve92",
+    "platform": "tt",
+    "text": "i've got about a month before a wedding. what foundation shade would i be? i'm about the same as you i think",
+    "ts": "2026-09-19T23:20:54.255Z"
+  },
+  {
+    "id": "dm_071",
+    "handle": "dani.and.co",
+    "platform": "ig",
+    "text": "i'm 16 and i've got £20 to spend, where do i start",
+    "ts": "2026-09-16T13:45:29.451Z"
+  },
+  {
+    "id": "dm_046",
+    "handle": "yaz.does.makeup",
+    "platform": "ig",
+    "text": "hi maya oily t-zone, dry everywhere else. my mum says i'm too young for retinol, is she right",
+    "ts": "2026-09-01T03:14:02.197Z"
+  },
+  {
+    "id": "dm_220",
+    "handle": "zainabss",
+    "platform": "ig",
+    "text": "Hi! I'm reaching out from a talent agency — would you be open to a quick call about representation?",
+    "ts": "2026-09-05T16:28:48.677Z"
+  },
+  {
+    "id": "dm_183",
+    "handle": "tara.face",
+    "platform": "ig",
+    "text": "which shade of the tint am i if i'm a NW25 in everything else",
+    "ts": "2026-09-04T14:17:24.327Z"
+  },
+  {
+    "id": "dm_020",
+    "handle": "noorss",
+    "platform": "tt",
+    "text": "i'm 34 and my skin's changed since having my son. is a £35 moisturiser ever worth it over the £11 one for dry skin",
+    "ts": "2026-09-15T13:27:46.297Z"
+  },
+  {
+    "id": "dm_119",
+    "handle": "bea_uk",
+    "platform": "ig",
+    "text": "sorry to dm but screenshotted your whole routine and i'm buying it bit by bit",
+    "ts": "2026-09-10T03:30:36.482Z"
+  },
+  {
+    "id": "dm_150",
+    "handle": "immy_uk",
+    "platform": "ig",
+    "text": "darker skin, marks stay for months. i've come out in tiny bumps since i started the new serum, is that purging or a reaction",
+    "ts": "2026-08-26T14:16:33.158Z"
+  },
+  {
+    "id": "dm_108",
+    "handle": "mo_uk",
+    "platform": "tt",
+    "text": "i can't spend £20 every two months, what's the next best thing",
+    "ts": "2026-09-04T05:39:00.418Z"
+  },
+  {
+    "id": "dm_212",
+    "handle": "tara_uk",
+    "platform": "tt",
+    "text": "🔥 GROW TO 250K FOLLOWERS IN 30 DAYS ✅ real uk accounts ✅ no password ✅ dm BOOST",
+    "ts": "2026-09-19T21:05:13.283Z"
+  },
+  {
+    "id": "dm_213",
+    "handle": "noorss",
+    "platform": "ig",
+    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
+    "ts": "2026-09-09T06:31:28.542Z"
+  },
+  {
+    "id": "dm_175",
+    "handle": "fern.87",
+    "platform": "tt",
+    "text": "i had a baby three weeks ago and my skin is unrecognisable, i don't know where to start 🙏",
+    "ts": "2026-09-15T21:57:16.888Z"
+  },
+  {
+    "id": "dm_097",
+    "handle": "kayleigh92",
+    "platform": "tt",
+    "text": "sorry to dm but i work nights so my routine is upside down. is there a cheaper version of the Barrier Oil you use thank you!!",
+    "ts": "2026-08-25T17:53:49.857Z"
+  },
+  {
+    "id": "dm_155",
+    "handle": "fern_uk",
+    "platform": "tt",
+    "text": "my eyelids are flaking and sore, i don't know which thing did it been following since the boots video.",
+    "ts": "2026-08-24T15:46:02.959Z"
+  },
+  {
+    "id": "dm_160",
+    "handle": "zainab.notes",
+    "platform": "tt",
+    "text": "rosacea-ish redness on my cheeks. my face went red and hot after the toner last night, do i stop love your videos btw",
+    "ts": "2026-09-20T00:29:47.002Z"
+  },
+  {
+    "id": "dm_131",
+    "handle": "kemss",
+    "platform": "tt",
+    "text": "sorry to dm but not asking anything, just saving up for the £60 one and wanted you to know happy to buy through your link if you have one.",
+    "ts": "2026-09-16T06:33:27.930Z"
+  },
+  {
+    "id": "dm_043",
+    "handle": "immy.notes",
+    "platform": "tt",
+    "text": "is a £35 moisturiser ever worth it over the £9 one for dry skin i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-19T22:48:22.053Z"
+  },
+  {
+    "id": "dm_077",
+    "handle": "tilda.87",
+    "platform": "ig",
+    "text": "i've got like £62 of birthday money, what's the one thing worth buying i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-15T01:16:51.201Z"
+  },
+  {
+    "id": "dm_104",
+    "handle": "ruth_uk",
+    "platform": "ig",
+    "text": "i've got eczema on my hands and i think it's spreading. i can't spend £48 every two months, what's the next best thing",
+    "ts": "2026-08-23T07:47:53.584Z"
+  },
+  {
+    "id": "dm_070",
+    "handle": "kayleigh.03",
+    "platform": "tt",
+    "text": "hiya oily t-zone, dry everywhere else. is it bad to use my sister's stuff, she's 21 and has oily skin xx",
+    "ts": "2026-09-04T05:42:54.942Z"
+  },
+  {
+    "id": "dm_091",
+    "handle": "tara.notes",
+    "platform": "ig",
+    "text": "the £35 one everyone's posting about, is there a boots dupe",
+    "ts": "2026-09-08T02:40:12.248Z"
+  },
+  {
+    "id": "dm_170",
+    "handle": "dani_x",
+    "platform": "ig",
+    "text": "rosacea-ish redness on my cheeks. i've come out in tiny bumps since i started the new retinal, is that purging or a reaction",
+    "ts": "2026-09-15T21:06:09.153Z"
+  },
+  {
+    "id": "dm_048",
+    "handle": "hen.notes",
+    "platform": "tt",
+    "text": "live in london, hard water, if that matters. school makes my skin worse i swear. cheap things that actually work? i know you get a million of these.",
+    "ts": "2026-08-23T18:23:18.066Z"
+  },
+  {
+    "id": "dm_087",
+    "handle": "gracie_london",
+    "platform": "ig",
+    "text": "Daily Gel or Red Reset, i can only afford one i don't trust anyone else on this.",
+    "ts": "2026-09-15T21:27:52.243Z"
+  },
+  {
+    "id": "dm_201",
+    "handle": "maevess",
+    "platform": "tt",
+    "text": "rosacea-ish redness on my cheeks. i work nights and i've got no time and no money, what's the least i can get away with",
+    "ts": "2026-09-12T14:37:11.118Z"
+  },
+  {
+    "id": "dm_218",
+    "handle": "mo.notes",
+    "platform": "ig",
+    "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
+    "ts": "2026-09-15T18:23:38.650Z"
+  },
+  {
+    "id": "dm_025",
+    "handle": "bella.and.co",
+    "platform": "ig",
+    "text": "is the Cloud Cream still the good one or has something better come along",
+    "ts": "2026-09-12T09:15:37.752Z"
+  },
+  {
+    "id": "dm_122",
+    "handle": "immy.does.makeup",
+    "platform": "ig",
+    "text": "rosacea-ish redness on my cheeks. my basket is full of things you've talked about 😅 paying for it on friday i know you get a million of these.",
+    "ts": "2026-08-24T22:06:47.552Z"
+  },
+  {
+    "id": "dm_229",
+    "handle": "noorldn",
+    "platform": "ig",
+    "text": "Hi Maya! 💕 We'd love to send you our new Barrier Oil line for an honest review — just 2 in-feed posts and 2 stories. Shall I send the deck?",
+    "ts": "2026-08-22T01:06:28.091Z"
+  },
+  {
+    "id": "dm_149",
+    "handle": "fernldn",
+    "platform": "ig",
+    "text": "burning when i put moisturiser on now, i think i've broken something",
+    "ts": "2026-08-25T13:17:39.316Z"
+  },
+  {
+    "id": "dm_240",
+    "handle": "lily_london",
+    "platform": "ig",
+    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
+    "ts": "2026-09-18T17:58:38.370Z"
+  },
+  {
+    "id": "dm_231",
+    "handle": "lilyxo",
+    "platform": "ig",
+    "text": "FREE SKINCARE BUNDLE 🎁 just cover shipping, link in bio",
+    "ts": "2026-09-02T19:42:41.257Z"
+  },
+  {
+    "id": "dm_196",
+    "handle": "dani.03",
+    "platform": "tt",
+    "text": "darker skin, marks stay for months. i work nights and i've got no time and no money, what's the least i can get away with been following since the boots video.",
+    "ts": "2026-09-01T03:19:31.040Z"
+  },
+  {
+    "id": "dm_040",
+    "handle": "lily92",
+    "platform": "ig",
+    "text": "hi maya is a £48 moisturiser ever worth it over the £13 one for dry skin been following since the boots video. sorry to bother you",
+    "ts": "2026-09-10T13:08:42.826Z"
+  },
+  {
+    "id": "dm_066",
+    "handle": "shan.face",
+    "platform": "ig",
+    "text": "i'm 41 and starting to care about this properly. what foundation shade would i be? i'm about the same as you i think",
+    "ts": "2026-08-22T19:15:12.154Z"
+  },
+  {
+    "id": "dm_210",
+    "handle": "evie.notes",
+    "platform": "ig",
+    "text": "sorry to dm but i trust you more than anyone on here. Cloud Cream or the cleanser? sorry to bother you",
+    "ts": "2026-09-19T13:04:18.747Z"
+  },
+  {
+    "id": "dm_018",
+    "handle": "yaz.87",
+    "platform": "tt",
+    "text": "live in london, hard water, if that matters. wedding in six weeks and my skin has picked now to fall apart. what do i do sorry this is long.",
+    "ts": "2026-09-06T14:38:23.916Z"
+  },
+  {
+    "id": "dm_234",
+    "handle": "yazldn",
+    "platform": "tt",
+    "text": "Hello dear, we are a Spanish beauty brand seeking UK influencers for long term cooperation. Gifting only at this stage.",
+    "ts": "2026-08-26T04:34:53.301Z"
+  },
+  {
+    "id": "dm_127",
+    "handle": "tilda.beauty",
+    "platform": "ig",
+    "text": "combination skin, mid twenties. getting paid next week and your shelf is the first thing i'm buying from. saving this i know you get a million of these.",
+    "ts": "2026-09-02T16:22:35.432Z"
+  },
+  {
+    "id": "dm_232",
+    "handle": "anya_uk",
+    "platform": "ig",
+    "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
+    "ts": "2026-09-09T05:39:58.637Z"
+  },
+  {
+    "id": "dm_139",
+    "handle": "dani_uk",
+    "platform": "tt",
+    "text": "rosacea-ish redness on my cheeks. about to spend £20 on skincare, talk me out of it or tell me what to get x",
+    "ts": "2026-09-14T18:08:48.608Z"
+  },
+  {
+    "id": "dm_228",
+    "handle": "olass",
+    "platform": "ig",
+    "text": "INVEST £200 GET £2000 BACK IN 48HRS crypto trading dm for details 📈📈",
+    "ts": "2026-09-06T07:32:56.281Z"
+  },
+  {
+    "id": "dm_029",
+    "handle": "mo.beauty",
+    "platform": "ig",
+    "text": "i've got eczema on my hands and i think it's spreading. what do you use on your face after a flight, mine is always awful for a week no rush! xx",
+    "ts": "2026-09-04T12:31:58.055Z"
+  },
+  {
+    "id": "dm_019",
+    "handle": "roisin_london",
+    "platform": "ig",
+    "text": "combination skin, mid twenties. is the Cloud Cream still the good one or has something better come along i don't trust anyone else on this.",
+    "ts": "2026-08-29T18:44:30.303Z"
+  },
+  {
+    "id": "dm_235",
+    "handle": "roisin.notes",
+    "platform": "ig",
+    "text": "your account has been flagged for copyright, verify here to avoid deletion",
+    "ts": "2026-09-16T23:24:05.999Z"
+  },
+  {
+    "id": "dm_193",
+    "handle": "bea.87",
+    "platform": "ig",
+    "text": "is the Glass Drop worth it or is it this month's thing",
+    "ts": "2026-09-19T14:32:25.111Z"
+  },
+  {
+    "id": "dm_153",
+    "handle": "kem_x",
+    "platform": "ig",
+    "text": "hiya my eyelids are flaking and sore, i don't know which thing did it love your videos btw",
+    "ts": "2026-08-31T08:30:25.109Z"
+  },
+  {
+    "id": "dm_211",
+    "handle": "hen.beauty",
+    "platform": "ig",
+    "text": "🔥 GROW TO 100K FOLLOWERS IN 30 DAYS ✅ real uk accounts ✅ no password ✅ dm BOOST",
+    "ts": "2026-09-19T00:52:24.325Z"
+  },
+  {
+    "id": "dm_207",
+    "handle": "daniss",
+    "platform": "tt",
+    "text": "which shade of the tint am i if i'm a NW25 in everything else",
+    "ts": "2026-08-22T00:54:17.097Z"
+  },
+  {
+    "id": "dm_182",
+    "handle": "sadexo",
+    "platform": "ig",
+    "text": "i'm 34 and my skin's changed since having my son. where do you buy the toner in the uk, everything i find is us only sorry this is long.",
+    "ts": "2026-08-31T15:48:37.959Z"
+  },
+  {
+    "id": "dm_014",
+    "handle": "nia.does.makeup",
+    "platform": "ig",
+    "text": "i'm on a student budget. my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad",
+    "ts": "2026-09-09T08:34:21.364Z"
+  },
+  {
+    "id": "dm_114",
+    "handle": "tara92",
+    "platform": "ig",
+    "text": "black friday is coming, what's actually worth waiting for 🥺",
+    "ts": "2026-09-07T06:57:44.635Z"
+  },
+  {
+    "id": "dm_038",
+    "handle": "dani.87",
+    "platform": "ig",
+    "text": "is the Cloud Cream still the good one or has something better come along",
+    "ts": "2026-09-19T05:57:02.194Z"
+  },
+  {
+    "id": "dm_055",
+    "handle": "tara.does.makeup",
+    "platform": "tt",
+    "text": "i've got about five minutes in the morning and that's being generous. what's the minimum 🙏",
+    "ts": "2026-09-08T07:22:01.443Z"
+  },
+  {
+    "id": "dm_186",
+    "handle": "ruth_london",
+    "platform": "ig",
+    "text": "i trust you more than anyone on here. Cloud Cream or the exfoliant? x",
+    "ts": "2026-08-23T08:23:38.133Z"
+  },
+  {
+    "id": "dm_032",
+    "handle": "lexxo",
+    "platform": "tt",
+    "text": "i'm 41 and starting to care about this properly. do i need an oil on top of my moisturiser or is that a marketing thing",
+    "ts": "2026-09-02T00:42:06.046Z"
+  },
+  {
+    "id": "dm_094",
+    "handle": "kayleigh.does.makeup",
+    "platform": "tt",
+    "text": "is the Glass Drop worth £62 or am i being sold to",
+    "ts": "2026-08-22T17:36:04.396Z"
+  },
+  {
+    "id": "dm_187",
+    "handle": "lex.beauty",
+    "platform": "tt",
+    "text": "honest opinion on the £35 serum everyone's on about",
+    "ts": "2026-09-05T09:38:00.893Z"
+  },
+  {
+    "id": "dm_159",
+    "handle": "bella_x",
+    "platform": "ig",
+    "text": "i'm 41 and starting to care about this properly. my face went red and hot after the Barrier Oil last night, do i stop thank you!!",
+    "ts": "2026-09-16T05:17:57.512Z"
+  },
+  {
+    "id": "dm_224",
+    "handle": "aisha.03",
+    "platform": "tt",
+    "text": "Hi Maya! 💕 We'd love to send you our new Cloud Cream line for an honest review — just 3 in-feed posts and 1 stories. Shall I send the deck?",
+    "ts": "2026-09-13T05:57:26.789Z"
+  },
+  {
+    "id": "dm_133",
+    "handle": "lex.beauty",
+    "platform": "tt",
+    "text": "about to spend £48 on skincare, talk me out of it or tell me what to get",
+    "ts": "2026-08-27T19:11:50.280Z"
+  },
+  {
+    "id": "dm_140",
+    "handle": "kayleigh.notes",
+    "platform": "tt",
+    "text": "i've got eczema on my hands and i think it's spreading. i've saved up £15 and i want to buy properly once instead of badly five times",
+    "ts": "2026-08-31T15:51:54.940Z"
+  },
+  {
+    "id": "dm_054",
+    "handle": "bea92",
+    "platform": "ig",
+    "text": "i'm 34 and my skin's changed since having my son. i've got like £62 of birthday money, what's the one thing worth buying i've read everything and i'm more confused than when i started.",
+    "ts": "2026-09-04T15:39:51.805Z"
+  },
+  {
+    "id": "dm_128",
+    "handle": "roisin_x",
+    "platform": "tt",
+    "text": "black friday is coming, what's actually worth waiting for",
+    "ts": "2026-08-23T13:49:48.199Z"
+  },
+  {
+    "id": "dm_144",
+    "handle": "kayleigh.does.makeup",
+    "platform": "ig",
+    "text": "live in london, hard water, if that matters. i've saved up £62 and i want to buy properly once instead of badly five times",
+    "ts": "2026-08-24T20:02:57.258Z"
+  },
+  {
+    "id": "dm_145",
+    "handle": "ruth_x",
+    "platform": "ig",
+    "text": "i'm 41 and starting to care about this properly. i had a baby two weeks ago and my skin is unrecognisable, i don't know where to start been following since the boots video. x",
+    "ts": "2026-09-16T01:20:05.165Z"
+  },
+  {
+    "id": "dm_214",
+    "handle": "mo.does.makeup",
+    "platform": "tt",
+    "text": "your account has been flagged for copyright, verify here to avoid deletion",
+    "ts": "2026-08-26T08:54:09.427Z"
+  },
+  {
+    "id": "dm_023",
+    "handle": "gracie.skin",
+    "platform": "tt",
+    "text": "my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad",
+    "ts": "2026-09-19T05:05:33.525Z"
+  },
+  {
+    "id": "dm_111",
+    "handle": "immy.and.co",
+    "platform": "ig",
+    "text": "i'm 41 and starting to care about this properly. Daily Gel or Red Reset, i can only afford one love your videos btw",
+    "ts": "2026-09-11T01:58:10.947Z"
+  },
+  {
+    "id": "dm_162",
+    "handle": "jen.03",
+    "platform": "tt",
+    "text": "rosacea-ish redness on my cheeks. i've come out in tiny bumps since i started the new serum, is that purging or a reaction",
+    "ts": "2026-08-28T03:13:43.755Z"
+  },
+  {
+    "id": "dm_219",
+    "handle": "sadess",
+    "platform": "ig",
+    "text": "Collab opportunity!! We pay per post. Reply INFO for our rate card 💰",
+    "ts": "2026-09-20T13:48:38.455Z"
+  },
+  {
+    "id": "dm_209",
+    "handle": "priya_london",
+    "platform": "ig",
+    "text": "i've got eczema on my hands and i think it's spreading. you told me not to buy something once and it saved me £60. just wanted to say thank you 🥺",
+    "ts": "2026-09-03T23:40:18.150Z"
+  },
+  {
+    "id": "dm_165",
+    "handle": "kem.face",
+    "platform": "ig",
+    "text": "hiya my face went red and hot after the moisturiser last night, do i stop",
+    "ts": "2026-08-29T15:56:12.726Z"
+  },
+  {
+    "id": "dm_109",
+    "handle": "bella.and.co",
+    "platform": "ig",
+    "text": "hiya Daily Gel or Red Reset, i can only afford one",
+    "ts": "2026-09-05T19:35:56.155Z"
+  },
+  {
+    "id": "dm_015",
+    "handle": "hen92",
+    "platform": "ig",
+    "text": "what do you use on your face after a flight, mine is always awful for a week sorry this is long. love your videos btw",
+    "ts": "2026-09-10T16:21:22.392Z"
   }
 ]

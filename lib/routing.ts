@@ -2,126 +2,136 @@ import type { DM, JevAnswers, Lane } from './types'
 import { DEFAULT_THRESHOLD, laneFor } from './lanes'
 
 /**
- * Maya's decision tree, as code. Every draft here is a line she already gives;
- * nothing is written on the fly. When the tree has no branch for a message, it
- * goes to her rather than getting a vague answer in her name.
+ * Maya's decision tree, as code. Every line here is one she already gives.
+ * Nothing is written on the fly, and when the tree has no branch for a message
+ * it goes to her rather than getting a vague answer in her name.
+ *
+ * Her rules, in the order they override everything else:
+ *   - Never recommend retinol. Not to everyone, not as a default.
+ *   - Two products per reply, maximum. People do not need more products.
+ *   - Anyone spending over £60 hears what is not worth buying, every time.
+ *   - Shade questions are never answered blind.
+ *   - SPF 50 every morning is non-negotiable.
  */
 
-type ShelfItem = { hers: string; price: string; cheap?: string; cheapPrice?: string }
+/** Her shelf. Prices and scores for the rest of it come from the case file, p8. */
+const SHELF = {
+  cloud_cream: { name: 'Cloud Cream', note: 'winter skin saviour, and the one I actually use' },
+  barrier_oil: { name: 'the Barrier Oil', note: 'over the top, last, only if it still feels tight' },
+  daily_gel: { name: 'the Daily Gel', note: 'morning and night, nothing else for a month' },
+  red_reset: { name: 'Red Reset', note: 'give it three weeks before you judge it' },
+  glass_drop: { name: 'Glass Drop', price: '£62', note: 'Good. Not £62 good.' },
+  spf: { name: 'SPF 50', note: 'every morning, non-negotiable' },
+} as const
 
-const SHELF: Record<string, ShelfItem> = {
-  cleanser: { hers: 'the La Roche-Posay Toleriane cleanser', price: '£13', cheap: "Simple's refreshing face wash", cheapPrice: '£4' },
-  moisturiser: { hers: 'the Vanicream moisturiser', price: '£13', cheap: 'the CeraVe lotion', cheapPrice: '£11' },
-  serum: { hers: "The Ordinary's niacinamide", price: '£6' },
-  spf: { hers: 'Beauty of Joseon Relief Sun', price: '£14' },
-  exfoliant: { hers: "Paula's Choice 2% BHA", price: '£33', cheap: "The Ordinary's 2% BHA", cheapPrice: '£8' },
-  retinoid: { hers: 'The Ordinary Retinal 0.2%', price: '£16' },
-  ointment: { hers: 'the CeraVe healing ointment', price: '£9' },
+const GLASS_DROP = /glass ?drop|£ ?6[0-9]|the ?£62/i
+const RETINOID = /retin(ol|oid|al)|tretinoin/i
+const WHERE_TO_BUY = /where (do|can) (you|i) (buy|get)|stockist|ships? to the uk|us only/i
+const RETINOID_RISK = /pregnan|breastfeed|dermatolog|prescri|rosacea|eczema|\bi'?m 1[0-7]\b|too young|accutane|roaccutane/i
+
+/** Her intake questions, in her words. One at a time — she never sends a form. */
+const INTAKE = {
+  skin: 'Quick one before I answer: is your skin tight after you wash it, or shiny by lunchtime? The answer is completely different for each.',
+  shade: "I can't pick a shade blind — what are you wearing now, and do you like how it sits on you? Tell me that and I'll tell you where you land.",
+  budget: "What are you working with, roughly? I'd rather send you two things you'll finish than five you won't.",
+  which: "Which one do you mean? Half of them I'd tell you to skip, so it matters which we're talking about.",
+} as const
+
+/** The skip line. Anyone spending over £60 gets it, whether they asked or not. */
+const SKIP = `And skip the ${SHELF.glass_drop.name}. ${SHELF.glass_drop.note}`
+const SPF_LINE = `${SHELF.spf.name} every morning. That one's not negotiable.`
+const RETINOL_BLOCK =
+  "Not from me. I don't hand retinol out — it's the fastest way I know to wreck a barrier that was fine yesterday. Get the boring part right for a month first, then ask me again and I'll tell you honestly whether you need it."
+
+/** Skin type in, at most two products out. */
+function pickFor(skin: string): string | null {
+  switch (skin) {
+    case 'dry':
+      return `${SHELF.cloud_cream.name} — ${SHELF.cloud_cream.note} — and ${SHELF.barrier_oil.name} ${SHELF.barrier_oil.note}.`
+    case 'oily_combo':
+      return `${SHELF.daily_gel.name}, ${SHELF.daily_gel.note}.`
+    case 'sensitive':
+      return `Nothing with fragrance in it — that's the rule, and it matters more than the product. ${SHELF.cloud_cream.name} is where I'd start you.`
+    case 'redness':
+      return `${SHELF.red_reset.name}, and ${SHELF.red_reset.note}.`
+    default:
+      return null
+  }
 }
 
-const CATEGORY_WORDS: [string, RegExp][] = [
-  ['glass_drop', /glass ?drop/i],
-  ['retinoid', /retin(ol|oid|al)|tretinoin/i],
-  ['spf', /\bspf\b|sunscreen|sun cream|suncream/i],
-  ['exfoliant', /exfoliant|\bbha\b|\baha\b|salicylic|glycolic|acid peel/i],
-  ['cleanser', /cleanser|face wash|cleansing/i],
-  ['moisturiser', /moisturis|moisturiz|\bcream\b|lotion/i],
-  ['serum', /serum|niacinamide|vitamin c/i],
-  ['toner', /\btoner\b|\btoning\b/i],
-  ['oil', /face oil|\boil\b/i],
-  ['ointment', /ointment|balm|slugging/i],
-]
-
-const category = (text: string) => CATEGORY_WORDS.find(([, re]) => re.test(text))?.[0]
-
-const RETINOID_RISK = /pregnan|breastfeed|dermatolog|prescri|tretinoin|rosacea|eczema|\bi'?m 1[0-7]\b|too young|my mum|accutane|roaccutane/i
-
-/** The recurring questions, answered the way she answers them. Checked first. */
-const TOPICS: [RegExp, string][] = [
-  [/niacinamide and vitamin c|vitamin c and niacinamide/i,
-    "Old myth, from one lab study run at temperatures your face never gets to. Use them together. If it stings, that's the vitamin C strength, not the pairing."],
-  [/flak|tight (after|an hour)|tightness|dry patches|rough patches/i,
-    "That's your barrier, not a hydration problem, and a serum won't fix it. Two weeks of the CeraVe ointment (£9) on damp skin at night first. If you still want the serum after that, it'll have something to sit on."],
-  [/hyaluronic/i,
-    "Hyaluronic acid pulls water from wherever it can get it — in a dry flat that's out of your skin. One layer, on damp skin, moisturiser straight over the top. Doubling up is why it feels worse."],
-  [/oil on top|face oil|\boil\b.*moisturis|moisturis.*\boil\b/i,
-    "An oil doesn't hydrate, it slows water leaving. So it goes last, over the moisturiser, and only if your skin still feels tight after. It's not a step most people need."],
-  [/after a flight|on a plane|long haul/i,
-    "Nothing clever: a thicker moisturiser the night before, and the ointment over the top on the flight itself. The cabin is drier than a desert — it's water loss, not damage."],
-  [/hard water/i,
-    "Hard water makes cleansing feel harsher than it is. Rinse with your hands rather than a hot shower stream, moisturise on damp skin, and don't buy a shower filter on my account."],
-  [/what'?s (actually )?still on your shelf|did you ever repurchase|repurchase/i,
-    "The ones I've bought again: the Toleriane cleanser (£13), the Vanicream moisturiser (£13) and the Beauty of Joseon SPF (£14). Everything else on that shelf was a one-off."],
-  [/purging/i,
-    "Purging is spots where you already get spots, and it settles in about four weeks. Anything new, anywhere else, or any stinging is not purging — stop and let it calm down."],
-  [/aldi|lidl|supermarket dupe/i,
-    "Some of them are genuinely fine — the moisturisers especially. The actives are where the cheap versions get vague about strength, and that's the bit you're paying for."],
-]
-
-const GLASS_DROP_SKIP =
-  "Skip it. £62 for a nice pipette, glycerin and a good photographer — there's nothing in it you're not getting from The Ordinary's niacinamide at £6. Wait six weeks and watch how quickly nobody mentions it."
-
-const RETINOID_LINE =
-  "Not yet. Get boring first: a cleanser you like, a moisturiser you use twice a day, SPF every morning for a month. If your skin is calm after that, start a retinal twice a week — but ask me again then rather than starting on this message."
-
-const INTAKE =
-  "Before I answer — is your skin tight after you wash it, or shiny by lunchtime? The answer's completely different for each, and I'd rather send you the right one."
-
-const budgetStarter = (band: string) =>
-  band === 'under_15'
-    ? "Two things and nothing else: Simple's face wash (£4) and the CeraVe lotion (£11). That's £15 and it's genuinely where I'd start you."
-    : "Three things: Simple's face wash (£4), the CeraVe lotion (£11) and the Beauty of Joseon SPF (£14). Under £30 together. Don't add a serum until those three are a habit."
+const FIVE_MINUTES = `Five minutes is plenty. Cleanse, ${SHELF.cloud_cream.name}, ${SHELF.spf.name}. That's the five-minute one I filmed — least watched thing I've made and the one people actually keep doing.`
 
 const WHY: Record<string, string> = {
   'a reaction': 'Her skin has reacted. Nothing goes out on that without you.',
-  retinoid: "Retinol question with something else going on in it — the sort you've said never to send from the shelf.",
+  'a life event': "There's a life event behind this, not a product question.",
+  'meant for her': 'She wrote to you, not about a product.',
+  'her skin, not a product': "She's describing what her skin is doing. That's a judgement call.",
+  retinoid: "Retinol, with something else going on in the message. Your rule: never from the shelf.",
   'yours to answer': 'Reads like a judgement call rather than a routine question.',
-  'nothing to answer it from': "Not enough in it to answer — no product, no skin type, no real question.",
+  'nothing to answer it from': 'Not enough in it to answer — no skin type, no budget, no real question.',
   'not sure enough to draft': 'The read came back weak on this one. Worth your eyes.',
-  'no branch': "Nothing in your routing covers this one.",
+  'no branch': 'Nothing in your routing covers this one.',
 }
 
 export type Routed = { lane: Lane; draft?: string; why?: string }
 
-/** Only the branches that recommend a product need to know the skin type. */
-const NEEDS_SKIN = new Set(['routine_help', 'product_rec'])
+const sentence = (line: string) => (line ? line.charAt(0).toUpperCase() + line.slice(1) : line)
 
 function draftFor(text: string, answers: JevAnswers): string | undefined {
-  const cat = category(text)
   const intent = answers.intent.choice
-  const skinUnknown = answers.skin_type.choice === 'unknown' || answers.skin_type.confidence < 0.5
+  const skin = answers.skin_type.choice
+  const budget = answers.budget_band.choice
+  const skinUnknown = skin === 'unknown' || answers.skin_type.confidence < 0.5
+  const pick = pickFor(skin)
+  const lines: string[] = []
+  let skipSaid = false
 
-  if (cat === 'glass_drop') return GLASS_DROP_SKIP
-  if (cat === 'retinoid') return RETINOID_LINE
-  for (const [re, line] of TOPICS) if (re.test(text)) return line
+  if (intent === 'shade_info') return INTAKE.shade
+  if (RETINOID.test(text)) return RETINOL_BLOCK
+  // Where to buy it: her stockists are in the case file, not in this code yet.
+  if (WHERE_TO_BUY.test(text)) return undefined
 
-  if (intent === 'where_to_buy') {
-    const item = cat && SHELF[cat]
-    return item
-      ? `Cult Beauty and Boots both have it online — ${item.hers} is ${item.price} there. Don't pay US shipping for it, it's the same formula in the bottle.`
-      : 'Cult Beauty and Boots online, and Boots price-match most of it in store. Nothing on my shelf is worth paying US shipping for.'
+  switch (intent) {
+    case 'recommendation':
+    case 'pick_one':
+      if (skinUnknown) return INTAKE.skin
+      if (!pick) return undefined
+      lines.push(pick)
+      if (budget === 'none') lines.push(INTAKE.budget)
+      break
+    case 'value_check':
+      // "Is it worth it?" with no product in it. She asks which one, every time.
+      if (!GLASS_DROP.test(text) && answers.names_shelf_product < 0.5) return INTAKE.which
+      if (GLASS_DROP.test(text)) {
+        lines.push(`${SHELF.glass_drop.note} It's a lovely texture and a very good photographer. Put the ${SHELF.glass_drop.price} towards ${SHELF.cloud_cream.name} and keep the change.`)
+        skipSaid = true
+        break
+      }
+      if (skinUnknown) return INTAKE.skin
+      if (!pick) return undefined
+      lines.push(`For your skin, yes — but only this much of it: ${pick}`)
+      break
+    case 'routine_context':
+      if (skinUnknown) return INTAKE.skin
+      if (!pick) return undefined
+      lines.push(pick)
+      lines.push(SPF_LINE)
+      lines.push('Give it six weeks before you change anything else. Most of what goes wrong is three things changing at once.')
+      break
+    case 'constraint_routine':
+      lines.push(FIVE_MINUTES)
+      break
+    default:
+      return undefined
   }
-  if (intent === 'dupe_request') {
-    if (cat === 'toner') return "I don't use one, so there's nothing to send you a cheaper version of. Your moisturiser is already doing that job."
-    const item = cat ? SHELF[cat] : undefined
-    if (item?.cheap) return `There is: ${item.cheap} at ${item.cheapPrice}. I've used both — the difference is how it feels, not what it does. Keep the rest of the money.`
-    return "Tell me which one you mean and I'll tell you if there's a cheaper version worth having — for about half of them there isn't, and I'd rather say so."
-  }
-  if (intent === 'routine_help') {
-    if (/where do i start|start with|starter|new to this|^help/i.test(text) && answers.budget_band.choice !== 'unknown') {
-      return budgetStarter(answers.budget_band.choice)
-    }
-    if (skinUnknown) return INTAKE
-    return "Keep it to cleanse, moisturise, SPF in the morning, and give it six weeks before you change anything. Most of what goes wrong is people changing three things at once."
-  }
-  if (intent === 'product_rec') {
-    if (skinUnknown && NEEDS_SKIN.has(intent)) return INTAKE
-    const item = cat ? SHELF[cat] : undefined
-    if (!item && answers.budget_band.choice !== 'unknown') return budgetStarter(answers.budget_band.choice)
-    if (item) return `${item.hers}, ${item.price}. It's what I use, and it's the cheapest thing I've found that does the job properly — if you're seeing it for more than that, it's the same bottle with a different sticker.`
-    return undefined
-  }
-  return undefined
+
+  // Anyone spending over £60 hears what is not worth buying, once.
+  if (!skipSaid && (budget === 'over_60' || GLASS_DROP.test(text))) lines.push(SKIP)
+  // SPF goes on the replies that are a routine. It is not a footer.
+  if ((intent === 'recommendation' || intent === 'pick_one') && lines.length) lines.push(SPF_LINE)
+
+  const draft = lines.filter(Boolean).map(sentence).join(' ')
+  return draft.trim() ? draft : undefined
 }
 
 export function route(
@@ -134,8 +144,8 @@ export function route(
   if (call.lane === 'noise' || call.lane === 'intent') return { lane: call.lane }
 
   // The retinol block: a retinoid question with a reaction, a prescription, a
-  // condition or someone under 18 in it never gets a drafted answer.
-  if (/retin(ol|oid|al)|tretinoin/i.test(dm.text) && (RETINOID_RISK.test(dm.text) || (signals.is_reaction ?? 0) >= 0.3)) {
+  // condition or someone under 18 in it never gets a drafted answer at all.
+  if (RETINOID.test(dm.text) && (RETINOID_RISK.test(dm.text) || (signals.is_reaction ?? 0) >= 0.3)) {
     return { lane: 'maya', why: WHY.retinoid }
   }
   if (call.lane === 'maya') return { lane: 'maya', why: WHY[call.because] ?? WHY['not sure enough to draft'] }

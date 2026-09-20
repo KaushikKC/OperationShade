@@ -4,45 +4,47 @@
       "id": "dm_001",
       "handle": "leah.textures",
       "platform": "ig",
-      "text": "my skin's been flaking under foundation since october. is the glow serum worth it or is there something cheaper that does the same job",
+      "text": "my skin's been flaking under foundation since october. is the Cloud Cream worth it or is there something cheaper that does the same job",
       "persona": "Dry-skin regular",
       "ts": "2026-09-20T14:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "product_rec",
-          "confidence": 0.91,
+          "choice": "value_check",
+          "confidence": 0.84,
           "probabilities": {
-            "product_rec": 0.91,
-            "routine_help": 0.04,
-            "dupe_request": 0.013,
-            "reaction_concern": 0.005,
-            "where_to_buy": 0.01,
-            "purchase_signal": 0.002,
-            "collab_pitch": 0.003,
-            "spam": 0.012,
-            "no_question": 0.005
+            "value_check": 0.839,
+            "shade_info": 0.004,
+            "recommendation": 0.069,
+            "pick_one": 0.007,
+            "routine_context": 0.013,
+            "skin_diagnosis": 0.003,
+            "trust_or_fan": 0.005,
+            "life_event": 0.016,
+            "constraint_routine": 0.007,
+            "delayed_intent": 0.015,
+            "brand_pitch": 0.003,
+            "spam": 0.019
           }
         },
         "skin_type": {
           "choice": "dry",
           "confidence": 0.88,
           "probabilities": {
-            "dry": 0.88,
-            "oily": 0.016,
-            "combination": 0.004,
-            "sensitive": 0.077,
-            "normal": 0.018,
-            "unknown": 0.005
+            "dry": 0.879,
+            "oily_combo": 0.019,
+            "sensitive": 0.063,
+            "redness": 0.019,
+            "unknown": 0.02
           }
         },
         "budget_band": {
-          "choice": "15_40",
+          "choice": "under_30",
           "confidence": 0.61,
           "probabilities": {
-            "15_40": 0.61,
-            "under_15": 0.255,
-            "40_plus": 0.065,
-            "unknown": 0.07
+            "under_30": 0.611,
+            "none": 0.071,
+            "30_to_60": 0.247,
+            "over_60": 0.071
           }
         },
         "purchase_intent": {
@@ -55,10 +57,10 @@
           "score": 0.21,
           "confidence": 0.74
         },
-        "names_shelf_product": 0.81
+        "names_shelf_product": 0.91
       },
       "lane": "voice",
-      "draft": "That's barrier, not hydration — the serum won't fix flaking under foundation. Two weeks of a plain ointment on damp skin at night first (the CeraVe one, £9). If you still want the serum after that it'll actually have something to sit on."
+      "draft": "For your skin, yes — but only this much of it: Cloud Cream — winter skin saviour, and the one I actually use — and the Barrier Oil over the top, last, only if it still feels tight."
     },
     {
       "id": "dm_002",
@@ -69,40 +71,42 @@
       "ts": "2026-09-20T10:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "routine_help",
-          "confidence": 0.44,
+          "choice": "life_event",
+          "confidence": 0.79,
           "probabilities": {
-            "routine_help": 0.441,
-            "product_rec": 0.24,
-            "dupe_request": 0.069,
-            "reaction_concern": 0.027,
-            "where_to_buy": 0.076,
-            "purchase_signal": 0.064,
-            "collab_pitch": 0.032,
-            "spam": 0.01,
-            "no_question": 0.041
+            "life_event": 0.79,
+            "shade_info": 0.009,
+            "recommendation": 0.024,
+            "pick_one": 0.02,
+            "value_check": 0.01,
+            "routine_context": 0.003,
+            "skin_diagnosis": 0.073,
+            "trust_or_fan": 0.018,
+            "constraint_routine": 0.005,
+            "delayed_intent": 0.012,
+            "brand_pitch": 0.015,
+            "spam": 0.021
           }
         },
         "skin_type": {
           "choice": "unknown",
           "confidence": 0.52,
           "probabilities": {
-            "unknown": 0.52,
-            "dry": 0.065,
-            "oily": 0.019,
-            "combination": 0.043,
-            "sensitive": 0.274,
-            "normal": 0.079
+            "unknown": 0.519,
+            "dry": 0.015,
+            "oily_combo": 0.025,
+            "sensitive": 0.342,
+            "redness": 0.099
           }
         },
         "budget_band": {
-          "choice": "unknown",
+          "choice": "none",
           "confidence": 0.71,
           "probabilities": {
-            "unknown": 0.71,
-            "under_15": 0.011,
-            "15_40": 0.019,
-            "40_plus": 0.26
+            "none": 0.71,
+            "under_30": 0.046,
+            "30_to_60": 0.205,
+            "over_60": 0.039
           }
         },
         "purchase_intent": {
@@ -118,7 +122,7 @@
         "names_shelf_product": 0.04
       },
       "lane": "maya",
-      "why": "She's lost her mum and has a wedding in three weeks. Nothing on the shelf answers this one."
+      "why": "There's a life event behind this, not a product question."
     },
     {
       "id": "dm_003",
@@ -129,40 +133,42 @@
       "ts": "2026-09-20T16:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "reaction_concern",
+          "choice": "skin_diagnosis",
           "confidence": 0.87,
           "probabilities": {
-            "reaction_concern": 0.871,
-            "product_rec": 0.017,
-            "routine_help": 0.058,
-            "dupe_request": 0.006,
-            "where_to_buy": 0.01,
-            "purchase_signal": 0.004,
-            "collab_pitch": 0.01,
-            "spam": 0.009,
-            "no_question": 0.015
+            "skin_diagnosis": 0.87,
+            "shade_info": 0.004,
+            "recommendation": 0.009,
+            "pick_one": 0.008,
+            "value_check": 0.014,
+            "routine_context": 0.051,
+            "trust_or_fan": 0.011,
+            "life_event": 0.011,
+            "constraint_routine": 0.003,
+            "delayed_intent": 0.007,
+            "brand_pitch": 0.01,
+            "spam": 0.002
           }
         },
         "skin_type": {
           "choice": "sensitive",
           "confidence": 0.79,
           "probabilities": {
-            "sensitive": 0.789,
-            "dry": 0.13,
-            "oily": 0.027,
-            "combination": 0.028,
-            "normal": 0.007,
-            "unknown": 0.019
+            "sensitive": 0.79,
+            "dry": 0.036,
+            "oily_combo": 0.029,
+            "redness": 0.135,
+            "unknown": 0.01
           }
         },
         "budget_band": {
-          "choice": "unknown",
+          "choice": "none",
           "confidence": 0.68,
           "probabilities": {
-            "unknown": 0.68,
-            "under_15": 0.047,
-            "15_40": 0.204,
-            "40_plus": 0.069
+            "none": 0.679,
+            "under_30": 0.216,
+            "30_to_60": 0.035,
+            "over_60": 0.07
           }
         },
         "purchase_intent": {
@@ -175,32 +181,35 @@
           "score": 0.95,
           "confidence": 0.9
         },
-        "names_shelf_product": 0.72
+        "names_shelf_product": 0.31
       },
       "lane": "maya",
-      "why": "Skin reaction, four days in. Worth your eyes before anyone tells her to push through."
+      "why": "Retinol, with something else going on in the message. Your rule: never from the shelf."
     },
     {
       "id": "dm_004",
       "handle": "tashaa.k",
       "platform": "tt",
-      "text": "is there a cheaper version of the £48 cream you keep in the blue jar? i can't justify that every two months",
+      "text": "is there a cheaper version of the Glass Drop? i can't justify £62 every two months",
       "persona": "Dupe hunter",
       "ts": "2026-09-20T06:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "dupe_request",
+          "choice": "value_check",
           "confidence": 0.93,
           "probabilities": {
-            "dupe_request": 0.93,
-            "product_rec": 0.028,
-            "routine_help": 0.008,
-            "reaction_concern": 0.002,
-            "where_to_buy": 0.004,
-            "purchase_signal": 0.004,
-            "collab_pitch": 0.008,
-            "spam": 0.008,
-            "no_question": 0.008
+            "value_check": 0.932,
+            "shade_info": 0.007,
+            "recommendation": 0.027,
+            "pick_one": 0.004,
+            "routine_context": 0.005,
+            "skin_diagnosis": 0.001,
+            "trust_or_fan": 0.004,
+            "life_event": 0.005,
+            "constraint_routine": 0.003,
+            "delayed_intent": 0.005,
+            "brand_pitch": 0.006,
+            "spam": 0.001
           }
         },
         "skin_type": {
@@ -208,21 +217,20 @@
           "confidence": 0.57,
           "probabilities": {
             "unknown": 0.57,
-            "dry": 0.264,
-            "oily": 0.057,
-            "combination": 0.012,
-            "sensitive": 0.041,
-            "normal": 0.056
+            "dry": 0.291,
+            "oily_combo": 0.083,
+            "sensitive": 0.029,
+            "redness": 0.027
           }
         },
         "budget_band": {
-          "choice": "under_15",
+          "choice": "over_60",
           "confidence": 0.66,
           "probabilities": {
-            "under_15": 0.66,
-            "15_40": 0.225,
-            "40_plus": 0.053,
-            "unknown": 0.062
+            "over_60": 0.66,
+            "none": 0.051,
+            "under_30": 0.036,
+            "30_to_60": 0.253
           }
         },
         "purchase_intent": {
@@ -235,70 +243,72 @@
           "score": 0.24,
           "confidence": 0.71
         },
-        "names_shelf_product": 0.89
+        "names_shelf_product": 0.94
       },
       "lane": "voice",
-      "draft": "There is, and I'd use it instead — the Vanicream moisturiser, £13. The blue jar is nicer to use, that's the whole difference. Save the £35."
+      "draft": "Good. Not £62 good. It's a lovely texture and a very good photographer. Put the £62 towards Cloud Cream and keep the change."
     },
     {
       "id": "dm_005",
       "handle": "bee.in.peckham",
       "platform": "ig",
-      "text": "where do you buy the cleanser in the uk? every site i find is us only and the shipping is more than the bottle",
-      "persona": "Where to buy",
+      "text": "what shade of the tint would i be? i'm about the same as you in most things but i go redder in summer",
+      "persona": "Shade match",
       "ts": "2026-09-19T22:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "where_to_buy",
-          "confidence": 0.94,
+          "choice": "shade_info",
+          "confidence": 0.92,
           "probabilities": {
-            "where_to_buy": 0.94,
-            "product_rec": 0.025,
-            "routine_help": 0.005,
-            "dupe_request": 0.008,
-            "reaction_concern": 0.003,
-            "purchase_signal": 0.003,
-            "collab_pitch": 0.006,
-            "spam": 0.004,
-            "no_question": 0.006
+            "shade_info": 0.92,
+            "recommendation": 0.029,
+            "pick_one": 0.007,
+            "value_check": 0.006,
+            "routine_context": 0.003,
+            "skin_diagnosis": 0.004,
+            "trust_or_fan": 0.007,
+            "life_event": 0.006,
+            "constraint_routine": 0.004,
+            "delayed_intent": 0.002,
+            "brand_pitch": 0.007,
+            "spam": 0.005
           }
         },
         "skin_type": {
           "choice": "unknown",
-          "confidence": 0.73,
+          "confidence": 0.66,
           "probabilities": {
-            "unknown": 0.73,
-            "dry": 0.037,
-            "oily": 0.037,
-            "combination": 0.157,
-            "sensitive": 0.018,
-            "normal": 0.021
+            "unknown": 0.661,
+            "dry": 0.033,
+            "oily_combo": 0.055,
+            "sensitive": 0.047,
+            "redness": 0.204
           }
         },
         "budget_band": {
-          "choice": "15_40",
+          "choice": "none",
           "confidence": 0.58,
           "probabilities": {
-            "15_40": 0.58,
-            "under_15": 0.076,
-            "40_plus": 0.067,
-            "unknown": 0.277
+            "none": 0.58,
+            "under_30": 0.279,
+            "30_to_60": 0.051,
+            "over_60": 0.09
           }
         },
         "purchase_intent": {
           "score": 0.81,
           "confidence": 0.85
         },
-        "needs_maya_personally": 0.07,
-        "answerable_by_routing": 0.96,
+        "needs_maya_personally": 0.22,
+        "answerable_by_routing": 0.74,
         "urgency": {
           "score": 0.33,
           "confidence": 0.69
         },
-        "names_shelf_product": 0.85
+        "names_shelf_product": 0.55
       },
       "lane": "voice",
-      "draft": "Cult Beauty stock it, and Boots have started carrying it online. Don't pay US shipping for it — it's the same formula."
+      "draft": "I can't pick a shade blind — what are you wearing now, and do you like how it sits on you? Tell me that and I'll tell you where you land."
     },
     {
       "id": "dm_006",
@@ -309,18 +319,21 @@
       "ts": "2026-09-19T15:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "product_rec",
+          "choice": "value_check",
           "confidence": 0.34,
           "probabilities": {
-            "product_rec": 0.34,
-            "routine_help": 0.018,
-            "dupe_request": 0.076,
-            "reaction_concern": 0.057,
-            "where_to_buy": 0.049,
-            "purchase_signal": 0.08,
-            "collab_pitch": 0.069,
-            "spam": 0.065,
-            "no_question": 0.246
+            "value_check": 0.34,
+            "shade_info": 0.015,
+            "recommendation": 0.301,
+            "pick_one": 0.029,
+            "routine_context": 0.088,
+            "skin_diagnosis": 0.07,
+            "trust_or_fan": 0.027,
+            "life_event": 0.032,
+            "constraint_routine": 0.02,
+            "delayed_intent": 0.028,
+            "brand_pitch": 0.025,
+            "spam": 0.025
           }
         },
         "skin_type": {
@@ -328,21 +341,20 @@
           "confidence": 0.81,
           "probabilities": {
             "unknown": 0.81,
-            "dry": 0.019,
-            "oily": 0.033,
-            "combination": 0.006,
-            "sensitive": 0.024,
-            "normal": 0.108
+            "dry": 0.114,
+            "oily_combo": 0.027,
+            "sensitive": 0.031,
+            "redness": 0.018
           }
         },
         "budget_band": {
-          "choice": "unknown",
+          "choice": "none",
           "confidence": 0.86,
           "probabilities": {
-            "unknown": 0.86,
-            "under_15": 0.029,
-            "15_40": 0.102,
-            "40_plus": 0.009
+            "none": 0.86,
+            "under_30": 0.097,
+            "30_to_60": 0.021,
+            "over_60": 0.022
           }
         },
         "purchase_intent": {
@@ -358,7 +370,7 @@
         "names_shelf_product": 0.08
       },
       "lane": "maya",
-      "why": "No product, no skin type, no question really. Both readings came back weak."
+      "why": "Not enough in it to answer — no skin type, no budget, no real question."
     },
     {
       "id": "dm_007",
@@ -369,40 +381,42 @@
       "ts": "2026-09-19T10:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "routine_help",
+          "choice": "recommendation",
           "confidence": 0.86,
           "probabilities": {
-            "routine_help": 0.859,
-            "product_rec": 0.067,
-            "dupe_request": 0.005,
-            "reaction_concern": 0.007,
-            "where_to_buy": 0.006,
-            "purchase_signal": 0.006,
-            "collab_pitch": 0.013,
-            "spam": 0.017,
-            "no_question": 0.02
+            "recommendation": 0.86,
+            "shade_info": 0.005,
+            "pick_one": 0.011,
+            "value_check": 0.015,
+            "routine_context": 0.055,
+            "skin_diagnosis": 0.005,
+            "trust_or_fan": 0.014,
+            "life_event": 0.003,
+            "constraint_routine": 0.005,
+            "delayed_intent": 0.01,
+            "brand_pitch": 0.009,
+            "spam": 0.008
           }
         },
         "skin_type": {
-          "choice": "combination",
+          "choice": "oily_combo",
           "confidence": 0.77,
           "probabilities": {
-            "combination": 0.771,
-            "dry": 0.024,
-            "oily": 0.134,
-            "sensitive": 0.029,
-            "normal": 0.03,
-            "unknown": 0.012
+            "oily_combo": 0.77,
+            "dry": 0.149,
+            "sensitive": 0.018,
+            "redness": 0.026,
+            "unknown": 0.037
           }
         },
         "budget_band": {
-          "choice": "under_15",
-          "confidence": 0.72,
+          "choice": "under_30",
+          "confidence": 0.82,
           "probabilities": {
-            "under_15": 0.719,
-            "15_40": 0.21,
-            "40_plus": 0.053,
-            "unknown": 0.018
+            "under_30": 0.82,
+            "none": 0.115,
+            "30_to_60": 0.039,
+            "over_60": 0.026
           }
         },
         "purchase_intent": {
@@ -418,7 +432,7 @@
         "names_shelf_product": 0.12
       },
       "lane": "voice",
-      "draft": "At 15 with £20: a gentle cleanser and a moisturiser, that's it. Simple's cleanser (£4) and the CeraVe lotion (£11). Skip the acids and the serums for now — they'll make the tightness worse and you don't need them."
+      "draft": "The Daily Gel, morning and night, nothing else for a month. SPF 50 every morning. That one's not negotiable."
     },
     {
       "id": "dm_008",
@@ -429,40 +443,42 @@
       "ts": "2026-09-19T03:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "routine_help",
+          "choice": "skin_diagnosis",
           "confidence": 0.61,
           "probabilities": {
-            "routine_help": 0.609,
-            "product_rec": 0.017,
-            "dupe_request": 0.045,
-            "reaction_concern": 0.174,
-            "where_to_buy": 0.017,
-            "purchase_signal": 0.033,
-            "collab_pitch": 0.031,
-            "spam": 0.027,
-            "no_question": 0.047
+            "skin_diagnosis": 0.611,
+            "shade_info": 0.04,
+            "recommendation": 0.018,
+            "pick_one": 0.018,
+            "value_check": 0.033,
+            "routine_context": 0.131,
+            "trust_or_fan": 0.024,
+            "life_event": 0.011,
+            "constraint_routine": 0.033,
+            "delayed_intent": 0.04,
+            "brand_pitch": 0.018,
+            "spam": 0.023
           }
         },
         "skin_type": {
-          "choice": "sensitive",
-          "confidence": 0.91,
+          "choice": "redness",
+          "confidence": 0.88,
           "probabilities": {
-            "sensitive": 0.909,
-            "dry": 0.046,
-            "oily": 0.009,
-            "combination": 0.013,
-            "normal": 0.007,
-            "unknown": 0.016
+            "redness": 0.88,
+            "dry": 0.022,
+            "oily_combo": 0.01,
+            "sensitive": 0.082,
+            "unknown": 0.006
           }
         },
         "budget_band": {
-          "choice": "unknown",
+          "choice": "none",
           "confidence": 0.64,
           "probabilities": {
-            "unknown": 0.641,
-            "under_15": 0.051,
-            "15_40": 0.077,
-            "40_plus": 0.231
+            "none": 0.64,
+            "under_30": 0.067,
+            "30_to_60": 0.244,
+            "over_60": 0.049
           }
         },
         "purchase_intent": {
@@ -478,7 +494,7 @@
         "names_shelf_product": 0.41
       },
       "lane": "maya",
-      "why": "She's on prescription treatment. That's a conversation, not a recommendation."
+      "why": "She's describing what her skin is doing. That's a judgement call."
     },
     {
       "id": "dm_009",
@@ -489,40 +505,42 @@
       "ts": "2026-09-18T21:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "product_rec",
+          "choice": "recommendation",
           "confidence": 0.84,
           "probabilities": {
-            "product_rec": 0.841,
-            "routine_help": 0.009,
-            "dupe_request": 0.017,
-            "reaction_concern": 0.016,
-            "where_to_buy": 0.012,
-            "purchase_signal": 0.058,
-            "collab_pitch": 0.017,
-            "spam": 0.021,
-            "no_question": 0.009
+            "recommendation": 0.842,
+            "shade_info": 0.013,
+            "pick_one": 0.065,
+            "value_check": 0.01,
+            "routine_context": 0.005,
+            "skin_diagnosis": 0.013,
+            "trust_or_fan": 0.015,
+            "life_event": 0.004,
+            "constraint_routine": 0.019,
+            "delayed_intent": 0.003,
+            "brand_pitch": 0.003,
+            "spam": 0.008
           }
         },
         "skin_type": {
-          "choice": "oily",
+          "choice": "oily_combo",
           "confidence": 0.86,
           "probabilities": {
-            "oily": 0.86,
-            "dry": 0.016,
-            "combination": 0.091,
-            "sensitive": 0.01,
-            "normal": 0.017,
-            "unknown": 0.006
+            "oily_combo": 0.859,
+            "dry": 0.021,
+            "sensitive": 0.02,
+            "redness": 0.021,
+            "unknown": 0.079
           }
         },
         "budget_band": {
-          "choice": "15_40",
+          "choice": "30_to_60",
           "confidence": 0.79,
           "probabilities": {
-            "15_40": 0.79,
-            "under_15": 0.039,
-            "40_plus": 0.142,
-            "unknown": 0.029
+            "30_to_60": 0.79,
+            "none": 0.041,
+            "under_30": 0.019,
+            "over_60": 0.15
           }
         },
         "purchase_intent": {
@@ -538,51 +556,53 @@
         "names_shelf_product": 0.33
       },
       "lane": "voice",
-      "draft": "The niacinamide serum and the gel cleanser — £34 together, and both are things I use rather than things I was sent. If she already has the cleanser, put the rest towards the SPF."
+      "draft": "The Daily Gel, morning and night, nothing else for a month. SPF 50 every morning. That one's not negotiable."
     },
     {
       "id": "dm_010",
       "handle": "ing.redients",
       "platform": "ig",
-      "text": "is it actually bad to use niacinamide and vitamin c together or is that an old myth people keep repeating",
-      "persona": "Ingredient question",
+      "text": "i've got the Cloud Cream and the Barrier Oil and i think i've been putting them on in the wrong order. my skin is dry, does it matter",
+      "persona": "Routine order",
       "ts": "2026-09-18T13:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "routine_help",
+          "choice": "routine_context",
           "confidence": 0.88,
           "probabilities": {
-            "routine_help": 0.88,
-            "product_rec": 0.051,
-            "dupe_request": 0.015,
-            "reaction_concern": 0.008,
-            "where_to_buy": 0.004,
-            "purchase_signal": 0.011,
-            "collab_pitch": 0.013,
-            "spam": 0.003,
-            "no_question": 0.015
+            "routine_context": 0.88,
+            "shade_info": 0.006,
+            "recommendation": 0.038,
+            "pick_one": 0.01,
+            "value_check": 0.004,
+            "skin_diagnosis": 0.014,
+            "trust_or_fan": 0.012,
+            "life_event": 0.002,
+            "constraint_routine": 0.008,
+            "delayed_intent": 0.012,
+            "brand_pitch": 0.01,
+            "spam": 0.004
           }
         },
         "skin_type": {
-          "choice": "unknown",
-          "confidence": 0.75,
+          "choice": "dry",
+          "confidence": 0.85,
           "probabilities": {
-            "unknown": 0.75,
-            "dry": 0.01,
-            "oily": 0.01,
-            "combination": 0.023,
-            "sensitive": 0.037,
-            "normal": 0.17
+            "dry": 0.85,
+            "oily_combo": 0.025,
+            "sensitive": 0.076,
+            "redness": 0.026,
+            "unknown": 0.023
           }
         },
         "budget_band": {
-          "choice": "unknown",
+          "choice": "none",
           "confidence": 0.82,
           "probabilities": {
-            "unknown": 0.82,
-            "under_15": 0.03,
-            "15_40": 0.11,
-            "40_plus": 0.04
+            "none": 0.819,
+            "under_30": 0.124,
+            "30_to_60": 0.023,
+            "over_60": 0.034
           }
         },
         "purchase_intent": {
@@ -595,54 +615,56 @@
           "score": 0.15,
           "confidence": 0.72
         },
-        "names_shelf_product": 0.19
+        "names_shelf_product": 0.96
       },
       "lane": "voice",
-      "draft": "Old myth, from one lab study at temperatures your face never reaches. Use them together. If it stings it's the vitamin C concentration, not the pairing."
+      "draft": "Cloud Cream — winter skin saviour, and the one I actually use — and the Barrier Oil over the top, last, only if it still feels tight. SPF 50 every morning. That one's not negotiable. Give it six weeks before you change anything else. Most of what goes wrong is three things changing at once."
     },
     {
       "id": "dm_011",
       "handle": "worth.it.or.not",
       "platform": "tt",
-      "text": "everyone is posting about the £62 cream this week. i trust you more than them — is it worth it or is it this month's thing",
+      "text": "everyone is posting about the Glass Drop this week. i trust you more than them — is it worth £62 or is it this month's thing",
       "persona": "Worth it?",
       "ts": "2026-09-18T04:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "product_rec",
-          "confidence": 0.79,
+          "choice": "value_check",
+          "confidence": 0.81,
           "probabilities": {
-            "product_rec": 0.79,
-            "routine_help": 0.013,
-            "dupe_request": 0.029,
-            "reaction_concern": 0.012,
-            "where_to_buy": 0.004,
-            "purchase_signal": 0.091,
-            "collab_pitch": 0.009,
-            "spam": 0.028,
-            "no_question": 0.024
+            "value_check": 0.809,
+            "shade_info": 0.005,
+            "recommendation": 0.086,
+            "pick_one": 0.015,
+            "routine_context": 0.014,
+            "skin_diagnosis": 0.009,
+            "trust_or_fan": 0.026,
+            "life_event": 0.008,
+            "constraint_routine": 0.006,
+            "delayed_intent": 0.006,
+            "brand_pitch": 0.011,
+            "spam": 0.005
           }
         },
         "skin_type": {
           "choice": "unknown",
           "confidence": 0.69,
           "probabilities": {
-            "unknown": 0.69,
+            "unknown": 0.689,
             "dry": 0.01,
-            "oily": 0.035,
-            "combination": 0.205,
-            "sensitive": 0.045,
-            "normal": 0.015
+            "oily_combo": 0.222,
+            "sensitive": 0.042,
+            "redness": 0.037
           }
         },
         "budget_band": {
-          "choice": "40_plus",
-          "confidence": 0.74,
+          "choice": "over_60",
+          "confidence": 0.87,
           "probabilities": {
-            "40_plus": 0.74,
-            "under_15": 0.05,
-            "15_40": 0.156,
-            "unknown": 0.054
+            "over_60": 0.87,
+            "none": 0.016,
+            "under_30": 0.026,
+            "30_to_60": 0.088
           }
         },
         "purchase_intent": {
@@ -655,32 +677,35 @@
           "score": 0.37,
           "confidence": 0.65
         },
-        "names_shelf_product": 0.77
+        "names_shelf_product": 0.95
       },
       "lane": "voice",
-      "draft": "It's this month's thing. Good formula, nothing in it you're not getting from the £16 one, and the packaging is most of the price. Wait six weeks and watch how quickly nobody mentions it."
+      "draft": "Good. Not £62 good. It's a lovely texture and a very good photographer. Put the £62 towards Cloud Cream and keep the change."
     },
     {
       "id": "dm_012",
       "handle": "quiet.follower.02",
       "platform": "ig",
       "text": "been watching you for two years and never messaged. i'm finally rebuilding my whole routine from scratch next month and i've saved every one of your shelf videos",
-      "persona": "Long-time watcher",
+      "persona": "Silent browser",
       "ts": "2026-09-17T16:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "purchase_signal",
+          "choice": "delayed_intent",
           "confidence": 0.85,
           "probabilities": {
-            "purchase_signal": 0.849,
-            "product_rec": 0.018,
-            "routine_help": 0.011,
-            "dupe_request": 0.012,
-            "reaction_concern": 0.018,
-            "where_to_buy": 0.003,
-            "collab_pitch": 0.012,
-            "spam": 0.012,
-            "no_question": 0.065
+            "delayed_intent": 0.851,
+            "shade_info": 0.008,
+            "recommendation": 0.009,
+            "pick_one": 0.013,
+            "value_check": 0.01,
+            "routine_context": 0.009,
+            "skin_diagnosis": 0.003,
+            "trust_or_fan": 0.054,
+            "life_event": 0.007,
+            "constraint_routine": 0.011,
+            "brand_pitch": 0.01,
+            "spam": 0.015
           }
         },
         "skin_type": {
@@ -688,21 +713,20 @@
           "confidence": 0.78,
           "probabilities": {
             "unknown": 0.78,
-            "dry": 0.14,
-            "oily": 0.046,
-            "combination": 0.014,
-            "sensitive": 0.01,
-            "normal": 0.01
+            "dry": 0.13,
+            "oily_combo": 0.035,
+            "sensitive": 0.017,
+            "redness": 0.038
           }
         },
         "budget_band": {
-          "choice": "40_plus",
+          "choice": "30_to_60",
           "confidence": 0.56,
           "probabilities": {
-            "40_plus": 0.56,
-            "under_15": 0.054,
-            "15_40": 0.023,
-            "unknown": 0.363
+            "30_to_60": 0.56,
+            "none": 0.29,
+            "under_30": 0.062,
+            "over_60": 0.088
           }
         },
         "purchase_intent": {
@@ -727,18 +751,21 @@
       "ts": "2026-09-20T02:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "collab_pitch",
+          "choice": "brand_pitch",
           "confidence": 0.96,
           "probabilities": {
-            "collab_pitch": 0.96,
-            "product_rec": 0.004,
-            "routine_help": 0.003,
-            "dupe_request": 0.003,
-            "reaction_concern": 0.003,
-            "where_to_buy": 0.005,
-            "purchase_signal": 0.004,
-            "spam": 0.015,
-            "no_question": 0.003
+            "brand_pitch": 0.96,
+            "shade_info": 0.003,
+            "recommendation": 0.003,
+            "pick_one": 0.003,
+            "value_check": 0.002,
+            "routine_context": 0.003,
+            "skin_diagnosis": 0.003,
+            "trust_or_fan": 0.002,
+            "life_event": 0.004,
+            "constraint_routine": 0.002,
+            "delayed_intent": 0.002,
+            "spam": 0.013
           }
         },
         "skin_type": {
@@ -746,21 +773,20 @@
           "confidence": 0.89,
           "probabilities": {
             "unknown": 0.891,
-            "dry": 0.016,
-            "oily": 0.012,
-            "combination": 0.011,
-            "sensitive": 0.004,
-            "normal": 0.066
+            "dry": 0.08,
+            "oily_combo": 0.004,
+            "sensitive": 0.022,
+            "redness": 0.003
           }
         },
         "budget_band": {
-          "choice": "unknown",
+          "choice": "none",
           "confidence": 0.91,
           "probabilities": {
-            "unknown": 0.91,
-            "under_15": 0.009,
-            "15_40": 0.015,
-            "40_plus": 0.066
+            "none": 0.909,
+            "under_30": 0.019,
+            "30_to_60": 0.011,
+            "over_60": 0.061
           }
         },
         "purchase_intent": {
@@ -788,15 +814,18 @@
           "choice": "spam",
           "confidence": 0.98,
           "probabilities": {
-            "spam": 0.981,
-            "product_rec": 0.002,
-            "routine_help": 0.002,
-            "dupe_request": 0.002,
-            "reaction_concern": 0.001,
-            "where_to_buy": 0.002,
-            "purchase_signal": 0.001,
-            "collab_pitch": 0.007,
-            "no_question": 0.002
+            "spam": 0.98,
+            "shade_info": 0.002,
+            "recommendation": 0.001,
+            "pick_one": 0.001,
+            "value_check": 0.002,
+            "routine_context": 0.002,
+            "skin_diagnosis": 0.002,
+            "trust_or_fan": 0.001,
+            "life_event": 0.002,
+            "constraint_routine": 0,
+            "delayed_intent": 0,
+            "brand_pitch": 0.007
           }
         },
         "skin_type": {
@@ -804,21 +833,20 @@
           "confidence": 0.94,
           "probabilities": {
             "unknown": 0.94,
-            "dry": 0.008,
-            "oily": 0.007,
-            "combination": 0.007,
-            "sensitive": 0.004,
-            "normal": 0.034
+            "dry": 0.029,
+            "oily_combo": 0.011,
+            "sensitive": 0.01,
+            "redness": 0.01
           }
         },
         "budget_band": {
-          "choice": "unknown",
+          "choice": "none",
           "confidence": 0.93,
           "probabilities": {
-            "unknown": 0.93,
-            "under_15": 0.048,
-            "15_40": 0.008,
-            "40_plus": 0.014
+            "none": 0.93,
+            "under_30": 0.044,
+            "30_to_60": 0.011,
+            "over_60": 0.015
           }
         },
         "purchase_intent": {
@@ -839,22 +867,25 @@
       "id": "dm_015",
       "handle": "hollie.ftw",
       "platform": "tt",
-      "text": "getting paid friday and your shelf is the first thing i'm buying off. saving this so i don't forget 🫡",
+      "text": "getting paid friday and the Cloud Cream is the first thing i'm buying. saving this so i don't forget 🫡",
       "ts": "2026-09-20T12:00:00.000Z",
       "answers": {
         "intent": {
-          "choice": "purchase_signal",
+          "choice": "delayed_intent",
           "confidence": 0.9,
           "probabilities": {
-            "purchase_signal": 0.901,
-            "product_rec": 0.007,
-            "routine_help": 0.006,
-            "dupe_request": 0.012,
-            "reaction_concern": 0.012,
-            "where_to_buy": 0.002,
-            "collab_pitch": 0.012,
-            "spam": 0.002,
-            "no_question": 0.046
+            "delayed_intent": 0.9,
+            "shade_info": 0.011,
+            "recommendation": 0.005,
+            "pick_one": 0.008,
+            "value_check": 0.008,
+            "routine_context": 0.003,
+            "skin_diagnosis": 0.01,
+            "trust_or_fan": 0.036,
+            "life_event": 0.002,
+            "constraint_routine": 0.007,
+            "brand_pitch": 0.007,
+            "spam": 0.003
           }
         },
         "skin_type": {
@@ -862,21 +893,20 @@
           "confidence": 0.83,
           "probabilities": {
             "unknown": 0.83,
-            "dry": 0.018,
-            "oily": 0.023,
-            "combination": 0.103,
-            "sensitive": 0.012,
-            "normal": 0.014
+            "dry": 0.013,
+            "oily_combo": 0.098,
+            "sensitive": 0.026,
+            "redness": 0.033
           }
         },
         "budget_band": {
-          "choice": "15_40",
+          "choice": "under_30",
           "confidence": 0.63,
           "probabilities": {
-            "15_40": 0.63,
-            "under_15": 0.069,
-            "40_plus": 0.232,
-            "unknown": 0.069
+            "under_30": 0.63,
+            "none": 0.013,
+            "30_to_60": 0.275,
+            "over_60": 0.082
           }
         },
         "purchase_intent": {
@@ -889,7 +919,7 @@
           "score": 0.29,
           "confidence": 0.64
         },
-        "names_shelf_product": 0.58
+        "names_shelf_product": 0.93
       },
       "lane": "intent"
     }
@@ -898,6 +928,6 @@
     "count": 15,
     "ms": 4120,
     "costUsd": 0.0186,
-    "decisions": 120
+    "decisions": 135
   }
 }

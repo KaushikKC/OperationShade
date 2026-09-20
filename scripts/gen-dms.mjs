@@ -14,21 +14,27 @@ const HANDLE_B = ['.skin', '_london', 'xo', '.beauty', '92', '.does.makeup', '_u
 // Six persona archetypes. Each line is a whole message; slots keep them varied.
 const ARCHETYPES = {
   dry_regular: [
-    "my skin goes tight about an hour after cleansing, is that a {thing} problem or am i using the wrong {cat}",
+    "my skin goes tight about an hour after cleansing, is that a {thing} problem or am i using the wrong {gencat}",
     "flaking around my nose every winter no matter what i put on it. what would you actually use",
     "is a {price} moisturiser ever worth it over the {lowprice} one for dry skin",
     "i've been doubling up on hyaluronic acid and my skin feels worse?? what am i doing wrong",
     "do i need an oil on top of my moisturiser or is that a marketing thing",
     "my cheeks are dry but i get spots on my chin. do i buy two moisturisers or is that mad",
     "what do you use on your face after a flight, mine is always awful for a week",
+    "is the Cloud Cream still the good one or has something better come along",
+    "wedding in {weeks} weeks and my skin has picked now to fall apart. what do i do",
+    "Cloud Cream or the Barrier Oil first? i've got both and i've been doing it wrong i think",
   ],
   teen_budget: [
     "i'm {age} and i've got {price} to spend, where do i start",
     "my mum says i'm too young for retinol, is she right",
-    "everyone at school uses the {cat} you talked about but i can't afford it, is there anything cheaper",
+    "everyone at school uses the {gencat} you talked about but i can't afford it, is there anything cheaper",
     "i've got like {price} of birthday money, what's the one thing worth buying",
     "is it bad to use my sister's stuff, she's {age2} and has oily skin",
     "school makes my skin worse i swear. cheap things that actually work?",
+    "school photos are {day} and i've got a massive spot, is there anything",
+    "what foundation shade would i be? i'm about the same as you i think",
+    "i've got about five minutes in the morning and that's being generous. what's the minimum",
   ],
   dupe_hunter: [
     "is there a cheaper version of the {cat} you use",
@@ -36,6 +42,8 @@ const ARCHETYPES = {
     "i can't spend {price} every two months, what's the next best thing",
     "does the aldi one actually do the same job or is that tiktok talking",
     "cheaper {cat} that isn't rubbish? i'm skint until the 28th",
+    "is the Glass Drop worth £62 or am i being sold to",
+    "Daily Gel or Red Reset, i can only afford one",
   ],
   payday_buyer: [
     "getting paid {day} and i want to sort my routine properly. where do i put the money",
@@ -49,6 +57,7 @@ const ARCHETYPES = {
     "screenshotted your whole routine and i'm buying it bit by bit",
     "my basket is full of things you've talked about 😅 paying for it on {day}",
     "bookmarked every one of your shelf videos. rebuilding everything next month",
+    "i've got {price} saved for the Cloud Cream, holding out for payday",
   ],
   reaction: [
     "my face went red and hot after the {cat} last night, do i stop",
@@ -56,6 +65,8 @@ const ARCHETYPES = {
     "burning when i put moisturiser on now, i think i've broken something",
     "i've come out in tiny bumps since i started the new {cat}, is that purging or a reaction",
     "my eyelids are flaking and sore, i don't know which thing did it",
+    "my cheeks have gone red and they stay red now, is that rosacea or am i panicking",
+    "i had a baby {weeks} weeks ago and my skin is unrecognisable, i don't know where to start",
   ],
   shelf_curious: [
     "is the {cat} worth it or is it this month's thing",
@@ -64,16 +75,23 @@ const ARCHETYPES = {
     "did you ever repurchase the {cat} or was it a one time thing",
     "honest opinion on the {price} serum everyone's on about",
     "which spf do you use in summer, the one from the video or something else",
+    "which shade of the tint am i if i'm a {shade} in everything else",
+    "i work nights and i've got no time and no money, what's the least i can get away with",
+    "you told me not to buy something once and it saved me {price}. just wanted to say thank you",
+    "i trust you more than anyone on here. Cloud Cream or the {cat}?",
   ],
 }
 const SLOTS = {
   thing: ['barrier', 'dryness', 'dehydration', 'cleanser'],
-  cat: ['cleanser', 'serum', 'moisturiser', 'spf', 'retinal', 'toner', 'exfoliant', 'Glass Drop serum'],
-  price: ['£20', '£35', '£48', '£62', '£15'],
+  gencat: ['cleanser', 'serum', 'moisturiser', 'spf', 'toner', 'exfoliant'],
+  cat: ['cleanser', 'serum', 'moisturiser', 'spf', 'retinal', 'toner', 'exfoliant', 'Glass Drop', 'Cloud Cream', 'Daily Gel', 'Red Reset', 'Barrier Oil'],
+  price: ['£20', '£35', '£48', '£62', '£15', '£60'],
   lowprice: ['£9', '£11', '£13'],
   age: ['14', '15', '16', '17'],
   age2: ['19', '21', '23'],
   day: ['friday', 'on the 25th', 'next week', 'thursday'],
+  weeks: ['two', 'three', 'six', 'ten'],
+  shade: ['NC20', 'NW25', 'a light-medium', 'a deep neutral'],
 }
 const NOISE = [
   "Hi Maya! 💕 We'd love to send you our new {cat} line for an honest review — just {n} in-feed posts and {n2} stories. Shall I send the deck?",
@@ -125,7 +143,7 @@ for (const row of SPEC.filter((r) => r.persona)) {
 }
 // 2. Six personas, ~34 each, templates cycled so no line repeats back to back.
 for (const lines of Object.values(ARCHETYPES)) {
-  for (let i = 0; i < 34; i++) {
+  for (let i = 0; i < 33; i++) {
     let text = fill(pick(lines), SLOTS)
     if (rnd() < 0.45) text = pick(CONTEXT) + text
     if (rnd() < 0.3) text = text + pick(TAIL)

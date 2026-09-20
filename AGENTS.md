@@ -42,7 +42,24 @@ be thin or partially malformed. Never crash on a missing field.
 | `intent` | Worth watching | Close to buying. No reply needed now. |
 | `noise` | Filed | Brand pitches, spam. Collapsed by default. |
 
-`maya` sorts by `urgency.score` descending. `voice` sorts by `purchase_intent.score` descending.
+`maya` sorts by `urgency.score` descending, never by message length. `voice` sorts by
+`purchase_intent.score` descending.
+
+### For the console (Person B)
+
+- **Import `rebucket(row, threshold)` from `lib/lanes`** for the confidence slider. It is
+  pure, it is the same rule the server used, and it already knows that the bar drops when
+  the only thing missing is her intake question. Do not reimplement the comparison.
+- **Default the slider to 0.60, not 0.70.** The threshold was swept against the thirty
+  hand labels: lane accuracy is 29/30 anywhere from 0.40 to 0.65 and drops to 27/30 at
+  0.70. Range 0.5–0.95 is unchanged, and dragging it up moves messages into Needs you —
+  the safe direction, and visible.
+- **A row with no `draft` can never be Ready to send**, whatever the slider says.
+  `rebucket()` enforces it; lane counts should go through it.
+- `LANE_LABELS` exports the four labels. Use them rather than retyping the strings.
+- **Frame the run stats as this sample.** `stats.count` is the 248 messages in
+  `data/dms.json`, not her month. "248 read in this sample", then the monthly figure
+  separately with its arithmetic visible.
 
 ## Language
 
@@ -60,4 +77,8 @@ node scripts/gen-fixture.mjs > data/fixtures/results.sample.json
 
 15 rows — the twelve case-file intercepts (the ones with a `persona`, which is what the
 **Sample 12** tab filters on) plus a brand pitch, a spam and a payday DM. Edit
-`scripts/fixture-spec.mjs`, never the JSON.
+`scripts/fixture-spec.mjs`, never the JSON. Its lanes and drafts come from `lib/routing.ts`,
+so the fixture behaves exactly like a real run.
+
+`data/results.json` is the committed full run: 248 messages, real Jev answers. `GET
+/api/results` serves it with no key and no network.
