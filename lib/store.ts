@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { Classified, DM, RunResult } from './types'
 
@@ -28,6 +28,15 @@ export async function writeInbox(dms: DM[]): Promise<boolean> {
     return true
   } catch {
     return false
+  }
+}
+
+/** Drop the uploaded inbox and go back to the corpus in the repo. */
+export async function clearInbox(): Promise<void> {
+  try {
+    await rm(file('inbox.json'))
+  } catch {
+    // Nothing uploaded, nothing to clear.
   }
 }
 

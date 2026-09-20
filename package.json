@@ -11,7 +11,8 @@
     "gold": "tsx scripts/eval-gold.ts",
     "dms": "node scripts/gen-dms.mjs > data/dms.json",
     "fixture": "tsx scripts/gen-fixture.ts > data/fixtures/results.sample.json",
-    "csv": "tsx scripts/gen-csv.ts"
+    "csv": "tsx scripts/gen-csv.ts",
+    "reset": "tsx scripts/reset-inbox.ts"
   },
   "dependencies": {
     "next": "16.3.5",

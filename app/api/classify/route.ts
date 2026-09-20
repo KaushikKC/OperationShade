@@ -1,25 +1,33 @@
 import { MAX_ROWS, parseDms } from '@/lib/csv'
 import { apiKey, QUESTION_COUNT, runInbox } from '@/lib/run'
-import { byId, readDms, readResults, writeInbox, writeResults } from '@/lib/store'
+import { byId, clearInbox, readDms, readResults, writeInbox, writeResults } from '@/lib/store'
 import type { Classified, RunResult } from '@/lib/types'
 
 export const runtime = 'nodejs'
 export const maxDuration = 300
 
 /**
- * POST { mode: 'all' | 'unclassified', csv?: string } -> RunResult.
+ * POST { mode: 'all' | 'unclassified', csv?: string, reset?: boolean } -> RunResult.
  * Caches to data/results.json. When a csv is sent it becomes the inbox first,
  * and the run starts from a clean slate rather than merging into the last one.
  */
 export async function POST(req: Request) {
   let mode: 'all' | 'unclassified' = 'all'
   let csv = ''
+  let reset = false
   try {
     const body = await req.json()
     if (body?.mode === 'unclassified') mode = 'unclassified'
     if (typeof body?.csv === 'string') csv = body.csv
+    reset = body?.reset === true
   } catch {
     // No body is the same as { mode: 'all' }.
+  }
+
+  // Back to the inbox in the repo, after someone has uploaded their own.
+  if (reset && !csv) {
+    await clearInbox()
+    mode = 'all'
   }
 
   if (csv) {
