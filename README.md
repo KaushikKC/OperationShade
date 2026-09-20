@@ -1,7 +1,38 @@
-# Operation Shade — Maya · Inbox Triage
+<p align="center">
+  <img src="logo.svg" alt="Operation Shade Logo" width="200" />
+</p>
 
-**Live:** https://operation-shade-jano.vercel.app/
-**Console:** [`/`](https://operation-shade-jano.vercel.app/) · **Public card:** [`/ask`](https://operation-shade-jano.vercel.app/ask)
+<h1 align="center">Operation Shade</h1>
+
+<p align="center">
+  <strong>Inbox Triage That Carries a Creator's Judgement, Not Her Workload</strong><br />
+  <em>Typed decisions, not generated text. Her shelf, her prices, her words. Nothing sends itself.</em>
+</p>
+
+<p align="center">
+  <a href="https://operation-shade-jano.vercel.app/"><strong>Live Console</strong></a> &bull;
+  <a href="https://operation-shade-jano.vercel.app/ask"><strong>Public Card</strong></a> &bull;
+  <a href="#why-jev"><strong>Why Jev</strong></a> &bull;
+  <a href="#calibration"><strong>Calibration</strong></a>
+</p>
+
+---
+
+## Overview
+
+**Operation Shade** turns a creator's DM inbox into four lanes and hands back the hours
+spent answering the same dozen questions. Every message is read once by
+[Jev](https://docs.typesafe.ai), TypeSafe's System One model, which returns typed answers
+and calibrated probabilities rather than prose. Code routes on those answers and assembles
+a reply out of words the creator has already said.
+
+Nothing in the reply path is generated. The model decides which branch; her notebook
+supplies the sentence. Messages it cannot place, and messages that need her rather than her
+routing, are escalated untouched.
+
+| Typed Decisions | Her Judgement, Encoded | Safety By Construction |
+| :--- | :--- | :--- |
+| **9 questions, one pass**<br>Choice · Score · Noul primitives<br>Calibrated confidence per answer | **10 products, her prices**<br>Her verbatim notes as reply text<br>Two products max, budget arithmetic | **No send path exists**<br>No draft, no reuse, ever<br>Retinol and reactions hard-blocked |
 
 ---
 
@@ -63,6 +94,8 @@ up fresh on arrival — a link sent today shows what Maya thinks when it is open
 later.
 
 ---
+
+<a id="why-jev"></a>
 
 ## Why Jev
 
@@ -173,6 +206,8 @@ and it is never what someone on a tight budget is told to start with. Saying tha
 is the brand.
 
 ---
+
+<a id="calibration"></a>
 
 ## Calibration
 

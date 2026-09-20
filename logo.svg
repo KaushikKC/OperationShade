@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Operation Shade">
+  <defs>
+    <clipPath id="disc"><circle cx="112" cy="112" r="86" /></clipPath>
+  </defs>
+  <rect width="240" height="240" fill="none" />
+  <g transform="rotate(-4 120 120)">
+    <!-- the hard offset shadow every raised thing in the console has -->
+    <circle cx="126" cy="126" r="86" fill="#0a0a0a" />
+    <circle cx="112" cy="112" r="86" fill="#ff7a66" stroke="#0a0a0a" stroke-width="9" />
+    <g clip-path="url(#disc)" opacity="0.14">
+      <path d="M26 150 H198 M26 172 H198 M26 128 H198" stroke="#0a0a0a" stroke-width="3" />
+    </g>
+    <text x="112" y="147"
+          font-family="Georgia, 'Times New Roman', Times, serif"
+          font-size="112" font-weight="700" fill="#0a0a0a"
+          text-anchor="middle" letter-spacing="-2">M</text>
+  </g>
+</svg>
