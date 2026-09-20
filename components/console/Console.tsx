@@ -846,7 +846,7 @@ export default function Console() {
           </div>
         </div>
         <span className="nb-pill" style={{ background: 'var(--nb-cream-deep)' }}>
-          inbox <b>{inboxName ?? 'dms_sept.json'}</b>
+          inbox <b>{inboxName ?? (source === 'live' ? 'dms.json' : 'results.sample.json')}</b>
         </span>
         <span className="nb-pill" style={{ background: 'var(--nb-cream-deep)' }}>
           reader <b>jev-latest</b>
