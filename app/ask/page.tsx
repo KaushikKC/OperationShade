@@ -114,11 +114,11 @@ function skipIn(draft: string | undefined): string | null {
   if (!draft) return null
   if (/wouldn'?t pay|not £\d+ good/i.test(draft)) {
     const p = byName(WOULD_NOT_PAY_FOR)
-    if (p) return `${p.name} (${gbp(p.price)}) — ${p.note}`
+    if (p) return `${p.name} (${gbp(p.price)}). ${p.note}`
   }
-  if (/retinol|retinoid|tretinoin/i.test(draft)) return 'Retinol — she doesn’t hand it out over a DM'
+  if (/retinol|retinoid|tretinoin/i.test(draft)) return 'Retinol. She doesn’t hand it out over a DM'
   if (/second one sitting on top|don'?t need (a second|another)/i.test(draft))
-    return 'A second one on top — you don’t need it'
+    return 'A second one on top. You don’t need it'
   if (/fragrance/i.test(draft)) return 'Anything with fragrance in it'
   return null
 }
@@ -126,7 +126,7 @@ function skipIn(draft: string | undefined): string | null {
 /** One line on why this is the answer — the reading, in her terms. */
 function whyLine(a: Classified): string {
   if (!a.draft) return ''
-  if (/\?/.test(a.draft)) return 'She asks her standard questions back before naming products — no guessing.'
+  if (/\?/.test(a.draft)) return 'She asks her standard questions back before naming products. No guessing.'
   const bits = [
     a.answers?.skin_type?.choice && a.answers.skin_type.choice !== 'unknown'
       ? skinLabel(a.answers.skin_type.choice)
@@ -135,16 +135,16 @@ function whyLine(a: Classified): string {
       ? budgetLabel(a.answers.budget_band.choice)
       : null,
   ].filter(Boolean)
-  const reading = bits.length ? `${bits.join(', ')} — ` : ''
+  const reading = bits.length ? `${bits.join(', ')}. ` : ''
   const line = `${reading}answered the same way she answers every one of these.`
   return line.charAt(0).toUpperCase() + line.slice(1)
 }
 
 /** The handoff line when there is no safe draft — follower-facing, no products. */
 function handoffLine(a: Classified): string {
-  if (REACTION.test(a.text)) return 'Skin that’s reacting goes to Maya — no product list while it’s angry.'
+  if (REACTION.test(a.text)) return 'Skin that’s reacting goes to Maya. No product list while it’s angry.'
   if (a.answers?.intent?.choice === 'relationship')
-    return 'There’s a life thing behind this one, not a product question — Maya answers these herself.'
+    return 'There’s a life thing behind this one, not a product question. Maya answers these herself.'
   return a.why ?? 'There is not enough here to give a safe answer without guessing.'
 }
 
@@ -179,11 +179,11 @@ function resultText(a: Classified): string {
   const buys = buysIn(a.draft)
   if (buys.length) {
     const total = buys.reduce((s, p) => s + p.price, 0)
-    lines.push(`Buy: ${buys.map((p) => `${p.name} (${gbp(p.price)})`).join(' + ')} — ${gbp(total)} together`)
+    lines.push(`Buy: ${buys.map((p) => `${p.name} (${gbp(p.price)})`).join(' + ')}. ${gbp(total)} together`)
   }
   const skip = skipIn(a.draft)
   if (skip) lines.push(`Skip: ${skip}`)
-  lines.push('From Maya’s own routing — nothing was sent anywhere.')
+  lines.push('From Maya’s own routing. Nothing was sent anywhere.')
   return lines.join('\n')
 }
 
@@ -291,7 +291,7 @@ function Ask() {
       await navigator.clipboard.writeText(resultText(answer))
       flash('Copied ✓')
     } catch {
-      flash('Copy didn’t work — select the text instead')
+      flash('Copy didn’t work. Select the text instead')
     }
   }
 
@@ -315,9 +315,9 @@ function Ask() {
     }
     try {
       await navigator.clipboard.writeText(`${payload.text}\n${payload.url}`)
-      flash('Copied — send it to a friend')
+      flash('Copied. Send it to a friend')
     } catch {
-      flash('Copy didn’t work — select the text instead')
+      flash('Copy didn’t work. Select the text instead')
     }
   }
 
@@ -341,7 +341,7 @@ function Ask() {
             What would Maya do?
           </h1>
           <p className="mt-1 text-[14px]" style={{ color: 'var(--nb-muted)' }}>
-            Skin type, budget, what you’re stuck on — her own notes answer what they can, and tell
+            Skin type, budget, what you’re stuck on. Her own notes answer what they can, and tell
             you when it needs her.
           </p>
 
@@ -361,7 +361,7 @@ function Ask() {
               )}
               {!opening && (
                 <p className="mt-1.5 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
-                  Not your skin? Change it below and ask your own — it costs nothing and she never
+                  Not your skin? Change it below and ask your own. It costs nothing and she never
                   sees it unless it needs her.
                 </p>
               )}
@@ -372,8 +372,8 @@ function Ask() {
             rows={3}
             placeholder={
               speech.supported
-                ? 'e.g. oily skin, £25, five minutes in the morning — type it, or tap the mic'
-                : 'e.g. oily skin, £25, five minutes in the morning — what do I actually need?'
+                ? 'e.g. oily skin, £25, five minutes in the morning, or tap the mic and say it'
+                : 'e.g. oily skin, £25, five minutes in the morning. What do I actually need?'
             }
             // While it is listening the box is showing a guess that the browser
             // is still rewriting, so it is not hers to edit yet.
@@ -391,7 +391,7 @@ function Ask() {
             <button className="nb-btn nb-btn-coral" onClick={() => void ask()} disabled={busy || !text.trim()}>
               {busy ? 'Thinking…' : 'Ask Maya'}
             </button>
-            {/* Only drawn where it works — no microphone on a browser without one. */}
+            {/* Only drawn where it works. No microphone on a browser without one. */}
             {speech.supported && (
               <button
                 // Stretched rather than sized: the glyph is taller than 14px
@@ -415,7 +415,7 @@ function Ask() {
                   className="inline-block h-[9px] w-[9px] animate-pulse rounded-full"
                   style={{ background: 'var(--nb-coral)' }}
                 />
-                <span style={{ color: 'var(--nb-muted)' }}>Listening — say it how you’d say it out loud.</span>
+                <span style={{ color: 'var(--nb-muted)' }}>Listening. Say it how you’d say it out loud.</span>
               </span>
             ) : null}
             {(err || speech.error) && (
@@ -527,7 +527,7 @@ function Ask() {
                   <div className="nb-eyebrow mb-1.5">This one needs Maya</div>
                   <p className="nb-hand text-[22px] leading-snug">{handoffLine(answer)}</p>
                   <p className="mt-2 text-[12.5px]" style={{ color: 'var(--nb-muted)' }}>
-                    No products on this one, and nothing has been sent to her — if you want her eyes
+                    No products on this one, and nothing has been sent to her. If you want her eyes
                     on it, take it to her DMs yourself.
                   </p>
                 </div>
@@ -536,7 +536,7 @@ function Ask() {
                 <p className="mt-3 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
                   {pct(answer.answers.answerable_by_routing)! >= 70
                     ? 'Answered straight from the notebook she writes from.'
-                    : 'Below the bar she sets — kept for her, not guessed.'}
+                    : 'Below the bar she sets. Kept for her, not guessed.'}
                 </p>
               )}
             </div>

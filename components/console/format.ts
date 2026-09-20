@@ -7,7 +7,7 @@ export const LANE_META: Record<
   voice: {
     label: 'Ready to send',
     color: 'var(--nb-mint)',
-    desc: 'Answered from your notes — a draft in your words, waiting for a check.',
+    desc: 'Answered from your notes. A draft in your words, waiting for a check.',
     short: 'Ready to send',
   },
   maya: {

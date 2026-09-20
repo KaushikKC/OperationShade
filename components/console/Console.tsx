@@ -274,7 +274,7 @@ function SendButton({ ready }: { ready: boolean }) {
     <button
       className="nb-btn"
       disabled
-      title="Not connected yet — copy it across for now"
+      title="Not connected yet. Copy it across for now"
       style={{ background: 'var(--nb-mint)', padding: '6px 14px', fontSize: 13, opacity: ready ? 0.6 : 0.4 }}
     >
       Send
@@ -551,8 +551,8 @@ function Drawer({
               </p>
             )}
             <p className="mt-2 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
-              Sending turns on once your account is connected, and it will always be this button —
-              never on its own.
+              Sending turns on once your account is connected, and it will always be this button.
+              Never on its own.
             </p>
           </div>
         )}
@@ -858,7 +858,7 @@ export default function Console() {
         <span
           className="nb-tape"
           style={{ background: source === 'live' ? 'var(--nb-mint)' : 'var(--nb-yellow)' }}
-          title={isMock ? 'NEXT_PUBLIC_MOCK — flip to 0 to go live' : 'live /api/results'}
+          title={isMock ? 'NEXT_PUBLIC_MOCK: flip to 0 to go live' : 'live /api/results'}
         >
           {source === 'live' ? 'live results' : 'sample data'}
         </span>
@@ -988,7 +988,7 @@ export default function Console() {
           )}
           {error && (
             <p className="mt-2 text-[12.5px] font-semibold" style={{ color: 'var(--nb-coral)' }}>
-              Last run hit a snag ({error}) — showing {source === 'sample' ? 'the sample inbox' : 'the last good results'}.
+              Last run hit a snag ({error}). Showing {source === 'sample' ? 'the sample inbox' : 'the last good results'}.
             </p>
           )}
 
@@ -1030,8 +1030,8 @@ export default function Console() {
                   <b>
                     {moved} {moved === 1 ? 'message has' : 'messages have'} moved
                   </b>{' '}
-                  moved out of Ready to send and onto your desk. Raise this to review more messages yourself —
-                  nothing is re-read and nothing is sent.
+                  moved out of Ready to send and onto your desk. Raise this to review more messages
+                  yourself. Nothing is re-read and nothing is sent.
                 </>
               ) : (
                 'Raise this to review more messages yourself. Nothing is re-read and nothing is sent.'
@@ -1043,7 +1043,7 @@ export default function Console() {
             <p className="mt-2 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
               {uploadNote ?? (
                 <>
-                  Reading <b>{inboxName}</b> — your own export, not the sample. Drop in a new file any time; a CSV
+                  Reading <b>{inboxName}</b>. Your own export, not the sample. Drop in a new file any time; a CSV
                   with the message text in it is enough.{' '}
                   <button
                     className="underline"
@@ -1216,7 +1216,7 @@ export default function Console() {
 
           <p className="mt-4 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
             Sorted for you: “Needs you” by urgency, “Ready to send” by buying signal. Drafts come
-            from your notebook routing — nothing sends itself.
+            from your notebook routing. Nothing sends itself.
           </p>
         </main>
       </div>

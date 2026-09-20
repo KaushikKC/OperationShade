@@ -55,7 +55,7 @@ export const QUESTIONS: QuestionCard[] = [
     key: 'needs_maya_personally',
     label: 'Needs you',
     kind: 'yesno',
-    prompt: 'Needs you, not your notes — a right answer about a product would still be the wrong reply',
+    prompt: 'Needs you, not your notes. A right answer about a product would still be the wrong reply',
     threshold: `Kept back at ${pc(NEEDS_MAYA_CEILING)} and over`,
   },
   {
@@ -65,7 +65,7 @@ export const QUESTIONS: QuestionCard[] = [
     prompt: 'You answer this one the same way every time',
     // Phrased against the slider, not against a number: she can move the bar,
     // and lib/lanes.ts drops it by 25 points when the reply is a question back.
-    threshold: `Drafted at your review bar — starts at ${pc(DEFAULT_THRESHOLD)}, and 25 points lower when the reply is a question back`,
+    threshold: `Drafted at your review bar. Starts at ${pc(DEFAULT_THRESHOLD)}, and 25 points lower when the reply is a question back`,
   },
   {
     key: 'urgency',
@@ -85,7 +85,7 @@ export const QUESTIONS: QuestionCard[] = [
     key: 'is_reaction',
     label: 'Skin has reacted',
     kind: 'yesno',
-    prompt: 'Burning, stinging, rawness, swelling — something is wrong now',
+    prompt: 'Burning, stinging, rawness, swelling. Something is wrong now',
     threshold: 'Straight to you at 50% and over',
     hidden: true,
   },
@@ -100,7 +100,7 @@ export const MAYA_ROUTING: { when: string; then: string }[] = [
   { when: 'Oily / combo', then: 'Daily Gel' },
   { when: 'Sensitive', then: 'nothing with fragrance · Red Reset' },
   { when: 'Redness', then: 'Red Reset' },
-  { when: 'Shade questions', then: 'ask what they wear now — never guess' },
+  { when: 'Shade questions', then: 'ask what they wear now. Never guess' },
   { when: 'Over £60', then: 'good, not £62 good' },
   { when: 'Always', then: 'SPF 50, non-negotiable · two products, never more' },
   { when: 'Never', then: 'retinol by default' },
