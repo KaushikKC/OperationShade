@@ -70,21 +70,47 @@ function pickFor(text: string, a: JevAnswers): { names: string[]; total: number;
   return { names: capped, total: capped.reduce((sum, n) => sum + (byName(n)?.price ?? 0), 0), rule: primary.rule }
 }
 
-const statedBudget = (text: string): number | null => {
+/**
+ * The exact amount, when the message really is stating a budget.
+ *
+ * The first figure in a message is very often not one: "why is everything £60
+ * now", "£20 for a cleanser? really?", "not spending £80 on a serum" are a
+ * complaint, a scoff and a refusal. Jev has already judged whether there is a
+ * budget in the message at all, so the figure is only trusted when it agrees
+ * with that band — which on this corpus rejects all thirteen misreads and
+ * keeps all forty-two real ones.
+ */
+const inBand = (n: number, band: string): boolean => {
+  if (band === 'under_30') return n < 30
+  if (band === '30_to_60') return n >= 30 && n <= 60
+  if (band === 'over_60') return n > 60
+  return false // 'none' — Jev found no budget here, so no figure is one.
+}
+
+const statedBudget = (text: string, band: string): number | null => {
   const match = text.match(/£\s*(\d+)/i) ?? text.match(/\b(\d+)\s*(?:quid|pounds?|gbp)\b/i)
-  return match ? Number(match[1]) : null
+  if (!match) return null
+  const n = Number(match[1])
+  return inBand(n, band) ? n : null
 }
 
 /** The money line. Her whole brand is being straight about what it costs. */
 function budgetLine(total: number, band: string, names: string[], text: string): string | null {
-  const ceiling = statedBudget(text) ?? CEILING[band]
+  const ceiling = statedBudget(text, band) ?? CEILING[band]
   if (ceiling === null || ceiling === undefined || total <= ceiling) return null
   const affordable = names
     .filter((name) => (byName(name)?.price ?? Infinity) <= ceiling)
     .sort((x, y) => (byName(y)?.maya ?? 0) - (byName(x)?.maya ?? 0))[0]
-  if (!affordable) return `That's ${gbp(total)}, not ${gbp(ceiling)}. Nothing here fits that budget without pretending — keep the money for now.`
+  if (!affordable) return `That's ${gbp(total)}, not ${gbp(ceiling)}. Nothing here fits that without pretending — keep the money for now.`
   const later = names.find((name) => name !== affordable)
-  return `That's ${gbp(total)}, not ${gbp(ceiling)}. Start with ${withPrice(affordable)}${later ? ` and add ${byName(later)?.name ?? later} when the budget allows` : ''}.`
+  const over = total - ceiling
+  // A tenner over is worth saying out loud; forty is not. Telling someone to
+  // stretch is a judgement, and it stops being a kind one past a point.
+  const worthStretching = over <= 15 && over <= ceiling * 0.25
+  const fallback = `start with ${withPrice(affordable)}${later ? ` and add the ${byName(later)?.name ?? later} next month — it works in that order` : ''}`
+  return worthStretching
+    ? `That's ${gbp(total)}, not ${gbp(ceiling)}. If you can stretch ${gbp(over)}, do it — it's the right pair. If you can't, ${fallback}.`
+    : `That's ${gbp(total)}, not ${gbp(ceiling)}. ${fallback.charAt(0).toUpperCase()}${fallback.slice(1)}.`
 }
 
 /** E-08.3: said when they are actually about to spend that kind of money. */
@@ -153,7 +179,7 @@ function draftFor(text: string, a: JevAnswers): string | undefined {
       const cleanser = byName('Soft Clean')
       if (!first || !cleanser) return undefined
       const total = first.price + cleanser.price
-      const ceiling = statedBudget(text) ?? CEILING[a.budget_band.choice]
+      const ceiling = statedBudget(text, a.budget_band.choice) ?? CEILING[a.budget_band.choice]
       if (ceiling !== null && ceiling !== undefined && total > ceiling) {
         if (first.price <= ceiling) {
           lines.push(`At ${gbp(ceiling)}, one product now: ${withNote(first.name)}. Keep your current cleanser and add ${cleanser.name} when the budget allows.`)
@@ -215,6 +241,18 @@ function draftFor(text: string, a: JevAnswers): string | undefined {
       }
       const pick = pickFor(text, a)
       if (!pick.names.length) return undefined
+      // If her ceiling rules out everything, say that instead of listing two
+      // products she cannot buy and taking them away in the next sentence.
+      const ceiling = statedBudget(text, a.budget_band.choice) ?? CEILING[a.budget_band.choice]
+      if (ceiling !== null && ceiling !== undefined && !pick.names.some((n) => (byName(n)?.price ?? Infinity) <= ceiling)) {
+        // Cheapest of the ones she'd actually put her name to. The balm is on
+        // the shelf for dry skin and she says it is too much for her, so it is
+        // not the thing to send someone who is counting every pound.
+        const byPrice = (x: string, y: string) => (byName(x)?.price ?? 0) - (byName(y)?.price ?? 0)
+        const hers = pick.names.filter((n) => !byName(n)?.hedged)
+        const cheapest = (hers.length ? hers : pick.names).sort(byPrice)[0]
+        return `Not at ${gbp(ceiling)}, not honestly. The cheapest thing I'd put on your skin is ${withPrice(cheapest)}, so keep the money until you've got that — buying something worse in the meantime is how people end up with a shelf of things they don't use.`
+      }
       const opener =
         intent === 'transfer_of_trust'
           ? `If it were my money: `
@@ -225,7 +263,7 @@ function draftFor(text: string, a: JevAnswers): string | undefined {
       if (intent === 'transfer_of_trust') lines.push(`That's where mine would go, and I'd leave the rest of it in your account.`)
       if (pick.rule) lines.push(`And ${pick.rule} — that rule matters more than the product does.`)
       // Oil Balm is on the shelf for dry skin and she does not use it. Say so.
-      if (pick.names.includes('Oil Balm')) lines.push(`Only take the balm if you like a heavy finish. It's beautiful and it's too much for me.`)
+      if (pick.names.includes('Oil Balm')) lines.push(`Only take the balm if you actually like a heavy finish.`)
       const money = budgetLine(pick.total, a.budget_band.choice, pick.names, text)
       if (money) lines.push(money)
       break
