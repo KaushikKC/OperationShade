@@ -812,11 +812,14 @@ export default function Console() {
   const lowCount = results.filter(isLowConfidence).length
   const sampleCount = results.filter((r) => !!r?.persona).length
 
+  // A count of nought while the inbox is still being read looks like a run
+  // that found nothing. Until there is something to count, show no number.
+  const n = (v: number) => (loading ? '' : ` ${v}`)
   const tabs: { key: Tab; label: string }[] = [
-    { key: 'all', label: `All ${results.length}` },
-    { key: 'low', label: `Unsure (${lowCount})` },
-    { key: 'urgent', label: `Urgent (${urgentCount})` },
-    { key: 'sample', label: `Case-file 12 (${sampleCount})` },
+    { key: 'all', label: `All${n(results.length)}` },
+    { key: 'low', label: loading ? 'Unsure' : `Unsure (${lowCount})` },
+    { key: 'urgent', label: loading ? 'Urgent' : `Urgent (${urgentCount})` },
+    { key: 'sample', label: loading ? 'Case-file 12' : `Case-file 12 (${sampleCount})` },
   ]
 
   return (
@@ -945,12 +948,12 @@ export default function Console() {
             <div className="flex-1" />
             {(
               [
-                [`${stats?.count ?? results.length}`, 'DMs read', 'in this sample'],
+                [loading ? '—' : `${stats?.count ?? results.length}`, 'DMs read', 'in this sample'],
                 [stats ? `${(stats.ms / 1000).toFixed(1)}s` : '—', 'wall time'],
                 [stats ? `$${stats.costUsd.toFixed(3)}` : '—', 'reader cost'],
                 [`${stats?.decisions ?? '—'}`, 'decisions made'],
                 [
-                  `~${hoursSaved}h`,
+                  loading ? '—' : `~${hoursSaved}h`,
                   'back to you / month',
                   `${REPLY_HOURS_A_MONTH} hrs × ${Math.round(voiceShare * 100)}% drafted`,
                 ],
@@ -1061,6 +1064,7 @@ export default function Console() {
               const meta = LANE_META[lane]
               const count = laneCounts[lane]
               const share = results.length ? Math.round((count / results.length) * 100) : 0
+              const shown = loading ? '—' : String(count)
               const active = laneFilter === lane
               return (
                 <button
@@ -1074,10 +1078,12 @@ export default function Console() {
                   }}
                 >
                   <div className="font-display text-[30px] font-black leading-none">
-                    {count}
-                    <span className="ml-2 text-[13px] font-bold" style={{ color: 'var(--nb-muted)' }}>
-                      {share}%
-                    </span>
+                    {shown}
+                    {!loading && (
+                      <span className="ml-2 text-[13px] font-bold" style={{ color: 'var(--nb-muted)' }}>
+                        {share}%
+                      </span>
+                    )}
                   </div>
                   <div className="mt-1 font-display text-[15px] font-extrabold">{meta.label}</div>
                   <div className="mt-1 text-[12px] leading-snug" style={{ color: 'var(--nb-muted)' }}>
@@ -1197,9 +1203,9 @@ export default function Console() {
                 {filtered.length === 0 && (
                   <tr>
                     <td colSpan={5} className="px-4 py-10 text-center">
-                      <div className="nb-hand text-[24px]">nothing here</div>
+                      <div className="nb-hand text-[24px]">{loading ? 'reading the inbox…' : 'nothing here'}</div>
                       <p className="text-[13px]" style={{ color: 'var(--nb-muted)' }}>
-                        {loading ? 'Reading the inbox…' : 'No messages match this view.'}
+                        {loading ? 'One pass over every message. A moment.' : 'No messages match this view.'}
                       </p>
                     </td>
                   </tr>
