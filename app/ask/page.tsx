@@ -88,7 +88,10 @@ function buysIn(draft: string | undefined): ShelfItem[] {
   if (!draft) return []
   const out: ShelfItem[] = []
   const seen = new Set<string>()
-  for (const m of draft.matchAll(/([A-Za-z][A-Za-z ]*?) \(£(\d+)\)/g)) {
+  // She writes "Cloud Cream, £38" now; older wordings used "Cloud Cream (£38)".
+  // Both are read, so the breakdown does not quietly empty out when her phrasing
+  // changes.
+  for (const m of draft.matchAll(/([A-Za-z][A-Za-z ]*?)(?:,\s*|\s*\()£(\d+)\)?/g)) {
     // The capture can pick up leading filler — "and Daily Gel", or "Put it
     // towards Cloud Cream". Shelf names match exactly, so drop words from the
     // front until one does; a genuine name is never stripped past itself.
@@ -136,7 +139,7 @@ function whyLine(a: Classified): string {
       : null,
   ].filter(Boolean)
   const reading = bits.length ? `${bits.join(', ')}. ` : ''
-  const line = `${reading}answered the same way she answers every one of these.`
+  const line = `${reading}Answered the same way she answers every one of these.`
   return line.charAt(0).toUpperCase() + line.slice(1)
 }
 

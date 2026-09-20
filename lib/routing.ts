@@ -107,8 +107,11 @@ const statedBudget = (text: string, band: string): number | null => {
 function budgetLine(total: number, band: string, names: string[], text: string): string | null {
   const ceiling = statedBudget(text, band) ?? CEILING[band]
   if (ceiling === null || ceiling === undefined || total <= ceiling) return null
+  // Affordability is judged on the things she would actually put her name to.
+  // The balm is cheaper than the cream and she says it is too much for her, so
+  // it is not what someone counting every pound gets told to start with.
   const affordable = names
-    .filter((name) => (byName(name)?.price ?? Infinity) <= ceiling)
+    .filter((name) => !byName(name)?.hedged && (byName(name)?.price ?? Infinity) <= ceiling)
     .sort((x, y) => (byName(y)?.maya ?? 0) - (byName(x)?.maya ?? 0))[0]
   if (!affordable) return `That's ${gbp(total)}, not ${gbp(ceiling)}. Nothing I've got fits that without pretending. Keep the money for now.`
   const later = names.find((name) => name !== affordable)
@@ -261,7 +264,11 @@ function draftFor(text: string, a: JevAnswers): string | undefined {
       // If her ceiling rules out everything, say that instead of listing two
       // products she cannot buy and taking them away in the next sentence.
       const ceiling = statedBudget(text, a.budget_band.choice) ?? CEILING[a.budget_band.choice]
-      if (ceiling !== null && ceiling !== undefined && !pick.names.some((n) => (byName(n)?.price ?? Infinity) <= ceiling)) {
+      if (
+        ceiling !== null &&
+        ceiling !== undefined &&
+        !pick.names.some((n) => !byName(n)?.hedged && (byName(n)?.price ?? Infinity) <= ceiling)
+      ) {
         // Cheapest of the ones she'd actually put her name to. The balm is on
         // the shelf for dry skin and she says it is too much for her, so it is
         // not the thing to send someone who is counting every pound.
