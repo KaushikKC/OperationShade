@@ -6,6 +6,7 @@ import type { Classified, JevAnswers } from '@/lib/types'
 import { route } from '@/lib/routing'
 import { byName, gbp, named, WOULD_NOT_PAY_FOR, type ShelfItem } from '@/lib/shelf'
 import { intentLabel, skinLabel, budgetLabel, pct } from '@/components/console/format'
+import { useDictation } from '@/components/use-dictation'
 
 const IS_MOCK = process.env.NEXT_PUBLIC_MOCK !== '0'
 
@@ -160,6 +161,27 @@ function resultText(a: Classified): string {
   return lines.join('\n')
 }
 
+/** Drawn, not imported — one glyph does not need a package. */
+function MicIcon({ listening }: { listening: boolean }) {
+  return (
+    <svg
+      aria-hidden
+      width="19"
+      height="19"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="9" y="2.5" width="6" height="11" rx="3" fill={listening ? 'currentColor' : 'none'} />
+      <path d="M5.5 11a6.5 6.5 0 0 0 13 0" />
+      <path d="M12 17.5V21" />
+    </svg>
+  )
+}
+
 export default function AskPage() {
   const [text, setText] = useState('')
   const [busy, setBusy] = useState(false)
@@ -167,9 +189,18 @@ export default function AskPage() {
   const [err, setErr] = useState<string | null>(null)
   const [note, setNote] = useState<string | null>(null)
 
+  // Spoken words land in the same box as typed ones, so either way she can read
+  // it back and fix it before asking. Nothing is asked on her behalf.
+  const speech = useDictation({
+    onFinal: (heard) => setText((t) => (t.trim() ? `${t.trim()} ${heard}` : heard)),
+  })
+
   async function ask() {
     const q = text.trim()
     if (!q || busy) return
+    // Asking closes the microphone — leaving it open through the answer would
+    // keep the light on for nothing.
+    if (speech.listening) speech.stop()
     setBusy(true)
     setErr(null)
     setNote(null)
@@ -260,8 +291,15 @@ export default function AskPage() {
           <textarea
             className="nb-input mt-4 w-full"
             rows={3}
-            placeholder="e.g. oily skin, £25, five minutes in the morning — what do I actually need?"
-            value={text}
+            placeholder={
+              speech.supported
+                ? 'e.g. oily skin, £25, five minutes in the morning — type it, or tap the mic'
+                : 'e.g. oily skin, £25, five minutes in the morning — what do I actually need?'
+            }
+            // While it is listening the box is showing a guess that the browser
+            // is still rewriting, so it is not hers to edit yet.
+            readOnly={speech.listening}
+            value={speech.interim ? `${text.trim()} ${speech.interim}`.trim() : text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
@@ -270,16 +308,48 @@ export default function AskPage() {
               }
             }}
           />
-          <div className="mt-3 flex items-center gap-3">
+          <div className="mt-3 flex flex-wrap items-center gap-2">
             <button className="nb-btn nb-btn-coral" onClick={() => void ask()} disabled={busy || !text.trim()}>
               {busy ? 'Thinking…' : 'Ask Maya'}
             </button>
-            {err && (
+            {/* Only drawn where it works — no microphone on a browser without one. */}
+            {speech.supported && (
+              <button
+                // Stretched rather than sized: the glyph is taller than 14px
+                // text, so any fixed height would sit proud of Ask Maya. This
+                // takes the row's height, whatever that turns out to be.
+                className={`nb-btn self-stretch justify-center ${speech.listening ? 'nb-btn-ink' : 'nb-btn-yellow'}`}
+                style={{ padding: '0 12px' }}
+                aria-pressed={speech.listening}
+                // The only label it has, so it carries the whole meaning.
+                aria-label={speech.listening ? 'Stop listening' : 'Speak instead of typing'}
+                title={speech.listening ? 'Stop listening' : 'Speak instead of typing'}
+                onClick={() => (speech.listening ? speech.stop() : speech.start())}
+              >
+                <MicIcon listening={speech.listening} />
+              </button>
+            )}
+            {speech.listening ? (
+              <span className="flex items-center gap-2 text-[12.5px] font-semibold">
+                <i
+                  aria-hidden
+                  className="inline-block h-[9px] w-[9px] animate-pulse rounded-full"
+                  style={{ background: 'var(--nb-coral)' }}
+                />
+                <span style={{ color: 'var(--nb-muted)' }}>Listening — say it how you’d say it out loud.</span>
+              </span>
+            ) : null}
+            {(err || speech.error) && (
               <span className="text-[12.5px] font-semibold" style={{ color: 'var(--nb-coral)' }}>
-                {err}
+                {err ?? speech.error}
               </span>
             )}
           </div>
+          {speech.supported && !speech.listening && text.trim() && (
+            <p className="mt-1.5 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
+              Read it back and fix anything it misheard before you ask.
+            </p>
+          )}
 
           {answer && (
             <div className="mt-5 border-t-[2.5px] border-dashed border-[color:var(--nb-ink)] pt-4">
