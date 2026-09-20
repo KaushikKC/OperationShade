@@ -50,6 +50,27 @@ function isUrgent(dm: Classified): boolean {
   return num(dm.answers?.urgency?.score) >= 0.7
 }
 
+/** One answer chosen out of a question card, filtering the table to it. */
+type Pick = { key: string; value: string; label: string; rungs?: number }
+
+/**
+ * Does this message carry that answer? A choice question matches the option
+ * the reader landed on. The two scales match the rung nearest the score —
+ * a message scoring 0.7 on buying is "ready", which is the word on the chip
+ * and the only form of it she ever sees.
+ */
+function matchesPick(dm: Classified, pick: Pick): boolean {
+  const ans = (dm.answers as Record<string, unknown> | undefined)?.[pick.key] as
+    | { choice?: string; score?: number }
+    | undefined
+  if (!ans) return false
+  if (typeof ans.choice === 'string') return ans.choice === pick.value
+  if (typeof ans.score === 'number' && pick.rungs && pick.rungs > 1) {
+    return String(Math.round(ans.score * (pick.rungs - 1))) === pick.value
+  }
+  return false
+}
+
 function ConfBar({ value }: { value: number | null }) {
   if (value === null) return null
   return (
@@ -129,14 +150,41 @@ function LaneTag({ lane, urgent }: { lane: Lane | undefined; urgent?: boolean })
 }
 
 /**
- * One of the reader's questions. It opens to show what it can answer and where
- * the line is drawn — it is not a switch. These are asked of every message in
- * one pass, so turning one off would mean reading the whole inbox again, and a
- * control that cannot do what it looks like it does is worse than no control.
+ * One of the reader's questions. It opens to show what it can answer, where the
+ * line is drawn, and how the inbox actually answered — tapping one of those
+ * answers shows just those messages.
+ *
+ * It is not a switch. All nine are asked of every message in one pass, so
+ * turning one off would mean reading the whole inbox again.
  */
-function QuestionCardView({ q }: { q: (typeof QUESTIONS)[number] }) {
+function QuestionCardView({
+  q,
+  rows,
+  pick,
+  onPick,
+}: {
+  q: (typeof QUESTIONS)[number]
+  rows: Classified[]
+  pick: Pick | null
+  onPick: (p: Pick | null) => void
+}) {
   const [open, setOpen] = useState(false)
   const kindLabel = { options: 'pick one', scale: 'how much', yesno: 'yes / no' }[q.kind]
+  const mine = pick?.key === q.key ? pick : null
+  const rungs = q.options?.length ?? 0
+  /** The value a chip filters on: the option itself, or its rung on a scale. */
+  const valueAt = (o: string, i: number) => (q.kind === 'scale' ? String(i) : o)
+  // Counted only while the card is open, so a closed sidebar costs nothing.
+  const counts = useMemo(() => {
+    if (!open || !q.options) return null
+    const out: Record<string, number> = {}
+    for (const [i, o] of q.options.entries()) {
+      const value = valueAt(o, i)
+      out[value] = rows.reduce((n, r) => n + (matchesPick(r, { key: q.key, value, label: '', rungs }) ? 1 : 0), 0)
+    }
+    return out
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, q, rows, rungs])
   return (
     <div className="nb-card-flat" style={{ boxShadow: 'none' }}>
       <button
@@ -163,17 +211,42 @@ function QuestionCardView({ q }: { q: (typeof QUESTIONS)[number] }) {
             {q.prompt}
           </p>
           {q.options && (
-            <div className="mt-2 flex flex-wrap gap-1">
-              {q.options.map((o) => (
-                <span
-                  key={o}
-                  className="rounded-md border border-[color:var(--nb-ink)] px-1.5 py-0.5 text-[11px] font-semibold"
-                  style={{ background: 'var(--nb-bg)' }}
-                >
-                  {optionLabel(q.key, o)}
-                </span>
-              ))}
-            </div>
+            <>
+              <p className="mt-1.5 text-[11px] font-semibold" style={{ color: 'var(--nb-muted)' }}>
+                Tap an answer to see just those messages.
+              </p>
+              <div className="mt-1.5 flex flex-wrap gap-1">
+                {q.options.map((o, i) => {
+                  const value = valueAt(o, i)
+                  const n = counts?.[value] ?? 0
+                  const active = mine?.value === value
+                  // Nothing in this run answered that way, so there is nothing
+                  // to show — it stays readable, but it does not pretend.
+                  const empty = n === 0 && !active
+                  return (
+                    <button
+                      key={o}
+                      disabled={empty}
+                      aria-pressed={active}
+                      title={empty ? 'None in this run' : `Show the ${n} like this`}
+                      onClick={() =>
+                        onPick(active ? null : { key: q.key, value, label: optionLabel(q.key, o), rungs })
+                      }
+                      className="rounded-md border border-[color:var(--nb-ink)] px-1.5 py-0.5 text-[11px] font-semibold"
+                      style={{
+                        background: active ? 'var(--nb-ink)' : 'var(--nb-bg)',
+                        color: active ? 'var(--nb-paper)' : 'var(--nb-ink)',
+                        opacity: empty ? 0.4 : 1,
+                        cursor: empty ? 'default' : 'pointer',
+                      }}
+                    >
+                      {optionLabel(q.key, o)}
+                      {n > 0 && <span style={{ opacity: 0.65 }}> {n}</span>}
+                    </button>
+                  )
+                })}
+              </div>
+            </>
           )}
           {q.threshold && (
             <p className="mt-2 text-[11px] font-semibold" style={{ color: 'var(--nb-muted)' }}>
@@ -591,6 +664,7 @@ export default function Console() {
   const [mode, setMode] = useState<RunMode>('all')
   const [tab, setTab] = useState<Tab>('all')
   const [laneFilter, setLaneFilter] = useState<Lane | null>(null)
+  const [pick, setPick] = useState<Pick | null>(null)
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState<Row | null>(null)
 
@@ -628,6 +702,7 @@ export default function Console() {
     if (tab === 'urgent') rows = rows.filter(isUrgent)
     if (tab === 'sample') rows = rows.filter((r) => !!r?.persona)
     if (laneFilter) rows = rows.filter((r) => r?.lane === laneFilter)
+    if (pick) rows = rows.filter((r) => matchesPick(r, pick))
     const q = query.trim().toLowerCase()
     if (q) rows = rows.filter((r) => `${r?.handle} ${r?.text}`.toLowerCase().includes(q))
     const lanePos = (r: Classified) => LANE_ORDER.indexOf(r?.lane ?? 'noise')
@@ -641,7 +716,7 @@ export default function Console() {
       return 0
     })
     return rows
-  }, [results, tab, laneFilter, query])
+  }, [results, tab, laneFilter, query, pick])
 
   const stats = data?.stats
   const voiceShare = results.length ? laneCounts.voice / results.length : 0
@@ -738,7 +813,7 @@ export default function Console() {
           </p>
           <div className="space-y-2.5">
             {QUESTIONS.map((q) => (
-              <QuestionCardView key={q.key} q={q} />
+              <QuestionCardView key={q.key} q={q} rows={results} pick={pick} onPick={setPick} />
             ))}
           </div>
         </aside>
@@ -954,6 +1029,17 @@ export default function Console() {
                 onClick={() => setLaneFilter(null)}
               >
                 {LANE_META[laneFilter].short} ✕
+              </button>
+            )}
+            {/* The sidebar can be scrolled away, so the chosen answer says so here too. */}
+            {pick && (
+              <button
+                className="nb-btn nb-btn-yellow"
+                style={{ padding: '6px 13px', fontSize: 13 }}
+                title="Show everything again"
+                onClick={() => setPick(null)}
+              >
+                {pick.label} ✕
               </button>
             )}
             <input
