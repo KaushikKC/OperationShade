@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import type { Classified, JevAnswers } from '@/lib/types'
 import { route } from '@/lib/routing'
 import { byName, gbp, named, WOULD_NOT_PAY_FOR, type ShelfItem } from '@/lib/shelf'
@@ -147,6 +148,12 @@ function handoffLine(a: Classified): string {
   return a.why ?? 'There is not enough here to give a safe answer without guessing.'
 }
 
+/** The link that reopens this exact answer, for a friend or for later. */
+function shareUrl(a: Classified): string {
+  if (typeof window === 'undefined') return ''
+  return `${window.location.origin}${window.location.pathname}?q=${encodeURIComponent(a.text)}`
+}
+
 /** What Copy and Share both put on the clipboard. */
 function resultText(a: Classified): string {
   const lines: string[] = [`Maya’s decision: ${a.draft}`]
@@ -182,8 +189,21 @@ function MicIcon({ listening }: { listening: boolean }) {
   )
 }
 
-export default function AskPage() {
-  const [text, setText] = useState('')
+/**
+ * A shared link has to open the answer, not a blank box.
+ *
+ * E-09.4: 41% of her high-value buyers first met Maya through a friend's
+ * share. That share is one person answering another person's question using
+ * Maya's judgement — so the thing being passed along has to carry the answer
+ * with it. The question travels in the URL and the verdict is worked out
+ * fresh on arrival, which means a link sent today still shows what Maya
+ * thinks when it is opened four days later (E-09.5: the median gap is 4.6).
+ */
+function Ask() {
+  const params = useSearchParams()
+  // Constant for this visit: what arrived in the link, if anything.
+  const [arrivedWith] = useState(() => params.get('q')?.trim() ?? '')
+  const [text, setText] = useState(arrivedWith)
   const [busy, setBusy] = useState(false)
   const [answer, setAnswer] = useState<Classified | null>(null)
   const [err, setErr] = useState<string | null>(null)
@@ -195,8 +215,8 @@ export default function AskPage() {
     onFinal: (heard) => setText((t) => (t.trim() ? `${t.trim()} ${heard}` : heard)),
   })
 
-  async function ask() {
-    const q = text.trim()
+  async function ask(override?: string) {
+    const q = (override ?? text).trim()
     if (!q || busy) return
     // Asking closes the microphone — leaving it open through the answer would
     // keep the light on for nothing.
@@ -217,12 +237,46 @@ export default function AskPage() {
         if (!res.ok) throw new Error(`ask ${res.status}`)
         setAnswer((await res.json()) as Classified)
       }
+      // The address bar now holds the question, so this page can be sent to a
+      // friend or kept for later without anything being stored anywhere.
+      try {
+        window.history.replaceState(null, '', `${window.location.pathname}?q=${encodeURIComponent(q)}`)
+      } catch {
+        // Some embedded browsers refuse this. The answer is still on screen.
+      }
     } catch (e) {
       setErr(e instanceof Error ? e.message : 'something went wrong')
     } finally {
       setBusy(false)
     }
   }
+
+  // Arriving with a question in the link: answer it. No setState runs before
+  // the first await, so this does not cascade a render on the way in.
+  useEffect(() => {
+    if (!arrivedWith) return
+    let dead = false
+    void (async () => {
+      try {
+        const res = await fetch('/api/ask', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ text: arrivedWith }),
+        })
+        if (!res.ok) throw new Error(`ask ${res.status}`)
+        const json = (await res.json()) as Classified
+        if (!dead) setAnswer(json)
+      } catch {
+        if (!dead) setErr('Could not open that one. Ask it again below.')
+      }
+    })()
+    return () => {
+      dead = true
+    }
+  }, [arrivedWith])
+
+  /** Waiting on a link someone sent, rather than on something typed here. */
+  const opening = Boolean(arrivedWith) && !answer && !err
 
   function flash(msg: string) {
     setNote(msg)
@@ -244,7 +298,7 @@ export default function AskPage() {
     const payload = {
       title: 'What would Maya do?',
       text: resultText(answer),
-      url: window.location.href,
+      url: shareUrl(answer),
     }
     const nav = navigator as Navigator & {
       share?: (d: typeof payload) => Promise<void>
@@ -277,7 +331,7 @@ export default function AskPage() {
       <div className="w-full max-w-[560px]">
         <div className="mb-4 text-center">
           <span className="nb-tape" style={{ background: 'var(--nb-yellow)' }}>
-            from Maya’s notebook
+            {arrivedWith ? 'someone sent you this' : 'from Maya’s notebook'}
           </span>
         </div>
         <div className="nb-card p-6">
@@ -288,6 +342,29 @@ export default function AskPage() {
             Skin type, budget, what you’re stuck on — her own notes answer what they can, and tell
             you when it needs her.
           </p>
+
+          {/* Arriving on someone else's question: show whose it was, and make
+              it obvious that the box below is for theirs. */}
+          {arrivedWith && (
+            <div
+              className="nb-card-flat mt-4 border-l-[5px] p-3"
+              style={{ background: 'var(--nb-cream-deep)', borderLeftColor: 'var(--nb-yellow)' }}
+            >
+              <div className="nb-eyebrow mb-1">The question you were sent</div>
+              <p className="nb-hand text-[19px] leading-snug">“{arrivedWith}”</p>
+              {opening && (
+                <p className="mt-1.5 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
+                  Looking it up in her notes…
+                </p>
+              )}
+              {!opening && (
+                <p className="mt-1.5 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
+                  Not your skin? Change it below and ask your own — it costs nothing and she never
+                  sees it unless it needs her.
+                </p>
+              )}
+            </div>
+          )}
           <textarea
             className="nb-input mt-4 w-full"
             rows={3}
@@ -474,5 +551,25 @@ export default function AskPage() {
         </p>
       </div>
     </main>
+  )
+}
+
+/**
+ * useSearchParams needs a boundary around it, and this is what someone sees
+ * for the instant before a shared link opens.
+ */
+export default function AskPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen" style={{ background: 'var(--nb-bg)' }}>
+          <p className="nb-hand pt-24 text-center text-[22px]" style={{ color: 'var(--nb-muted)' }}>
+            one moment…
+          </p>
+        </main>
+      }
+    >
+      <Ask />
+    </Suspense>
   )
 }
