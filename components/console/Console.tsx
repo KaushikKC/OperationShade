@@ -388,7 +388,11 @@ export default function Console() {
 
   const stats = data?.stats
   const voiceShare = results.length ? laneCounts.voice / results.length : 0
-  const hoursSaved = Math.round(voiceShare * 70)
+  // E-02, sheet 02: 70+ hrs of reply time a month. The only figure we supply
+  // is the share drafted here, and it moves with the slider — so the sum is
+  // printed next to the answer rather than asserted.
+  const REPLY_HOURS_A_MONTH = 70
+  const hoursSaved = Math.round(voiceShare * REPLY_HOURS_A_MONTH)
   const urgentCount = results.filter(isUrgent).length
   const lowCount = results.filter(isLowConfidence).length
   const sampleCount = results.filter((r) => !!r?.persona).length
@@ -512,13 +516,19 @@ export default function Console() {
               sample export
             </a>
             <div className="flex-1" />
-            {[
-              [`${stats?.count ?? results.length}`, 'DMs read'],
-              [stats ? `${(stats.ms / 1000).toFixed(1)}s` : '—', 'wall time'],
-              [stats ? `$${stats.costUsd.toFixed(3)}` : '—', 'reader cost'],
-              [`${stats?.decisions ?? '—'}`, 'decisions made'],
-              [`~${hoursSaved}h`, 'back to you / month'],
-            ].map(([v, l]) => (
+            {(
+              [
+                [`${stats?.count ?? results.length}`, 'DMs read', 'in this sample'],
+                [stats ? `${(stats.ms / 1000).toFixed(1)}s` : '—', 'wall time'],
+                [stats ? `$${stats.costUsd.toFixed(3)}` : '—', 'reader cost'],
+                [`${stats?.decisions ?? '—'}`, 'decisions made'],
+                [
+                  `~${hoursSaved}h`,
+                  'back to you / month',
+                  `${REPLY_HOURS_A_MONTH} hrs × ${Math.round(voiceShare * 100)}% drafted`,
+                ],
+              ] as [string, string, string?][]
+            ).map(([v, l, note]) => (
               <div
                 key={l}
                 className="border-l-[2.5px] border-[color:var(--nb-line-soft)] pl-3"
@@ -527,6 +537,11 @@ export default function Console() {
                 <div className="mt-1 text-[10.5px] font-bold uppercase tracking-wide" style={{ color: 'var(--nb-muted)' }}>
                   {l}
                 </div>
+                {note && (
+                  <div className="mt-0.5 text-[10px] tabular-nums" style={{ color: 'var(--nb-muted)' }}>
+                    {note}
+                  </div>
+                )}
               </div>
             ))}
           </div>
