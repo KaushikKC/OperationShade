@@ -437,10 +437,10 @@ function Drawer({
                     style={{ background: 'var(--nb-paper)', padding: '6px 14px', fontSize: 13 }}
                     onClick={() => {
                       setAsking(false)
-                      setSaved('Saved for this one only.')
+                      setSaved('Not approved for similar messages.')
                     }}
                   >
-                    Only this one
+                    Don’t reuse this
                   </button>
                 </div>
               </div>
@@ -712,7 +712,7 @@ export default function Console() {
           {/* Hers first: the things she decides and can change right now. */}
           <div className="nb-eyebrow mb-1">Your Playbook</div>
           <p className="mb-3 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
-            Yours. Change any of it and the inbox follows.
+            Your review bar and approved replies. Change them and the inbox follows.
           </p>
 
           <PlaybookPanel playbook={playbook} threshold={threshold} />

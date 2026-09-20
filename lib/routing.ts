@@ -70,14 +70,21 @@ function pickFor(text: string, a: JevAnswers): { names: string[]; total: number;
   return { names: capped, total: capped.reduce((sum, n) => sum + (byName(n)?.price ?? 0), 0), rule: primary.rule }
 }
 
+const statedBudget = (text: string): number | null => {
+  const match = text.match(/£\s*(\d+)/i) ?? text.match(/\b(\d+)\s*(?:quid|pounds?|gbp)\b/i)
+  return match ? Number(match[1]) : null
+}
+
 /** The money line. Her whole brand is being straight about what it costs. */
-function budgetLine(total: number, band: string, names: string[]): string | null {
-  const ceiling = CEILING[band]
+function budgetLine(total: number, band: string, names: string[], text: string): string | null {
+  const ceiling = statedBudget(text) ?? CEILING[band]
   if (ceiling === null || ceiling === undefined || total <= ceiling) return null
-  const cheapest = [...names].sort((x, y) => (byName(x)?.price ?? 0) - (byName(y)?.price ?? 0))[0]
-  const best = [...names].sort((x, y) => (byName(y)?.maya ?? 0) - (byName(x)?.maya ?? 0))[0]
-  const over = total - ceiling
-  return `That's ${gbp(total)}, not ${gbp(ceiling)}. If you can stretch ${gbp(over)}, do it. If you can't, start with ${withPrice(best)} and add the ${byName(cheapest)?.name === best ? withPrice(names.find((n) => n !== best) ?? cheapest) : withPrice(cheapest)} next month — it works in that order.`
+  const affordable = names
+    .filter((name) => (byName(name)?.price ?? Infinity) <= ceiling)
+    .sort((x, y) => (byName(y)?.maya ?? 0) - (byName(x)?.maya ?? 0))[0]
+  if (!affordable) return `That's ${gbp(total)}, not ${gbp(ceiling)}. Nothing here fits that budget without pretending — keep the money for now.`
+  const later = names.find((name) => name !== affordable)
+  return `That's ${gbp(total)}, not ${gbp(ceiling)}. Start with ${withPrice(affordable)}${later ? ` and add ${byName(later)?.name ?? later} when the budget allows` : ''}.`
 }
 
 /** E-08.3: said when they are actually about to spend that kind of money. */
@@ -142,8 +149,21 @@ function draftFor(text: string, a: JevAnswers): string | undefined {
       // E-01.9: "only 2 products bc i will not do 8 steps".
       const pick = pickFor(text, a)
       if (!skinKnown(a)) return `Two products is the right instinct — most people are doing eight and getting less. ${INTAKE.skin} ${INTAKE.blunt}`
-      lines.push(`Two, then: ${withPrice('Soft Clean')} and ${withNote(pick.names[0])}.`)
-      lines.push(`That's the ${POSTS.fiveMinute.title.toLowerCase()} I filmed — the least-watched thing I've made and the one people actually stick to.`)
+      const first = byName(pick.names[0])
+      const cleanser = byName('Soft Clean')
+      if (!first || !cleanser) return undefined
+      const total = first.price + cleanser.price
+      const ceiling = statedBudget(text) ?? CEILING[a.budget_band.choice]
+      if (ceiling !== null && ceiling !== undefined && total > ceiling) {
+        if (first.price <= ceiling) {
+          lines.push(`At ${gbp(ceiling)}, one product now: ${withNote(first.name)}. Keep your current cleanser and add ${cleanser.name} when the budget allows.`)
+        } else {
+          lines.push(`At ${gbp(ceiling)}, I can't get this right from my shelf without pretending. ${first.name} is ${gbp(first.price)}, so keep the money for now.`)
+        }
+      } else {
+        lines.push(`Two, then: ${withPrice(cleanser.name)} and ${withNote(first.name)}.`)
+      }
+      lines.push(`That's the ${POSTS.fiveMinute.title.replace(/^My /, '').toLowerCase()} I filmed — the least-watched thing I've made and the one people actually stick to.`)
       break
     }
     case 'value': {
@@ -206,7 +226,7 @@ function draftFor(text: string, a: JevAnswers): string | undefined {
       if (pick.rule) lines.push(`And ${pick.rule} — that rule matters more than the product does.`)
       // Oil Balm is on the shelf for dry skin and she does not use it. Say so.
       if (pick.names.includes('Oil Balm')) lines.push(`Only take the balm if you like a heavy finish. It's beautiful and it's too much for me.`)
-      const money = budgetLine(pick.total, a.budget_band.choice, pick.names)
+      const money = budgetLine(pick.total, a.budget_band.choice, pick.names, text)
       if (money) lines.push(money)
       break
     }
