@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo, useState, type ReactNode } from 'react'
+import { useMemo, useRef, useState, type ReactNode } from 'react'
 import type { Classified, Lane } from '@/lib/types'
 import { MAYA_ROUTING, QUESTIONS } from './questions'
 import {
@@ -314,7 +314,29 @@ function Drawer({ dm, onClose }: { dm: Classified; onClose: () => void }) {
 }
 
 export default function Console() {
-  const { data, source, isMock, loading, running, progress, error, run } = useResults()
+  const { data, source, isMock, loading, running, progress, error, inboxName, run } = useResults()
+  const fileInput = useRef<HTMLInputElement | null>(null)
+  const [uploadNote, setUploadNote] = useState<string | null>(null)
+
+  // No Instagram API in this build, so her export is the inbox.
+  async function onFile(file: File | undefined) {
+    if (!file || running) return
+    setUploadNote(null)
+    try {
+      const csv = await file.text()
+      if (!csv.trim()) {
+        setUploadNote('That file is empty.')
+        return
+      }
+      setUploadNote(`Reading ${file.name}…`)
+      await run('all', { name: file.name, csv })
+      setUploadNote(null)
+    } catch {
+      setUploadNote("Couldn't open that file.")
+    } finally {
+      if (fileInput.current) fileInput.current.value = ''
+    }
+  }
   const [mode, setMode] = useState<RunMode>('all')
   const [tab, setTab] = useState<Tab>('all')
   const [laneFilter, setLaneFilter] = useState<Lane | null>(null)
@@ -387,7 +409,7 @@ export default function Console() {
           </div>
         </div>
         <span className="nb-pill" style={{ background: 'var(--nb-cream-deep)' }}>
-          inbox <b>dms_sept.json</b>
+          inbox <b>{inboxName ?? 'dms_sept.json'}</b>
         </span>
         <span className="nb-pill" style={{ background: 'var(--nb-cream-deep)' }}>
           reader <b>jev-latest</b>
@@ -449,6 +471,22 @@ export default function Console() {
             <button className="nb-btn nb-btn-coral" onClick={() => void run(mode)} disabled={running || loading}>
               {running ? 'Reading…' : '▶ Run the inbox'}
             </button>
+            <input
+              ref={fileInput}
+              type="file"
+              accept=".csv,text/csv,text/plain"
+              className="hidden"
+              onChange={(e) => void onFile(e.target.files?.[0])}
+            />
+            <button
+              className="nb-btn"
+              style={{ background: 'var(--nb-cream-deep)' }}
+              onClick={() => fileInput.current?.click()}
+              disabled={running}
+              title="Upload a DM export and read that instead"
+            >
+              ⬆ Upload your DMs
+            </button>
             <div className="flex-1" />
             {[
               [`${stats?.count ?? results.length}`, 'DMs read'],
@@ -482,6 +520,13 @@ export default function Console() {
           {error && (
             <p className="mt-2 text-[12.5px] font-semibold" style={{ color: 'var(--nb-coral)' }}>
               Last run hit a snag ({error}) — showing {source === 'sample' ? 'the sample inbox' : 'the last good results'}.
+            </p>
+          )}
+
+          {(uploadNote || inboxName) && (
+            <p className="mt-2 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
+              {uploadNote ??
+                `Reading ${inboxName} — your own export, not the sample. Drop in a new file any time; a CSV with the message text in it is enough.`}
             </p>
           )}
 
