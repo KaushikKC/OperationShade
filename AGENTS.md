@@ -57,8 +57,8 @@ be thin or partially malformed. Never crash on a missing field.
 - **A row with no `draft` can never be Ready to send**, whatever the slider says.
   `rebucket()` enforces it; lane counts should go through it.
 - `LANE_LABELS` exports the four labels. Use them rather than retyping the strings.
-- **Frame the run stats as this sample.** `stats.count` is the 248 messages in
-  `data/dms.json`, not her month. "248 read in this sample", then the monthly figure
+- **Frame the run stats as this sample.** `stats.count` is the 268 messages in
+  `data/dms.json`, not her month. "268 read in this sample", then the monthly figure
   separately with its arithmetic visible.
 
 ## Language
@@ -72,13 +72,20 @@ Maya is the user and she is not a developer. Never use the words **bot**, **AI**
 `data/fixtures/results.sample.json` is generated, not hand-typed:
 
 ```
-node scripts/gen-fixture.mjs > data/fixtures/results.sample.json
+npm run fixture          # tsx scripts/gen-fixture.ts > data/fixtures/results.sample.json
 ```
+
+Regenerate it whenever `lib/routing.ts` changes — otherwise sample mode shows a draft the
+routing no longer writes.
 
 15 rows — the twelve case-file intercepts (the ones with a `persona`, which is what the
 **Sample 12** tab filters on) plus a brand pitch, a spam and a payday DM. Edit
 `scripts/fixture-spec.mjs`, never the JSON. Its lanes and drafts come from `lib/routing.ts`,
 so the fixture behaves exactly like a real run.
 
-`data/results.json` is the committed full run: 248 messages, real Jev answers. `GET
+`data/results.json` is the committed full run: 268 messages, real Jev answers. `GET
 /api/results` serves it with no key and no network.
+
+Sample mode (`NEXT_PUBLIC_MOCK` unset) shows the 15-row fixture in the console and answers
+`/ask` with the sample stand-in. `NEXT_PUBLIC_MOCK=0` shows the 268-row run (no key needed)
+but `/ask` then needs `TYPESAFE_API_KEY` in `.env.local`.

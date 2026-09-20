@@ -148,6 +148,25 @@ function handoffLine(a: Classified): string {
   return a.why ?? 'There is not enough here to give a safe answer without guessing.'
 }
 
+/**
+ * One question in, Maya's verdict out. The sample stand-in and the live reader
+ * are chosen here and nowhere else, so a question typed into the box and a
+ * question arriving in a shared link cannot take different roads.
+ */
+async function answerFor(q: string): Promise<Classified> {
+  if (IS_MOCK) {
+    await new Promise((r) => setTimeout(r, 900))
+    return mockAsk(q)
+  }
+  const res = await fetch('/api/ask', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ text: q }),
+  })
+  if (!res.ok) throw new Error(`ask ${res.status}`)
+  return (await res.json()) as Classified
+}
+
 /** The link that reopens this exact answer, for a friend or for later. */
 function shareUrl(a: Classified): string {
   if (typeof window === 'undefined') return ''
@@ -225,18 +244,7 @@ function Ask() {
     setErr(null)
     setNote(null)
     try {
-      if (IS_MOCK) {
-        await new Promise((r) => setTimeout(r, 900))
-        setAnswer(mockAsk(q))
-      } else {
-        const res = await fetch('/api/ask', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ text: q }),
-        })
-        if (!res.ok) throw new Error(`ask ${res.status}`)
-        setAnswer((await res.json()) as Classified)
-      }
+      setAnswer(await answerFor(q))
       // The address bar now holds the question, so this page can be sent to a
       // friend or kept for later without anything being stored anywhere.
       try {
@@ -258,13 +266,7 @@ function Ask() {
     let dead = false
     void (async () => {
       try {
-        const res = await fetch('/api/ask', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ text: arrivedWith }),
-        })
-        if (!res.ok) throw new Error(`ask ${res.status}`)
-        const json = (await res.json()) as Classified
+        const json = await answerFor(arrivedWith)
         if (!dead) setAnswer(json)
       } catch {
         if (!dead) setErr('Could not open that one. Ask it again below.')
