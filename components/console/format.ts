@@ -32,27 +32,26 @@ export const LANE_META: Record<
 
 export const LANE_ORDER: Lane[] = ['voice', 'maya', 'intent', 'noise']
 
+/**
+ * The twelve categories the case file puts on its own intercepts (E-01), said
+ * the way Maya or the person writing to her would say them. Nothing on screen
+ * needs to know what the classifier calls them.
+ */
 const INTENT_LABELS: Record<string, string> = {
-  shade_info: 'shade question',
-  recommendation: 'recommendation',
-  pick_one: 'pick one',
-  value_check: 'worth it?',
-  routine_context: 'routine',
-  skin_diagnosis: 'skin check',
-  trust_or_fan: 'trust ask',
-  life_event: 'life event',
-  constraint_routine: 'simple routine',
-  delayed_intent: 'payday buyer',
+  info: 'what is that one?',
+  recommendation: 'what should i buy?',
+  judgement: 'which one?',
+  value: 'is it worth it?',
+  context: 'i already have one',
+  diagnosis: 'what is my skin?',
+  trust: 'thank you',
+  relationship: 'life event',
+  constraint: 'keep it simple',
+  delayed_intent: 'buying later',
+  transfer_of_trust: 'what would you do?',
+  personalisation: 'pick for me',
   brand_pitch: 'brand pitch',
   spam: 'spam',
-  where_to_buy: 'where to buy',
-  no_question: 'no clear ask',
-  product_rec: 'product question',
-  routine_help: 'routine help',
-  dupe_request: 'dupe hunt',
-  reaction_concern: 'reaction',
-  purchase_signal: 'buying signal',
-  collab_pitch: 'brand pitch',
 }
 
 const SKIN_LABELS: Record<string, string> = {
