@@ -555,7 +555,7 @@ export default function Console() {
               <input
                 id="sure"
                 type="range"
-                min={0.3}
+                min={DEFAULT_THRESHOLD}
                 max={0.9}
                 step={0.01}
                 value={threshold}
@@ -582,11 +582,11 @@ export default function Console() {
                   <b>
                     {moved} {moved === 1 ? 'message has' : 'messages have'} moved
                   </b>{' '}
-                  since you started sliding. Drag right and more of them wait for you; drag left and more get a
-                  draft. Nothing is re-read and nothing is sent.
+                  moved out of Ready to send and onto your desk. Nothing was re-read and nothing was sent — these
+                  are the same answers, held to a higher bar.
                 </>
               ) : (
-                'Drag right and more messages wait for you; drag left and more get a draft. Nothing is re-read and nothing is sent.'
+                'Sitting where the run was scored. Drag right to keep more of them back for yourself — nothing is re-read and nothing is sent.'
               )}
             </p>
           </div>
