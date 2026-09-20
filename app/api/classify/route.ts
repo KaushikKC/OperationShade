@@ -1,18 +1,43 @@
+import { MAX_ROWS, parseDms } from '@/lib/csv'
 import { apiKey, QUESTION_COUNT, runInbox } from '@/lib/run'
-import { byId, readDms, readResults, writeResults } from '@/lib/store'
+import { byId, readDms, readResults, writeInbox, writeResults } from '@/lib/store'
 import type { Classified, RunResult } from '@/lib/types'
 
 export const runtime = 'nodejs'
 export const maxDuration = 300
 
-/** POST { mode: 'all' | 'unclassified' } -> RunResult. Caches to data/results.json. */
+/**
+ * POST { mode: 'all' | 'unclassified', csv?: string } -> RunResult.
+ * Caches to data/results.json. When a csv is sent it becomes the inbox first,
+ * and the run starts from a clean slate rather than merging into the last one.
+ */
 export async function POST(req: Request) {
   let mode: 'all' | 'unclassified' = 'all'
+  let csv = ''
   try {
     const body = await req.json()
     if (body?.mode === 'unclassified') mode = 'unclassified'
+    if (typeof body?.csv === 'string') csv = body.csv
   } catch {
     // No body is the same as { mode: 'all' }.
+  }
+
+  if (csv) {
+    const parsed = parseDms(csv)
+    if (!parsed.dms.length) {
+      return Response.json(
+        { error: "Couldn't find any messages in that file. It needs a column of message text — a header called text, message or body helps." },
+        { status: 422 },
+      )
+    }
+    await writeInbox(parsed.dms)
+    mode = 'all'
+    console.info(
+      `[classify] read ${parsed.dms.length} messages from an upload` +
+        (parsed.skipped ? `, skipped ${parsed.skipped} empty` : '') +
+        (parsed.truncated ? `, ignored ${parsed.truncated} past the ${MAX_ROWS} cap` : '') +
+        (parsed.headerless ? ' (no header row recognised)' : ''),
+    )
   }
 
   let key: string
