@@ -721,7 +721,7 @@ function PlaybookPanel({
 }
 
 export default function Console() {
-  const { data, source, isMock, loading, running, progress, error, inboxName, run, resetInbox } = useResults()
+  const { data, source, loading, running, progress, error, inboxName, run, resetInbox } = useResults()
   const fileInput = useRef<HTMLInputElement | null>(null)
   const [uploadNote, setUploadNote] = useState<string | null>(null)
 
@@ -831,8 +831,15 @@ export default function Console() {
       >
         <div className="flex items-center gap-3">
           <span
-            className="grid h-9 w-9 place-items-center rounded-full border-[3px] border-[color:var(--nb-ink)] font-display text-[18px] font-black"
-            style={{ background: 'var(--nb-coral)' }}
+            aria-hidden
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full font-display text-[20px] font-black leading-none"
+            style={{
+              background: 'var(--nb-coral)',
+              border: 'var(--nb-border)',
+              boxShadow: 'var(--nb-shadow-sm)',
+              transform: 'rotate(-4deg)',
+              paddingBottom: 1,
+            }}
           >
             M
           </span>
@@ -845,23 +852,10 @@ export default function Console() {
             </div>
           </div>
         </div>
-        <span className="nb-pill" style={{ background: 'var(--nb-cream-deep)' }}>
-          inbox <b>{inboxName ?? (source === 'live' ? 'dms.json' : 'results.sample.json')}</b>
-        </span>
-        <span className="nb-pill" style={{ background: 'var(--nb-cream-deep)' }}>
-          reader <b>jev-latest</b>
-        </span>
         <div className="flex-1" />
         <Link href="/ask" className="nb-btn nb-btn-yellow" style={{ padding: '7px 14px' }}>
           “What would Maya do?” card
         </Link>
-        <span
-          className="nb-tape"
-          style={{ background: source === 'live' ? 'var(--nb-mint)' : 'var(--nb-yellow)' }}
-          title={isMock ? 'NEXT_PUBLIC_MOCK: flip to 0 to go live' : 'live /api/results'}
-        >
-          {source === 'live' ? 'live results' : 'sample data'}
-        </span>
       </header>
 
       <div className="grid" style={{ gridTemplateColumns: '300px 1fr', minHeight: 'calc(100vh - 64px)' }}>
@@ -936,15 +930,6 @@ export default function Console() {
             >
               ⬆ Upload your DMs
             </button>
-            <a
-              href="/maya-dms-last-30-days.csv"
-              download
-              className="text-[11.5px] underline"
-              style={{ color: 'var(--nb-muted)' }}
-              title="A file in the right shape, to try it with"
-            >
-              sample export
-            </a>
             <div className="flex-1" />
             {(
               [
