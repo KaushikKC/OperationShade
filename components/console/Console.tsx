@@ -259,6 +259,29 @@ function QuestionCardView({
   )
 }
 
+/**
+ * Where sending will happen, once her account is connected.
+ *
+ * It is drawn disabled and says why, rather than being left out — both
+ * platforms do allow a reply to someone who messaged her first (Instagram
+ * inside 24 hours, TikTok inside 48), so this is a real next step and not a
+ * decoration. What is missing is the conversation itself: a reply needs the
+ * id the platform hands over when the message arrives, and these rows came
+ * from a file. It stays disabled until there is a live inbox behind it.
+ */
+function SendButton({ ready }: { ready: boolean }) {
+  return (
+    <button
+      className="nb-btn"
+      disabled
+      title="Not connected yet — copy it across for now"
+      style={{ background: 'var(--nb-mint)', padding: '6px 14px', fontSize: 13, opacity: ready ? 0.6 : 0.4 }}
+    >
+      Send
+    </button>
+  )
+}
+
 function Drawer({
   dm,
   playbook,
@@ -276,6 +299,8 @@ function Drawer({
   // Keyed on the message and its current reply at the call site, so a new
   // message or a changed reply remounts this and the box starts clean.
   const [text, setText] = useState(dm.draft ?? '')
+  /** Hers, typed from scratch on a message the routing left alone. */
+  const [mine, setMine] = useState('')
   const [asking, setAsking] = useState(false)
   const [saved, setSaved] = useState<string | null>(null)
   const a = dm.answers
@@ -484,6 +509,7 @@ function Drawer({
               >
                 {copied ? 'Copied ✓' : 'Copy to reply'}
               </button>
+              <SendButton ready={!!text.trim()} />
             </div>
 
             {asking && (
@@ -525,7 +551,8 @@ function Drawer({
               </p>
             )}
             <p className="mt-2 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
-              Nothing sends itself — this is pasted into Instagram or TikTok by you.
+              Sending turns on once your account is connected, and it will always be this button —
+              never on its own.
             </p>
           </div>
         )}
@@ -533,6 +560,62 @@ function Drawer({
           <div className="nb-card-flat mt-4 p-4" style={{ background: 'var(--nb-pink)' }}>
             <div className="nb-eyebrow mb-1">Why it’s yours</div>
             <p className="nb-hand text-[21px] leading-snug">{dm.why}</p>
+          </div>
+        )}
+
+        {/*
+         * Somewhere to write one of hers. Only on the ones kept for her, and
+         * only when the routing wrote nothing — a blank box, never a prefill,
+         * because the whole reason this message is here is that no wording of
+         * her routing's would be the right one.
+         *
+         * It does not reach the Playbook. An approval replaces a prepared
+         * reply that was going out anyway, and there is none here.
+         */}
+        {dm.lane === 'maya' && !dm.draft && (
+          <div
+            className="nb-card-flat mt-4 border-l-[6px] p-4"
+            style={{ background: 'var(--nb-cream-deep)', borderLeftColor: 'var(--nb-pink)' }}
+          >
+            <div className="nb-eyebrow mb-2">Your reply</div>
+            <textarea
+              className="nb-hand w-full resize-y rounded-md border-[2.5px] border-[color:var(--nb-ink)] p-2.5 text-[20px] leading-snug"
+              style={{ background: 'var(--nb-paper)', minHeight: 132 }}
+              placeholder="In your words…"
+              value={mine}
+              onChange={(e) => setMine(e.target.value)}
+              aria-label="Your reply to this message"
+            />
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <button
+                className="nb-btn nb-btn-coral"
+                style={{ padding: '6px 14px', fontSize: 13 }}
+                disabled={!mine.trim()}
+                onClick={() => {
+                  void navigator.clipboard?.writeText(mine).then(() => {
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 1500)
+                  })
+                }}
+              >
+                {copied ? 'Copied ✓' : 'Copy to reply'}
+              </button>
+              <SendButton ready={!!mine.trim()} />
+              {mine.trim() && (
+                <button
+                  className="nb-btn"
+                  style={{ background: 'var(--nb-paper)', padding: '6px 14px', fontSize: 13 }}
+                  onClick={() => setMine('')}
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+            <p className="mt-2 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
+              Sending turns on once your account is connected. Until then you copy it across yourself,
+              and nothing leaves this screen. Your wording here stays on this one message and is never
+              reused.
+            </p>
           </div>
         )}
       </aside>
