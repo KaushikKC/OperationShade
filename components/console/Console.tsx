@@ -458,6 +458,105 @@ function Drawer({
   )
 }
 
+function PlaybookPanel({
+  playbook,
+  threshold,
+}: {
+  playbook: ReturnType<typeof usePlaybook>
+  threshold: number
+}) {
+  const [confirming, setConfirming] = useState(false)
+  const { approved, reuseOn } = playbook
+
+  return (
+    <div className="nb-card mt-5 p-4" style={{ background: 'var(--nb-yellow)' }}>
+      <div className="nb-eyebrow mb-2">Your Playbook</div>
+
+      <div className="flex items-center justify-between text-[13px]">
+        <span style={{ color: 'var(--nb-muted)' }}>Review bar</span>
+        <b>
+          {barMood(threshold)} · {Math.round(threshold * 100)}%
+        </b>
+      </div>
+
+      <label className="mt-2 flex cursor-pointer items-center justify-between gap-2 text-[13px]">
+        <span>Use my approved replies</span>
+        <input
+          type="checkbox"
+          checked={reuseOn}
+          onChange={(e) => playbook.setReuseOn(e.target.checked)}
+          style={{ accentColor: 'var(--nb-ink)', width: 16, height: 16 }}
+        />
+      </label>
+
+      <div className="mt-3 border-t-[2px] border-[color:var(--nb-line-soft)] pt-2 text-[12px]" style={{ color: 'var(--nb-muted)' }}>
+        {approved.length === 0
+          ? 'Nothing approved yet. Edit a reply and approve your wording to start one.'
+          : `${approved.length} approved ${approved.length === 1 ? 'reply' : 'replies'}`}
+      </div>
+
+      {approved.length > 0 && (
+        <ul className="mt-2 space-y-2">
+          {approved.map((a) => (
+            <li key={a.id} className="nb-card-flat p-2" style={{ background: 'var(--nb-paper)' }}>
+              <label className="flex cursor-pointer items-start justify-between gap-2">
+                <span className="text-[12.5px] leading-snug">
+                  <b>
+                    {skinLabel(a.skinType)} · {intentLabel(a.intent)}
+                  </b>
+                  <span className="mt-0.5 block nb-hand text-[15px]" style={{ color: 'var(--nb-muted)' }}>
+                    “{a.approvedText.slice(0, 64)}
+                    {a.approvedText.length > 64 ? '…' : ''}”
+                  </span>
+                </span>
+                <input
+                  type="checkbox"
+                  checked={a.enabled}
+                  onChange={(e) => playbook.setEnabled(a.id, e.target.checked)}
+                  style={{ accentColor: 'var(--nb-ink)', width: 15, height: 15, marginTop: 2 }}
+                />
+              </label>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {approved.length > 0 &&
+        (confirming ? (
+          <div className="mt-3 text-[12px]">
+            <p className="font-bold">Clear everything you have approved?</p>
+            <p className="mt-0.5" style={{ color: 'var(--nb-muted)' }}>
+              Kept in this browser only. The prepared replies stay exactly as they were.
+            </p>
+            <div className="mt-2 flex gap-2">
+              <button
+                className="nb-btn nb-btn-coral"
+                style={{ padding: '5px 12px', fontSize: 12 }}
+                onClick={() => {
+                  playbook.reset()
+                  setConfirming(false)
+                }}
+              >
+                Yes, clear them
+              </button>
+              <button
+                className="nb-btn"
+                style={{ background: 'var(--nb-paper)', padding: '5px 12px', fontSize: 12 }}
+                onClick={() => setConfirming(false)}
+              >
+                Keep them
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button className="mt-3 text-[11.5px] underline" style={{ color: 'var(--nb-muted)' }} onClick={() => setConfirming(true)}>
+            Reset approved replies
+          </button>
+        ))}
+    </div>
+  )
+}
+
 export default function Console() {
   const { data, source, isMock, loading, running, progress, error, inboxName, run, resetInbox } = useResults()
   const fileInput = useRef<HTMLInputElement | null>(null)
@@ -623,6 +722,8 @@ export default function Console() {
               ))}
             </ul>
           </div>
+
+          <PlaybookPanel playbook={playbook} threshold={threshold} />
         </aside>
 
         {/* main */}
