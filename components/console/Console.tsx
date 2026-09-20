@@ -955,7 +955,7 @@ export default function Console() {
                 [
                   loading ? '—' : `~${hoursSaved}h`,
                   'back to you / month',
-                  `${REPLY_HOURS_A_MONTH} hrs × ${Math.round(voiceShare * 100)}% drafted`,
+                  loading ? `${REPLY_HOURS_A_MONTH} hrs a month` : `${REPLY_HOURS_A_MONTH} hrs × ${Math.round(voiceShare * 100)}% drafted`,
                 ],
               ] as [string, string, string?][]
             ).map(([v, l, note]) => (
