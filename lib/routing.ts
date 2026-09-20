@@ -22,6 +22,13 @@ const WHERE_TO_BUY = /where (do|can) (you|i) (buy|get)|stockist|ships? to the uk
 const SHADE = /\bshade\b|\bundertone\b|foundation|colour match|color match|\btint\b/i
 const REDNESS = /redness|\bred\b|rosacea|flush|angry skin/i
 const DRYNESS = /\bdry\b|flak|tight|peel/i
+/**
+ * "I bought it and it is wrong for me." Not a reaction — a reaction is caught
+ * upstream and never reaches a draft. This is someone who took her advice and
+ * it did not suit them, which is the moment her own hedge is worth more than
+ * any recommendation.
+ */
+const MISFIT = /too (heavy|rich|greasy|much|thick|strong|oily)|doesn'?t (work|suit)|does not (work|suit)|not working|hate it|wrong for me|did i do something wrong|pilling|sits weird|regret|waste of money/i
 
 const RETINOL_BLOCK =
   "I don't hand retinol out, and I'm not going to start with you on a DM. It's the fastest way I know to wreck a face that was fine last week. Get boring right for a month — cleanser, moisturiser, SPF — then ask me again and I'll tell you honestly whether you need it."
@@ -100,6 +107,26 @@ function draftFor(text: string, a: JevAnswers): string | undefined {
 
   if (RETINOID.test(text)) return RETINOL_BLOCK
   if (WHERE_TO_BUY.test(text)) return undefined // her stockists are not in the evidence
+
+  // Took her advice, and it did not suit them. Answer before the intent branch
+  // does, because Jev reads these as a diagnosis or a value question and both
+  // would miss the point: the person wants to know they did nothing wrong.
+  if (owned.length && MISFIT.test(text)) {
+    const p = owned[0]
+    const swap = ROUTING[skinOf(a)]?.first
+    // Her own top pick failing someone it should suit is a judgement call, not
+    // a swap. Those go to her rather than getting a second guess in her name.
+    if (skinKnown(a) && swap === p.name) return undefined
+
+    const out = [
+      p.hedged
+        ? `You did nothing wrong — ${lower(p.note)} It's the one thing on that shelf I don't reach for myself, and I should say that louder.`
+        : `Nothing wrong with you. It's ${/^8/.test(String(p.maya)) ? 'an' : 'a'} ${p.maya} from me and it still won't suit every face — that happens, and it isn't something you did.`,
+    ]
+    if (skinKnown(a) && swap) out.push(`For your skin it's ${withNote(swap)}.`)
+    else out.push(`${INTAKE.skin} Tell me that and I'll swap you onto the right one.`)
+    return out.map(sentence).join(' ')
+  }
   if (intent === 'info' || SHADE.test(text)) {
     if (SHADE.test(text)) return SHADE_REPLY
     if (owned.length) return `${withNote(owned[0].name)}. ${owned[0].maya} out of ten from me, and that's after using it rather than being sent it.`

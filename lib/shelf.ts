@@ -12,6 +12,8 @@ export type ShelfItem = {
   finish: string
   maya: number
   note: string
+  /** Her note admits it is not for her. She says so rather than selling it. */
+  hedged?: boolean
 }
 
 export const SHELF: ShelfItem[] = [
@@ -22,7 +24,7 @@ export const SHELF: ShelfItem[] = [
   { ref: 'E-04.5', name: 'SPF 50', price: 26, type: 'SPF', skin: ['all'], finish: 'Invisible', maya: 9.6, note: 'Non-negotiable.' },
   { ref: 'E-04.6', name: 'Glass Drop', price: 62, type: 'Serum', skin: ['all'], finish: 'Dewy', maya: 8.1, note: 'Good. Not £62 good.' },
   { ref: 'E-04.7', name: 'Soft Clean', price: 22, type: 'Cleanser', skin: ['all'], finish: 'Cream', maya: 8.6, note: 'Boring in the best way.' },
-  { ref: 'E-04.8', name: 'Oil Balm', price: 29, type: 'Balm', skin: ['dry'], finish: 'Glow', maya: 7.7, note: 'Beautiful, but too much for me.' },
+  { ref: 'E-04.8', name: 'Oil Balm', price: 29, type: 'Balm', skin: ['dry'], finish: 'Glow', maya: 7.7, note: 'Beautiful, but too much for me.', hedged: true },
   { ref: 'E-04.9', name: 'Clear Wash', price: 20, type: 'Cleanser', skin: ['oily_combo'], finish: 'Foam', maya: 8.0, note: 'Great after gym.' },
   { ref: 'E-04.10', name: 'Tint Veil', price: 34, type: 'Base', skin: ['all'], finish: 'Skin-like', maya: 9.0, note: 'Best on camera.' },
 ]
