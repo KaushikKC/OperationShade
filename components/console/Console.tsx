@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useMemo, useRef, useState, type ReactNode } from 'react'
 import { DEFAULT_THRESHOLD, rebucket } from '@/lib/lanes'
 import type { Classified, Lane } from '@/lib/types'
 import { MAYA_ROUTING, QUESTIONS } from './questions'
@@ -191,14 +191,11 @@ function Drawer({
   // wording is standing in for it — so "put it back" always has something to
   // put back, and an approval is always keyed to the reply it replaced.
   const prepared = dm.preparedDraft ?? dm.draft ?? ''
+  // Keyed on the message and its current reply at the call site, so a new
+  // message or a changed reply remounts this and the box starts clean.
   const [text, setText] = useState(dm.draft ?? '')
   const [asking, setAsking] = useState(false)
   const [saved, setSaved] = useState<string | null>(null)
-  useEffect(() => {
-    setText(dm.draft ?? '')
-    setAsking(false)
-    setSaved(null)
-  }, [dm.id, dm.draft])
   const a = dm.answers
   const fields: { key: string; label: string; node: ReactNode }[] = []
   if (a) {
@@ -933,6 +930,7 @@ export default function Console() {
 
       {selected && (
         <Drawer
+          key={`${selected.id}:${(results.find((r) => r.id === selected.id) ?? selected).draft ?? ''}`}
           dm={results.find((r) => r.id === selected.id) ?? selected}
           playbook={playbook}
           onClose={() => setSelected(null)}

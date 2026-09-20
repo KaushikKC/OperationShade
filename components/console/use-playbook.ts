@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useSyncExternalStore } from 'react'
 import type { Classified } from '@/lib/types'
 
 /**
@@ -95,28 +95,61 @@ function parse(raw: string | null): Stored {
   }
 }
 
+/**
+ * localStorage is an external store, so React reads it through
+ * useSyncExternalStore rather than an effect that sets state on mount. The
+ * snapshot is cached against the raw string: returning a fresh object on every
+ * read would spin the renderer. Writes go straight through and notify, which
+ * also keeps a second tab in step.
+ */
+let cachedRaw: string | null = null
+let cachedSnapshot: Stored = EMPTY
+const listeners = new Set<() => void>()
+
+function readSnapshot(): Stored {
+  let raw: string | null = null
+  try {
+    raw = window.localStorage.getItem(STORAGE_KEY)
+  } catch {
+    return cachedSnapshot
+  }
+  if (raw !== cachedRaw) {
+    cachedRaw = raw
+    cachedSnapshot = parse(raw)
+  }
+  return cachedSnapshot
+}
+
+const serverSnapshot = (): Stored => EMPTY
+
+function subscribe(onChange: () => void): () => void {
+  listeners.add(onChange)
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === null || e.key === STORAGE_KEY) onChange()
+  }
+  window.addEventListener('storage', onStorage)
+  return () => {
+    listeners.delete(onChange)
+    window.removeEventListener('storage', onStorage)
+  }
+}
+
+function write(next: Stored): void {
+  cachedSnapshot = next
+  try {
+    cachedRaw = JSON.stringify(next)
+    window.localStorage.setItem(STORAGE_KEY, cachedRaw)
+  } catch {
+    // Private window, blocked storage, full quota. The session still works,
+    // it just will not survive a refresh.
+    cachedRaw = null
+  }
+  for (const l of listeners) l()
+}
+
 export function usePlaybook() {
-  const [state, setState] = useState<Stored>(EMPTY)
-  const [ready, setReady] = useState(false)
-
-  // Read after mount so the server and the first client render agree.
-  useEffect(() => {
-    try {
-      setState(parse(window.localStorage.getItem(STORAGE_KEY)))
-    } catch {
-      setState(EMPTY)
-    }
-    setReady(true)
-  }, [])
-
-  useEffect(() => {
-    if (!ready) return
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-    } catch {
-      // Private window, full quota, storage disabled. The session still works.
-    }
-  }, [state, ready])
+  const state = useSyncExternalStore(subscribe, readSnapshot, serverSnapshot)
+  const update = useCallback((fn: (s: Stored) => Stored) => write(fn(cachedSnapshot)), [])
 
   const bySignature = useMemo(() => {
     const m = new Map<string, ApprovedReply>()
@@ -138,9 +171,10 @@ export function usePlaybook() {
     [bySignature, state.reuseOn, state.restored],
   )
 
-  const record = useCallback((f: ReplyFeedback) => {
-    setState((s) => ({ ...s, feedback: [f, ...s.feedback].slice(0, 200) }))
-  }, [])
+  const record = useCallback(
+    (f: ReplyFeedback) => update((s) => ({ ...s, feedback: [f, ...s.feedback].slice(0, 200) })),
+    [update],
+  )
 
   /** Approve a wording for every message that would have had this same reply. */
   const approve = useCallback((row: Classified, approvedText: string, originalDraft: string) => {
@@ -158,38 +192,35 @@ export function usePlaybook() {
       createdAt: new Date().toISOString(),
       enabled: true,
     }
-    setState((s) => ({
+    update((s) => ({
       ...s,
       approved: [entry, ...s.approved.filter((a) => a.signature !== sig)],
       restored: s.restored.filter((id) => id !== row.id),
     }))
-  }, [])
+  }, [update])
 
-  const setEnabled = useCallback((id: string, enabled: boolean) => {
-    setState((s) => ({ ...s, approved: s.approved.map((a) => (a.id === id ? { ...a, enabled } : a)) }))
-  }, [])
+  const setEnabled = useCallback(
+    (id: string, enabled: boolean) =>
+      update((s) => ({ ...s, approved: s.approved.map((a) => (a.id === id ? { ...a, enabled } : a)) })),
+    [update],
+  )
 
-  const setReuseOn = useCallback((reuseOn: boolean) => setState((s) => ({ ...s, reuseOn })), [])
+  const setReuseOn = useCallback((reuseOn: boolean) => update((s) => ({ ...s, reuseOn })), [update])
 
   /** Put the prepared reply back for one message, and take it away again. */
-  const restoreOriginal = useCallback((messageId: string) => {
-    setState((s) => (s.restored.includes(messageId) ? s : { ...s, restored: [...s.restored, messageId] }))
-  }, [])
-  const useApprovedAgain = useCallback((messageId: string) => {
-    setState((s) => ({ ...s, restored: s.restored.filter((id) => id !== messageId) }))
-  }, [])
+  const restoreOriginal = useCallback(
+    (messageId: string) =>
+      update((s) => (s.restored.includes(messageId) ? s : { ...s, restored: [...s.restored, messageId] })),
+    [update],
+  )
+  const useApprovedAgain = useCallback(
+    (messageId: string) => update((s) => ({ ...s, restored: s.restored.filter((id) => id !== messageId) })),
+    [update],
+  )
 
-  const reset = useCallback(() => {
-    setState(EMPTY)
-    try {
-      window.localStorage.removeItem(STORAGE_KEY)
-    } catch {
-      // Already gone, or storage is unavailable.
-    }
-  }, [])
+  const reset = useCallback(() => write(EMPTY), [])
 
   return {
-    ready,
     approved: state.approved,
     feedback: state.feedback,
     reuseOn: state.reuseOn,
