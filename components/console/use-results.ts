@@ -25,6 +25,8 @@ export const SAMPLE_RESULT: RunResult = asRunResult(sampleRaw)
 
 export type ResultsSource = 'sample' | 'live'
 export type RunMode = 'all' | 'unclassified'
+/** A DM export Maya has dropped in. There is no Instagram API here. */
+export type Upload = { name: string; csv: string }
 
 export function useResults() {
   const [data, setData] = useState<RunResult | null>(IS_MOCK ? SAMPLE_RESULT : null)
@@ -32,6 +34,7 @@ export function useResults() {
   const [running, setRunning] = useState(false)
   const [progress, setProgress] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [inboxName, setInboxName] = useState<string | null>(null)
   const ticker = useRef<ReturnType<typeof setInterval> | null>(null)
   const loading = !IS_MOCK && data === null
 
@@ -83,13 +86,16 @@ export function useResults() {
     }
   }, [])
 
-  const run = useCallback(async (mode: RunMode) => {
+  const run = useCallback(async (mode: RunMode, upload?: Upload) => {
     if (running) return
     setRunning(true)
     setProgress(0)
     setError(null)
 
-    if (IS_MOCK) {
+    // An uploaded file always goes to the reader. Sample mode has nothing to
+    // say about messages it has never seen, and pretending otherwise would be
+    // the one thing this product must not do.
+    if (IS_MOCK && !upload) {
       // Fake a run so the bar, timer and stats move like the real thing.
       const started = Date.now()
       const total = 2600
@@ -116,12 +122,14 @@ export function useResults() {
         const res = await fetch('/api/classify', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ mode }),
+          body: JSON.stringify(upload ? { mode: 'all', csv: upload.csv } : { mode }),
         })
-        if (!res.ok) throw new Error(`classify ${res.status}`)
-        setData(asRunResult(await res.json()))
+        const json = await res.json().catch(() => null)
+        if (!res.ok) throw new Error(json?.error ?? `The reader stopped (${res.status}).`)
+        setData(asRunResult(json))
         setSource('live')
         setProgress(1)
+        if (upload) setInboxName(upload.name)
       } catch (e) {
         setError(e instanceof Error ? e.message : 'run failed')
       }
@@ -131,5 +139,5 @@ export function useResults() {
     setTimeout(() => setProgress(null), 600)
   }, [running])
 
-  return { data, source, isMock: IS_MOCK, loading, running, progress, error, refresh, run }
+  return { data, source, isMock: IS_MOCK, loading, running, progress, error, inboxName, refresh, run }
 }
