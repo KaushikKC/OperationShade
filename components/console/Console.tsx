@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { DEFAULT_THRESHOLD, rebucket } from '@/lib/lanes'
 import type { Classified, Lane } from '@/lib/types'
 import { MAYA_ROUTING, QUESTIONS } from './questions'
@@ -16,7 +16,7 @@ import {
   timeAgo,
 } from './format'
 import { useResults, type RunMode } from './use-results'
-import { usePlaybook, type ApprovedReply } from './use-playbook'
+import { signatureOf, usePlaybook, type ApprovedReply } from './use-playbook'
 
 /** A row as the console shows it: her approved wording may stand in for the draft. */
 type Row = Classified & { fromPlaybook?: ApprovedReply; preparedDraft?: string }
@@ -187,6 +187,18 @@ function Drawer({
   onClose: () => void
 }) {
   const [copied, setCopied] = useState(false)
+  // The prepared reply is what the routing wrote, even when her approved
+  // wording is standing in for it — so "put it back" always has something to
+  // put back, and an approval is always keyed to the reply it replaced.
+  const prepared = dm.preparedDraft ?? dm.draft ?? ''
+  const [text, setText] = useState(dm.draft ?? '')
+  const [asking, setAsking] = useState(false)
+  const [saved, setSaved] = useState<string | null>(null)
+  useEffect(() => {
+    setText(dm.draft ?? '')
+    setAsking(false)
+    setSaved(null)
+  }, [dm.id, dm.draft])
   const a = dm.answers
   const fields: { key: string; label: string; node: ReactNode }[] = []
   if (a) {
@@ -303,20 +315,136 @@ function Drawer({
             className="nb-card-flat mt-4 border-l-[6px] p-4"
             style={{ background: 'var(--nb-cream-deep)', borderLeftColor: 'var(--nb-coral)' }}
           >
-            <div className="nb-eyebrow mb-1">Draft in your words</div>
-            <p className="nb-hand text-[21px] leading-snug">{dm.draft}</p>
-            <button
-              className="nb-btn nb-btn-mint mt-3"
-              style={{ padding: '6px 14px', fontSize: 13 }}
-              onClick={() => {
-                void navigator.clipboard?.writeText(dm.draft ?? '').then(() => {
-                  setCopied(true)
-                  setTimeout(() => setCopied(false), 1500)
-                })
+            <div className="flex items-center justify-between gap-2">
+              <div className="nb-eyebrow">Draft in your words</div>
+              {dm.fromPlaybook && (
+                <button
+                  className="text-[11px] underline"
+                  style={{ color: 'var(--nb-muted)' }}
+                  onClick={() => playbook.restoreOriginal(dm.id)}
+                >
+                  put the prepared reply back
+                </button>
+              )}
+              {!dm.fromPlaybook && playbook.restored.includes(dm.id) && (
+                <button
+                  className="text-[11px] underline"
+                  style={{ color: 'var(--nb-muted)' }}
+                  onClick={() => playbook.useApprovedAgain(dm.id)}
+                >
+                  use my approved wording here
+                </button>
+              )}
+            </div>
+            {dm.fromPlaybook && (
+              <div className="mb-2 mt-1 text-[10.5px] font-bold uppercase tracking-wide" style={{ color: 'var(--nb-muted)' }}>
+                From a reply you approved
+              </div>
+            )}
+
+            <textarea
+              className="nb-hand mt-2 w-full resize-y rounded-md border-[2.5px] border-[color:var(--nb-ink)] p-2.5 text-[20px] leading-snug"
+              style={{ background: 'var(--nb-paper)', minHeight: 132 }}
+              value={text}
+              onChange={(e) => {
+                setText(e.target.value)
+                setSaved(null)
+                setAsking(false)
               }}
-            >
-              {copied ? 'Copied ✓' : 'Copy to reply'}
-            </button>
+              aria-label="Your reply"
+            />
+
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <button
+                className="nb-btn nb-btn-mint"
+                style={{ padding: '6px 14px', fontSize: 13 }}
+                onClick={() => {
+                  playbook.record({
+                    messageId: dm.id,
+                    originalDraft: prepared,
+                    finalText: prepared,
+                    signature: signatureOf({ answers: dm.answers, draft: prepared }) ?? '',
+                    outcome: 'accepted',
+                    createdAt: new Date().toISOString(),
+                  })
+                  setText(prepared)
+                  setAsking(false)
+                  setSaved('Kept as written. Nothing has been sent.')
+                }}
+              >
+                Use as written
+              </button>
+              <button
+                className="nb-btn nb-btn-coral"
+                style={{ padding: '6px 14px', fontSize: 13 }}
+                disabled={!text.trim() || text.trim() === prepared.trim()}
+                onClick={() => {
+                  playbook.record({
+                    messageId: dm.id,
+                    originalDraft: prepared,
+                    finalText: text.trim(),
+                    signature: signatureOf({ answers: dm.answers, draft: prepared }) ?? '',
+                    outcome: 'edited',
+                    createdAt: new Date().toISOString(),
+                  })
+                  setSaved(null)
+                  setAsking(true)
+                }}
+              >
+                Save my version
+              </button>
+              <button
+                className="nb-btn"
+                style={{ background: 'var(--nb-cream-deep)', padding: '6px 14px', fontSize: 13 }}
+                onClick={() => {
+                  void navigator.clipboard?.writeText(text).then(() => {
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 1500)
+                  })
+                }}
+              >
+                {copied ? 'Copied ✓' : 'Copy to reply'}
+              </button>
+            </div>
+
+            {asking && (
+              <div className="nb-card-flat mt-3 p-3" style={{ background: 'var(--nb-yellow)' }}>
+                <p className="text-[13.5px] font-bold">Use this wording for similar messages?</p>
+                <p className="mt-1 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
+                  Only where this same reply was going out anyway. Reactions and anything already kept for you
+                  are untouched.
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <button
+                    className="nb-btn nb-btn-mint"
+                    style={{ padding: '6px 14px', fontSize: 13 }}
+                    onClick={() => {
+                      playbook.approve(dm, text, prepared)
+                      setAsking(false)
+                      setSaved('Approved. Similar messages will start with your wording.')
+                    }}
+                  >
+                    Approve for similar
+                  </button>
+                  <button
+                    className="nb-btn"
+                    style={{ background: 'var(--nb-paper)', padding: '6px 14px', fontSize: 13 }}
+                    onClick={() => {
+                      setAsking(false)
+                      setSaved('Saved for this one only.')
+                    }}
+                  >
+                    Only this one
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {saved && (
+              <p className="mt-2 text-[12px] font-bold" style={{ color: 'var(--nb-muted)' }}>
+                {saved}
+              </p>
+            )}
             <p className="mt-2 text-[11.5px]" style={{ color: 'var(--nb-muted)' }}>
               Nothing sends itself — this is pasted into Instagram or TikTok by you.
             </p>
